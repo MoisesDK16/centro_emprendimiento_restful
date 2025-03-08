@@ -15,7 +15,10 @@ namespace Identity.Seeds
                 Nombre = "Moises",
                 Apellido = "Loor",
                 EmailConfirmed = true,
-                PhoneNumberConfirmed = true
+                PhoneNumberConfirmed = true,
+                Identificacion = "1234567890",
+                CiudadOrigen = "Guayas",
+                Telefono = "0987654321",
             };
 
             if (userManager.Users.All(u => u.Id != defaultUser.Id))

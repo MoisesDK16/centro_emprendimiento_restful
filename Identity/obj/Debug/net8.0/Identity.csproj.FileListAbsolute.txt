@@ -1,22 +1,3 @@
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.csproj.AssemblyReference.cache
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.AssemblyInfoInputs.cache
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.AssemblyInfo.cs
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.csproj.CoreCompileInputs.cache
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.deps.json
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.runtimeconfig.json
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.dll
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.pdb
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Application.dll
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Domain.dll
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Application.pdb
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Domain.pdb
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.csproj.Up2Date
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.dll
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\refint\Identity.dll
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.pdb
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.genruntimeconfig.cache
-C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\ref\Identity.dll
 C:\Users\User\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.deps.json
 C:\Users\User\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.runtimeconfig.json
 C:\Users\User\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.dll
@@ -36,3 +17,39 @@ C:\Users\User\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_res
 C:\Users\User\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.pdb
 C:\Users\User\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.genruntimeconfig.cache
 C:\Users\User\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\ref\Identity.dll
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.deps.json
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.dll
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.pdb
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Application.dll
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Domain.dll
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Application.pdb
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Domain.pdb
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.csproj.AssemblyReference.cache
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.AssemblyInfoInputs.cache
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.AssemblyInfo.cs
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.csproj.CoreCompileInputs.cache
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.sourcelink.json
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.csproj.Up2Date
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.dll
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\refint\Identity.dll
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.pdb
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\ref\Identity.dll
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.deps.json
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.dll
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Identity.pdb
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Application.dll
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Domain.dll
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Application.pdb
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\bin\Debug\net8.0\Domain.pdb
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.csproj.AssemblyReference.cache
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.AssemblyInfoInputs.cache
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.AssemblyInfo.cs
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.csproj.CoreCompileInputs.cache
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.sourcelink.json
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.csproj.Up2Date
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.dll
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\refint\Identity.dll
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\Identity.pdb
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Identity\obj\Debug\net8.0\ref\Identity.dll

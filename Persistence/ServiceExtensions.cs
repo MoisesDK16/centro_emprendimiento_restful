@@ -11,12 +11,16 @@ namespace Persistence
     {
         public static void AddPersistenceInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(options =>
+            services.AddDbContextFactory<AppDbContext>(options =>
                 options.UseSqlServer(
                     configuration.GetConnectionString("cn"),
-                    b => b.MigrationsAssembly("WebAPI")));
+                    b => b.MigrationsAssembly("WebAPI")),
+                    ServiceLifetime.Scoped
+                );
 
             services.AddTransient(typeof(IRepositoryAsync<>), typeof(MyRepositoryAsync<>));
+            services.AddTransient(typeof(IReadOnlyRepositoryAsync<>), typeof(MyRepositoryAsync<>));
+
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = configuration.GetValue<string>("Caching:RedisConnection");

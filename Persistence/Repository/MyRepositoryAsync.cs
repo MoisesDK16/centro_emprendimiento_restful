@@ -1,53 +1,55 @@
 ﻿using Application.Interfaces;
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Persistence.Context;
 
 namespace Persistence.Repository
 {
-    public class MyRepositoryAsync<T> : RepositoryBase<T>, IRepositoryAsync<T> where T : class
+    public class MyRepositoryAsync<T> : RepositoryBase<T>,  IRepositoryAsync<T>, IReadOnlyRepositoryAsync<T> where T : class
     {
-        private readonly Context.AppDbContext _dbContext;
+        private readonly IDbContextFactory<AppDbContext> _contextFactory;
 
-        public MyRepositoryAsync(Context.AppDbContext dbContext) : base(dbContext)
+        public MyRepositoryAsync(IDbContextFactory<AppDbContext> contextFactory) : base(contextFactory.CreateDbContext())
         {
-            _dbContext = dbContext;
+            _contextFactory = contextFactory;
         }
+
         public async Task<T> AddAsync(T entity)
         {
-            var result = await _dbContext.Set<T>().AddAsync(entity);
-            await _dbContext.SaveChangesAsync();
+            await using var dbContext = _contextFactory.CreateDbContext();
+            var result = await dbContext.Set<T>().AddAsync(entity);
+            await dbContext.SaveChangesAsync();
             return result.Entity;
         }
 
         public async Task<T> GetByIdAsync(long id)
         {
-            var entity = await _dbContext.Set<T>().FindAsync(id);
-
-            if (entity == null)
-            {
-                Console.WriteLine($"⚠️ Advertencia: No se encontró el ID {id} en la base de datos.");
-            }
-
+            await using var dbContext = _contextFactory.CreateDbContext();
+            var entity = await dbContext.Set<T>().FindAsync(new object[] { id });
+            if (entity == null) throw new KeyNotFoundException("Registro no encontrado");
             return entity;
         }
 
         public async Task UpdateAsync(T entity)
         {
-            _dbContext.Entry(entity).State = EntityState.Modified;
-            await _dbContext.SaveChangesAsync();
+            await using var dbContext = _contextFactory.CreateDbContext();
+            dbContext.Entry(entity).State = EntityState.Modified;
+            await dbContext.SaveChangesAsync();
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            return await _dbContext.SaveChangesAsync();
+            await using var dbContext = _contextFactory.CreateDbContext();
+            return await dbContext.SaveChangesAsync();
         }
 
         public async Task<bool> DeleteAsync(T entity)
         {
-            _dbContext.Set<T>().Remove(entity);
+            await using var dbContext = _contextFactory.CreateDbContext();
+            dbContext.Set<T>().Remove(entity);
+            await dbContext.SaveChangesAsync();
             return true;
         }
-
 
     }
 }

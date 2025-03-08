@@ -5,7 +5,10 @@ namespace Identity.Models
 {
     public class ApplicationUser: IdentityUser
     {
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
+        public required string Nombre { get; set; }
+        public required string Apellido { get; set; }
+        public required string Identificacion { get; set; }
+        public required string CiudadOrigen { get; set; }
+        public required string Telefono { get; set; }
     }
 }

@@ -1,19 +1,23 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Domain.Common;
+using Domain.Enums.Categoria;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Domain.Entities
 {
-    [Table("Categoria")]
-    public class Categoria
+    [Table("categoria")]
+    public class Categoria : AuditableBaseEntity
     {
-        [Required]
-        public required string nombre { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("Id")]
+        public long Id { get; set; }
+        public required string Nombre { get; set; }
 
-        [Required]
-        public required string tipo { get; set; }
+        [EnumDataType(typeof(Tipo), ErrorMessage = "El tipo de categoría no es válido.")]
+        public required Tipo Tipo { get; set; }
 
-        [AllowNull]
-        public string? descripcion { get; set; }
+        public string? Descripcion { get; set; }
     }
 }

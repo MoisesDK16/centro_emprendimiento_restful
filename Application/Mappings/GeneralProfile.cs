@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.Feautures.CategoriaC.Commands;
 using Application.Feautures.Proveedores.Commands.CreateProveedorCommand;
 using AutoMapper;
 using Domain.Entities;
@@ -12,6 +13,7 @@ namespace Application.Mappings
 
             CreateMap<Proveedor, ProveedorDTO>();
             CreateMap<CreateProveedorCommand, Proveedor>();
+            CreateMap<CrearCategoriaComando, Categoria>();
         }
     }
 }

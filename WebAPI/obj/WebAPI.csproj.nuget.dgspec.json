@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\WebAPI\\WebAPI.csproj": {}
+    "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\WebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Application\\Application.csproj": {
+    "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Application\\obj\\",
+        "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Domain\\Domain.csproj"
+              "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Domain\\Domain.csproj"
               }
             }
           }
@@ -48,7 +48,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -139,24 +139,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Domain\\Domain.csproj": {
+    "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -183,7 +183,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -204,24 +204,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Identity\\Identity.csproj": {
+    "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\Identity.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Identity\\Identity.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\Identity.csproj",
         "projectName": "Identity",
-        "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Identity\\Identity.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Identity\\obj\\",
+        "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\Identity.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -236,8 +236,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Application\\Application.csproj"
+              "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Application.csproj"
               }
             }
           }
@@ -252,7 +252,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -266,37 +266,9 @@
               "target": "Package",
               "version": "[8.0.13, )"
             },
-            "Microsoft.AspNetCore.Identity": {
-              "target": "Package",
-              "version": "[2.3.0, )"
-            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[9.0.2, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[9.0.2, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[9.0.2, )"
-            },
-            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
-              "target": "Package",
-              "version": "[9.0.0, )"
-            },
-            "System.IdentityModel.Tokens.Jwt": {
-              "target": "Package",
-              "version": "[8.6.0, )"
             }
           },
           "imports": [
@@ -315,24 +287,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Persistence\\Persistence.csproj": {
+    "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Persistence\\Persistence.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Persistence.csproj",
         "projectName": "Persistence",
-        "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Persistence\\Persistence.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Persistence\\obj\\",
+        "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Persistence.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -347,11 +319,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Application\\Application.csproj"
-              },
-              "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Domain\\Domain.csproj"
+              "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Application.csproj"
               }
             }
           }
@@ -366,7 +335,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -409,24 +378,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Shared\\Shared.csproj": {
+    "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Shared\\Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Shared\\Shared.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Shared\\Shared.csproj",
         "projectName": "Shared",
-        "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Shared\\Shared.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Shared\\obj\\",
+        "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Shared\\Shared.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -441,8 +410,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Application\\Application.csproj"
+              "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Application.csproj"
               }
             }
           }
@@ -457,7 +426,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -488,24 +457,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\WebAPI\\WebAPI.csproj": {
+    "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\WebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\WebAPI\\WebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\WebAPI.csproj",
         "projectName": "WebAPI",
-        "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\WebAPI\\WebAPI.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\WebAPI\\obj\\",
+        "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\WebAPI.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -520,17 +489,17 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Application\\Application.csproj"
+              "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Application.csproj"
               },
-              "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Identity\\Identity.csproj": {
-                "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Identity\\Identity.csproj"
+              "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\Identity.csproj": {
+                "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\Identity.csproj"
               },
-              "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Persistence\\Persistence.csproj": {
-                "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Persistence\\Persistence.csproj"
+              "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Persistence.csproj": {
+                "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Persistence.csproj"
               },
-              "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Shared\\Shared.csproj": {
-                "projectPath": "C:\\Users\\PC\\Pictures\\6TO\\Aplicaciones Web\\PI3\\centro_emprendimiento_restful\\Shared\\Shared.csproj"
+              "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Shared\\Shared.csproj": {
+                "projectPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Shared\\Shared.csproj"
               }
             }
           }
@@ -545,71 +514,21 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.100"
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Ardalis.Specification": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "Ardalis.Specification.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.0, )"
-            },
-            "AutoMapper": {
-              "target": "Package",
-              "version": "[14.0.0, )"
-            },
-            "MediatR": {
-              "target": "Package",
-              "version": "[12.4.1, )"
-            },
-            "MediatR.Contracts": {
-              "target": "Package",
-              "version": "[2.0.1, )"
-            },
-            "MediatR.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[11.0.0, )"
-            },
             "Microsoft.AspNetCore.Mvc.Versioning": {
               "target": "Package",
               "version": "[5.1.0, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[9.0.2, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[9.0.2, )"
-            },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
-              "target": "Package",
-              "version": "[9.0.2, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.2, )"
-            },
-            "Microsoft.Extensions.DependencyInjection": {
-              "target": "Package",
-              "version": "[9.0.2, )"
-            },
-            "Microsoft.Extensions.DependencyInjection.Abstractions": {
-              "target": "Package",
-              "version": "[9.0.2, )"
-            },
-            "NuGet.Versioning": {
-              "target": "Package",
-              "version": "[6.13.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -635,7 +554,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

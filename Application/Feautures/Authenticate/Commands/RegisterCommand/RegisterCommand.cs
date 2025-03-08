@@ -7,13 +7,16 @@ namespace Application.Feautures.Authenticate.Commands.RegisterCommand
 {
     public class RegisterCommand : IRequest<Response<string>>
     {
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Email { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
-        public string Origin { get; set; }
+        public required string Nombre { get; set; }
+        public required string Apellido { get; set; }
+        public required string Email { get; set; }
+        public required string UserName { get; set; }
+        public required string Password { get; set; }
+        public required string ConfirmPassword { get; set; }
+        public required string Identificacion { get; set; }
+        public required string Telefono { get; set; }
+        public required string CiudadOrigen { get; set; }
+        public required string Origin { get; set; }
 
     }
     
@@ -34,7 +37,11 @@ namespace Application.Feautures.Authenticate.Commands.RegisterCommand
                 Email = request.Email,
                 UserName = request.UserName,
                 Password = request.Password,
-                ConfirmPassword = request.ConfirmPassword
+                ConfirmPassword = request.ConfirmPassword,
+                Identificacion = request.Identificacion,
+                Telefono = request.Telefono,
+                CiudadOrigen = request.CiudadOrigen
+
             }, request.Origin);
         }
     }

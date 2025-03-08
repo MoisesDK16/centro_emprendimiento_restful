@@ -87,6 +87,122 @@
         }
       }
     },
+    "/api/v{version}/Categoria": {
+      "post": {
+        "tags": [
+          "Categoria"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearCategoriaComando"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearCategoriaComando"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearCategoriaComando"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Categoria"
+        ],
+        "parameters": [
+          {
+            "name": "Tipo",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/Tipo"
+            }
+          },
+          {
+            "name": "PageNumber",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "PageSize",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v{version}/Categoria/{id}": {
+      "get": {
+        "tags": [
+          "Categoria"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v{version}/Proveedor": {
       "post": {
         "tags": [
@@ -340,6 +456,28 @@
         },
         "additionalProperties": false
       },
+      "CrearCategoriaComando": {
+        "required": [
+          "descripcion",
+          "nombre",
+          "tipo"
+        ],
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "tipo": {
+            "$ref": "#/components/schemas/Tipo"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateProveedorCommand": {
         "type": "object",
         "properties": {
@@ -367,6 +505,17 @@
         "additionalProperties": false
       },
       "RegisterRequest": {
+        "required": [
+          "apellido",
+          "ciudadOrigen",
+          "confirmPassword",
+          "email",
+          "identificacion",
+          "nombre",
+          "password",
+          "telefono",
+          "userName"
+        ],
         "type": "object",
         "properties": {
           "nombre": {
@@ -392,9 +541,28 @@
           "confirmPassword": {
             "type": "string",
             "nullable": true
+          },
+          "identificacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefono": {
+            "type": "string",
+            "nullable": true
+          },
+          "ciudadOrigen": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
+      },
+      "Tipo": {
+        "enum": [
+          "NEGOCIO",
+          "PRODUCTO"
+        ],
+        "type": "string"
       },
       "UpdateProveedorCommand": {
         "type": "object",

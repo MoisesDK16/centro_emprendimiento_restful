@@ -7,6 +7,7 @@ using Identity.Services;
 using Microsoft.AspNetCore.Identity;
 using Persistence;
 using Shared.Services;
+using System.Text.Json.Serialization;
 using WebAPI.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,10 +20,13 @@ builder.Services.AddApiVersioningExtension();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationLayer();
+builder.Services.AddPersistenceInfrastructure(builder.Configuration);
 builder.Services.AddIdentityInfrastructure(builder.Configuration);
 builder.Services.AddSharedInfrastructure(builder.Configuration);
-builder.Services.AddPersistenceInfrastructure(builder.Configuration);
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 builder.Services.AddCors(options =>
 {

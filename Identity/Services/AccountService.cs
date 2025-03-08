@@ -75,6 +75,9 @@ namespace Identity.Services
                 Apellido = request.Apellido,
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
+                Identificacion = request.Identificacion,
+                Telefono = request.Telefono,
+                CiudadOrigen = request.CiudadOrigen,
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);

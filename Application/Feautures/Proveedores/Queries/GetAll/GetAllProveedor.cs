@@ -20,10 +20,10 @@ namespace Application.Feautures.Proveedores.Queries.GetAll
 
         public class GetAllClientesQueryHandler : IRequestHandler<GetAllProveedor, PagedResponse<IEnumerable<ProveedorDTO>>>
         {
-            private readonly IRepositoryAsync<Proveedor> _repository;
+            private readonly IReadOnlyRepositoryAsync<Proveedor> _repository;
             private readonly IDistributedCache _distributedCache;
             private readonly IMapper _mapper;
-            public GetAllClientesQueryHandler(IRepositoryAsync<Proveedor> repository, IMapper mapper, IDistributedCache distributedCache)
+            public GetAllClientesQueryHandler(IReadOnlyRepositoryAsync<Proveedor> repository, IMapper mapper, IDistributedCache distributedCache)
             {
                 _repository = repository;
                 _mapper = mapper;
@@ -43,7 +43,7 @@ namespace Application.Feautures.Proveedores.Queries.GetAll
                 {
                     proveedores = await _repository.ListAsync(
                         new ProveedorSpecification(request.PageSize, request.PageNumber, request.nombre, request.ruc)
-                    ).ConfigureAwait(false);
+                    );
 
                     var serializedproveedorsList = JsonConvert.SerializeObject(proveedores);
                     var encodedData = Encoding.UTF8.GetBytes(serializedproveedorsList);

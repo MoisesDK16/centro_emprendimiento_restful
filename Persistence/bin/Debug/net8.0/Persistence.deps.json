@@ -11,7 +11,6 @@
           "Application": "1.0.0",
           "Ardalis.Specification": "8.0.0",
           "Ardalis.Specification.EntityFrameworkCore": "8.0.0",
-          "Domain": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.13",
           "Microsoft.EntityFrameworkCore": "9.0.2",
           "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.2"
@@ -2260,7 +2259,7 @@
         },
         "runtime": {
           "Application.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -2268,7 +2267,7 @@
       "Domain/1.0.0": {
         "runtime": {
           "Domain.dll": {
-            "assemblyVersion": "1.0.0",
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
