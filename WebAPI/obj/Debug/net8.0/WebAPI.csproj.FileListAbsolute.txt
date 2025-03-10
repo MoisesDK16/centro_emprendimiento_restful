@@ -667,7 +667,6 @@ C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\WebA
 C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI3\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\appsettings.json
-C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\WebAPI.staticwebassets.endpoints.json
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\WebAPI.exe
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\WebAPI.deps.json
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\WebAPI.runtimeconfig.json
@@ -960,17 +959,14 @@ C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\D
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\WebAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\WebAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\WebAPI.sourcelink.json
-C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\scopedcss\bundle\WebAPI.styles.css
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\staticwebassets.development.json
-C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\staticwebassets\msbuild.WebAPI.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\staticwebassets\msbuild.WebAPI.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\staticwebassets\msbuild.build.WebAPI.props
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.WebAPI.props
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.WebAPI.props
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\scopedcss\bundle\WebAPI.styles.css
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\WebAPI.csproj.Up2Date
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\WebAPI.dll
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\refint\WebAPI.dll

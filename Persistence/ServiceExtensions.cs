@@ -14,7 +14,7 @@ namespace Persistence
             services.AddDbContextFactory<AppDbContext>(options =>
                 options.UseSqlServer(
                     configuration.GetConnectionString("cn"),
-                    b => b.MigrationsAssembly("WebAPI")),
+                    b => b.MigrationsAssembly("Persistence")),
                     ServiceLifetime.Scoped
                 );
 

@@ -8,7 +8,6 @@ namespace Persistence.Configuration
     {
         public void Configure(EntityTypeBuilder<Categoria> builder)
         {
-
             builder.ToTable("categoria");
             builder.HasKey(c => c.Id);
 

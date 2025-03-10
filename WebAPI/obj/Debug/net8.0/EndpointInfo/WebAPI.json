@@ -203,6 +203,88 @@
         }
       }
     },
+    "/api/v{version}/Producto/crear": {
+      "post": {
+        "tags": [
+          "Producto"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearProducto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearProducto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearProducto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v{version}/Producto/actualizar": {
+      "put": {
+        "tags": [
+          "Producto"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActualizarProducto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActualizarProducto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ActualizarProducto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v{version}/Proveedor": {
       "post": {
         "tags": [
@@ -442,6 +524,74 @@
   },
   "components": {
     "schemas": {
+      "ActualizarProducto": {
+        "required": [
+          "codigo",
+          "descripcion",
+          "nombre",
+          "rutaImagen"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "iva": {
+            "type": "number",
+            "format": "double"
+          },
+          "rutaImagen": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoriaId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "stockId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "precioCompra": {
+            "type": "number",
+            "format": "double"
+          },
+          "precioVenta": {
+            "type": "number",
+            "format": "double"
+          },
+          "cantidad": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaElaboracion": {
+            "type": "string",
+            "format": "date"
+          },
+          "fechaCaducidad": {
+            "type": "string",
+            "format": "date"
+          },
+          "fechaIngreso": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "AuthenticationRequest": {
         "type": "object",
         "properties": {
@@ -478,6 +628,67 @@
         },
         "additionalProperties": false
       },
+      "CrearProducto": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nombre": {
+            "type": "string",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/Estado"
+          },
+          "iva": {
+            "type": "number",
+            "format": "double"
+          },
+          "rutaImagen": {
+            "type": "string",
+            "nullable": true
+          },
+          "categoriaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "negocioId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "precioCompra": {
+            "type": "number",
+            "format": "double"
+          },
+          "precioVenta": {
+            "type": "number",
+            "format": "double"
+          },
+          "cantidad": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaElaboracion": {
+            "type": "string",
+            "format": "date"
+          },
+          "fechaCaducidad": {
+            "type": "string",
+            "format": "date"
+          },
+          "fechaIngreso": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateProveedorCommand": {
         "type": "object",
         "properties": {
@@ -503,6 +714,13 @@
           }
         },
         "additionalProperties": false
+      },
+      "Estado": {
+        "enum": [
+          "ACTIVO",
+          "INACTIVO"
+        ],
+        "type": "string"
       },
       "RegisterRequest": {
         "required": [

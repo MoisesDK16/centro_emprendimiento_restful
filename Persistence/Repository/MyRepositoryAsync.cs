@@ -2,6 +2,7 @@
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using System.Linq.Expressions;
 
 namespace Persistence.Repository
 {
@@ -22,13 +23,22 @@ namespace Persistence.Repository
             return result.Entity;
         }
 
+
         public async Task<T> GetByIdAsync(long id)
         {
             await using var dbContext = _contextFactory.CreateDbContext();
-            var entity = await dbContext.Set<T>().FindAsync(new object[] { id });
-            if (entity == null) throw new KeyNotFoundException("Registro no encontrado");
-            return entity;
+
+            // Obtener todas las propiedades de navegación dinámicamente y aplicar Include()
+            IQueryable<T> query = dbContext.Set<T>();
+            foreach (var includeExpression in GetAllNavigationProperties<T>(dbContext))
+            {
+                query = query.Include(includeExpression);
+            }
+
+            return await query.FirstOrDefaultAsync(e => EF.Property<long>(e, "Id") == id);
         }
+
+
 
         public async Task UpdateAsync(T entity)
         {
@@ -50,6 +60,26 @@ namespace Persistence.Repository
             await dbContext.SaveChangesAsync();
             return true;
         }
+
+        private static List<Expression<Func<T, object>>> GetAllNavigationProperties<T>(DbContext dbContext) where T : class
+        {
+            var entityType = dbContext.Model.FindEntityType(typeof(T));
+
+            if (entityType == null)
+                return new List<Expression<Func<T, object>>>();
+
+            return entityType.GetNavigations()
+                .Select(navigation =>
+                {
+                    var parameter = Expression.Parameter(typeof(T), "e");
+                    var property = Expression.Property(parameter, navigation.Name);
+
+                    // NO usamos Convert a object, EF Core puede trabajar sin esto
+                    return Expression.Lambda<Func<T, object>>(property, parameter);
+                })
+                .ToList();
+        }
+
 
     }
 }

@@ -115,6 +115,48 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebAPI.Controllers.ProductoController",
+    "Method": "ActualizarProducto",
+    "RelativePath": "api/v{version}/Producto/actualizar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "comando",
+        "Type": "Application.Feautures.ProductoC.Commands.ActualizarProducto",
+        "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ProductoController",
+    "Method": "CrearProducto",
+    "RelativePath": "api/v{version}/Producto/crear",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "comando",
+        "Type": "Application.Feautures.ProductoC.Commands.CrearProducto",
+        "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.ProveedorController",
     "Method": "Create",
     "RelativePath": "api/v{version}/Proveedor",

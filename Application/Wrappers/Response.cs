@@ -9,10 +9,12 @@ namespace Application.Wrappers
 
     public class Response<T>
     {
+
         public Response()
         {
             Errors = new List<string>();
         }
+
         public Response(T data, string message = null)
         {
             Succeeded = true;

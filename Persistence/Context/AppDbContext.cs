@@ -15,12 +15,16 @@ namespace Persistence.Context
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
             _dateTime = dateTime;
         }
-        
+
         public DbSet<Proveedor> Proveedores { get; set; }
 
         public DbSet<Categoria> Categorias { get; set; }
 
         public DbSet<Negocio> Negocios { get; set; }
+
+        public DbSet<Stock> Stocks { get; set; }
+
+        public DbSet<Producto> productos { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
