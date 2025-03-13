@@ -20,7 +20,8 @@ namespace Domain.Entities
 
         public string? Descripcion { get; set; }
 
-        public long NegocioId { get; set; }
+        [AllowNull]
+        public long? NegocioId { get; set; }
 
         [ForeignKey("NegocioId")]
         public Negocio? Negocio { get; set; }

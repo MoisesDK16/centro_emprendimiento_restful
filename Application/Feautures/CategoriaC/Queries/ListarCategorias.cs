@@ -14,6 +14,8 @@ namespace Application.Feautures.CategoriaC.Queries
         public int PageSize { get; set; }
         public required Tipo Tipo { get; set; }
 
+        public long NegocioId { get; set; }
+
         public class ListarCategoriasHandler : IRequestHandler<ListarCategorias, PagedResponse<IEnumerable<Domain.Entities.Categoria>>>
         {
             private readonly IReadOnlyRepositoryAsync<Domain.Entities.Categoria> _repository;
@@ -24,7 +26,7 @@ namespace Application.Feautures.CategoriaC.Queries
             public async Task<PagedResponse<IEnumerable<Domain.Entities.Categoria>>> Handle(ListarCategorias request, CancellationToken cancellationToken)
             {
                 var categories = await _repository.ListAsync(
-                        new CategoriaSpecification(request.PageSize, request.PageNumber, request.Tipo),
+                        new CategoriaSpecification(request.PageSize, request.PageNumber, request.Tipo, request.NegocioId),
                         cancellationToken 
                     ).ConfigureAwait(false);
 

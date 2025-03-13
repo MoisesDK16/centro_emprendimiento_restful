@@ -2,6 +2,7 @@
 using Application.Feautures.CategoriaC.Commands;
 using Application.Feautures.ProductoC.Commands;
 using Application.Feautures.Proveedores.Commands.CreateProveedorCommand;
+using Application.Feautures.StockC.Commands;
 using AutoMapper;
 using Domain.Entities;
 
@@ -15,8 +16,9 @@ namespace Application.Mappings
             CreateMap<Proveedor, ProveedorDTO>();
             CreateMap<CreateProveedorCommand, Proveedor>();
             CreateMap<CrearCategoriaComando, Categoria>();
-            CreateMap<CrearProducto, Producto>();
-            CreateMap<ActualizarProducto, Producto>();
+            // Mapeo de CrearStock a Stock, estableciendo manualmente ProductoId y Producto
+            CreateMap<CrearStock, Stock>()
+                .ForMember(dest => dest.Producto, opt => opt.Ignore()); // Ignoramos la navegación aquí
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using Domain.Enums.Producto;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Domain.Entities
@@ -16,6 +18,8 @@ namespace Domain.Entities
         public Categoria Categoria { get; set; }
         public long NegocioId { get; set; }
         public Negocio Negocio { get; set; }
+
+        [JsonIgnore]
         public List<Stock> Stocks { get; set; } = new List<Stock>();
 
         //Propiedades

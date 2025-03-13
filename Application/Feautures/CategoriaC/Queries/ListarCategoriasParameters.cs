@@ -11,5 +11,7 @@ namespace Application.Feautures.CategoriaC.Queries
     public class ListarCategoriasParameters : RequestParameter
     {
         public required Tipo Tipo { get; set; }
+
+        public long NegocioId { get; set; }
     }
 }

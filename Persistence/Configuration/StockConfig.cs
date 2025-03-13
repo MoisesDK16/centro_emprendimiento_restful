@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Reflection.Emit;
 
 namespace Persistence.Configuration
 {
@@ -26,7 +27,11 @@ namespace Persistence.Configuration
                 .IsRequired();
 
             builder.Property(x => x.FechaIngreso)
-                .IsRequired();
+            .IsRequired();
+
+            builder.HasOne(s => s.Producto).WithMany(p => p.Stocks) // Relación con la lista en Producto
+             .HasForeignKey(s => s.ProductoId)
+             .OnDelete(DeleteBehavior.Cascade); // Eliminar stock si se elimina el producto
         }
     }
 }

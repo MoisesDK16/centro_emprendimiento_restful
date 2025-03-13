@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Persistence.Repository
 {
-    public class MyRepositoryAsync<T> : RepositoryBase<T>,  IRepositoryAsync<T>, IReadOnlyRepositoryAsync<T> where T : class
+    public class MyRepositoryAsync<T> : RepositoryBase<T>, IRepositoryAsync<T>, IReadOnlyRepositoryAsync<T> where T : class
     {
         private readonly IDbContextFactory<AppDbContext> _contextFactory;
 

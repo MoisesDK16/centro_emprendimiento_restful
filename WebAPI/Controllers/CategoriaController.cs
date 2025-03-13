@@ -28,7 +28,8 @@ namespace WebAPI.Controllers
             {
                 PageNumber = filter.PageNumber,
                 PageSize = filter.PageSize,
-                Tipo = filter.Tipo
+                Tipo = filter.Tipo,
+                NegocioId = filter.NegocioId
             };
             var listaCategorias = await Mediator.Send(command);
             return Ok(listaCategorias);
