@@ -16,8 +16,7 @@ namespace Domain.Entities
         public Categoria Categoria { get; set; }
         public long NegocioId { get; set; }
         public Negocio Negocio { get; set; }
-        public long StockId { get; set; }
-        public Stock Stock { get; set; }
+        public List<Stock> Stocks { get; set; } = new List<Stock>();
 
         //Propiedades
         public string Codigo { get; set; }
@@ -27,9 +26,5 @@ namespace Domain.Entities
         public decimal Iva { get; set; }
         public string RutaImagen { get; set; }
 
-        public static implicit operator Producto(Task<Producto> v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

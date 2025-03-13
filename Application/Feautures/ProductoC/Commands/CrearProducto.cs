@@ -54,7 +54,7 @@ namespace Application.Feautures.ProductoC.Commands
                 if (negocio == null)
                     throw new ApiException($"Negocio con Id {request.NegocioId} no encontrado");
 
-                var producto = new Producto
+                var producto = new Producto 
                 {
                     Codigo = request.Codigo,
                     Nombre = request.Nombre,
@@ -83,7 +83,7 @@ namespace Application.Feautures.ProductoC.Commands
                 await _stockRepository.AddAsync(stock);
                 await _stockRepository.SaveChangesAsync();
 
-                producto.StockId = stock.Id;
+                producto.Stocks.Add(stock);
                 await _repository.UpdateAsync(producto);
                 await _repository.SaveChangesAsync(); 
 

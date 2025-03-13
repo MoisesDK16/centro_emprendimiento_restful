@@ -18,7 +18,7 @@ namespace Application.Feautures.ProductoC.Commands
         public required string RutaImagen { get; set; }
         //Relaciones
         public long CategoriaId { get; set; }
-        //Data de Stock
+
         public long StockId { get; set; }
         public decimal PrecioCompra { get; set; }
         public decimal PrecioVenta { get; set; }
@@ -48,28 +48,14 @@ namespace Application.Feautures.ProductoC.Commands
                 _ = await _categoriaRepository.GetByIdAsync(request.CategoriaId)
                     ?? throw new ApiException($"Categoría con Id {request.CategoriaId} no encontrada");
 
-                var stockFound = await _stockRepository.GetByIdAsync(request.StockId)
-                    ?? throw new ApiException($"Stock con Id {request.StockId} no encontrado");
-
                 productFound.Codigo = request.Codigo;
                 productFound.Nombre = request.Nombre;
                 productFound.Descripcion = request.Descripcion;
                 productFound.Iva = request.Iva;
                 productFound.RutaImagen = request.RutaImagen;
                 productFound.CategoriaId = request.CategoriaId;
-                productFound.StockId = request.StockId;
-
-                productFound.Stock = stockFound;
-
-                stockFound.PrecioCompra = request.PrecioCompra;
-                stockFound.PrecioVenta = request.PrecioVenta;
-                stockFound.Cantidad = request.Cantidad;
-                stockFound.FechaElaboracion = request.FechaElaboracion;
-                stockFound.FechaCaducidad = request.FechaCaducidad;
-                stockFound.FechaIngreso = request.FechaIngreso;
 
                 await _repository.UpdateAsync(productFound);
-                await _stockRepository.UpdateAsync(stockFound);
                 await _repository.SaveChangesAsync();
 
                 return new Response<long>(productFound.Id);
