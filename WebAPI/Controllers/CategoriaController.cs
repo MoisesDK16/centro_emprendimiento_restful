@@ -41,5 +41,12 @@ namespace WebAPI.Controllers
             var categoria = await Mediator.Send(query);
             return Ok(categoria);
         }
+
+        [HttpGet("select-categorias")]
+        public async Task<IActionResult> SelectCategorias([FromQuery] SelectCategorias select)
+        {
+            var categorias = await Mediator.Send(select);
+            return Ok(categorias);
+        }
     }
 }

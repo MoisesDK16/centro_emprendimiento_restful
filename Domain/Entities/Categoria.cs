@@ -19,5 +19,10 @@ namespace Domain.Entities
         public required Tipo Tipo { get; set; }
 
         public string? Descripcion { get; set; }
+
+        public long NegocioId { get; set; }
+
+        [ForeignKey("NegocioId")]
+        public Negocio? Negocio { get; set; }
     }
 }

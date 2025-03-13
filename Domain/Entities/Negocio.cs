@@ -22,6 +22,8 @@ namespace Domain.Entities
         public required Estado estado { get; set; }
         public required string descripcion { get; set; }
 
+        public List<Categoria> categorias { get; set; } = new List<Categoria>();
+
         /*[ForeignKey("Emprendedor")]
         public required string EmprendedorId { get; set; }  // Identity usa string como ID
         public virtual ApplicationUser Emprendedor { get; set; } = null!;

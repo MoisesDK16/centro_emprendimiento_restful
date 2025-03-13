@@ -10,9 +10,9 @@ namespace Application.Feautures.CategoriaC.Commands
     public class CrearCategoriaComando : IRequest<Response<long>>
     {
         public required string Nombre { get; set; }
-
         public required Tipo Tipo { get; set; }
         public required string Descripcion { get; set; }
+        public long NegocioId { get; set; }
 
         public class CrearCategoriaHandler : IRequestHandler<CrearCategoriaComando, Response<long>>
         {

@@ -38,7 +38,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Feautures\ProductoC\Queries\" />
     <Folder Include="Feautures\StockC\Commands\" />
     <Folder Include="Feautures\StockC\Queries\" />
     <Folder Include="Feautures\Usuario\" />

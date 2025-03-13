@@ -1,4 +1,6 @@
-﻿using Application.Feautures.ProductoC.Commands;
+﻿using Application.Feautures.CategoriaC.Queries;
+using Application.Feautures.ProductoC.Commands;
+using Application.Feautures.ProductoC.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,6 +23,25 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> ActualizarProducto([FromBody] ActualizarProducto comando)
         {
             return Ok(await Mediator.Send(comando));
+        }
+
+        [HttpGet("listarProductos")]
+         public async Task<IActionResult> ListarProductos([FromQuery] ListarProductosParameters filter)
+        {
+            var productos = await Mediator.Send(new ListarProductos
+            {
+                PageNumber = filter.PageNumber,
+                PageSize = filter.PageSize,
+                Categoria = filter.Categoria });
+
+            return Ok(productos);
+        }
+
+        [HttpGet("productoById")]
+        public async Task<IActionResult> ProductoById([FromQuery] ProductoById request)
+        {
+            var producto = await Mediator.Send(request);
+            return Ok(producto);
         }
     }
 }

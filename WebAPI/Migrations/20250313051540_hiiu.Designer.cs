@@ -12,8 +12,8 @@ using Persistence.Context;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250313011520_ggfgf")]
-    partial class ggfgf
+    [Migration("20250313051540_hiiu")]
+    partial class hiiu
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,9 @@ namespace WebAPI.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long>("NegocioId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(20)
@@ -59,6 +62,8 @@ namespace WebAPI.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NegocioId");
 
                     b.ToTable("categoria", (string)null);
                 });
@@ -241,6 +246,17 @@ namespace WebAPI.Migrations
                     b.ToTable("stock", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Categoria", b =>
+                {
+                    b.HasOne("Domain.Entities.Negocio", "Negocio")
+                        .WithMany("categorias")
+                        .HasForeignKey("NegocioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Negocio");
+                });
+
             modelBuilder.Entity("Domain.Entities.Producto", b =>
                 {
                     b.HasOne("Domain.Entities.Categoria", "Categoria")
@@ -269,6 +285,11 @@ namespace WebAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Producto");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Negocio", b =>
+                {
+                    b.Navigation("categorias");
                 });
 
             modelBuilder.Entity("Domain.Entities.Producto", b =>
