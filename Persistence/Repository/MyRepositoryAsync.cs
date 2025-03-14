@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.Exceptions;
+using Application.Interfaces;
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
@@ -28,14 +29,14 @@ namespace Persistence.Repository
         {
             await using var dbContext = _contextFactory.CreateDbContext();
 
-            // Obtener todas las propiedades de navegación dinámicamente y aplicar Include()
             IQueryable<T> query = dbContext.Set<T>();
             foreach (var includeExpression in GetAllNavigationProperties<T>(dbContext))
             {
                 query = query.Include(includeExpression);
             }
 
-            return await query.FirstOrDefaultAsync(e => EF.Property<long>(e, "Id") == id);
+            var entity = await query.FirstOrDefaultAsync(e => EF.Property<long>(e, "Id") == id);
+            return entity ?? throw new ApiException($"Entity {typeof(T).Name} with id {id} not found");
         }
 
 

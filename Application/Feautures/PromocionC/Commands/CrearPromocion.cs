@@ -16,6 +16,7 @@ namespace Application.Feautures.PromocionC.Commands
         public int CantidadGratis { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
+        public long NegocioId { get; set; }
         public List<long> IdProductos { get; set; } = new List<long>();
 
 
@@ -24,6 +25,7 @@ namespace Application.Feautures.PromocionC.Commands
             private readonly IRepositoryAsync<Promocion> _repository;
             private readonly IRepositoryAsync<Producto> _productoRepository;
             private readonly IReadOnlyRepositoryAsync<Producto> _productoyReading;
+            private readonly IRepositoryAsync<Domain.Entities.Negocio> _negocioRepository;
             public CrearPromocionHandler(IRepositoryAsync<Promocion> repository, IRepositoryAsync<Producto> productoRepository, IReadOnlyRepositoryAsync<Producto> productoyReading)
             {
                 _repository = repository;
@@ -33,6 +35,8 @@ namespace Application.Feautures.PromocionC.Commands
 
             public async Task<Response<long>> Handle(CrearPromocion request, CancellationToken cancellationToken)
             {
+                var negocioFound = await _negocioRepository.GetByIdAsync(request.NegocioId);
+
                 var productosFound = await _productoyReading.ListAsync(new ProductoSpecification(request.IdProductos));
 
                 if (productosFound.Count != request.IdProductos.Count)
@@ -48,7 +52,8 @@ namespace Application.Feautures.PromocionC.Commands
                     CantidadCompra = request.CantidadCompra,
                     CantidadGratis = request.CantidadGratis,
                     FechaInicio = request.FechaInicio,
-                    FechaFin = request.FechaFin
+                    FechaFin = request.FechaFin,
+                    NegocioId = request.NegocioId,
                 };
 
                 await _repository.AddAsync(promocion);

@@ -11,15 +11,15 @@ namespace Application.DTOs.Productos
     {
         public long Id { get; set; }
         public long CategoriaId { get; set; }
-        public string NombreCategoria { get; set; }
-        public long NegocioId { get; set; }
-        public string NombreNegocio { get; set; }
+        public string? NombreCategoria { get; set; }
+        public long? NegocioId { get; set; }
+        public string? NombreNegocio { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }
-        public string Descripcion { get; set; }
+        public string? Descripcion { get; set; }
         public Estado Estado { get; set; }
         public decimal Iva { get; set; }
-        public string RutaImagen { get; set; }
+        public string? RutaImagen { get; set; }
 
     }
 }

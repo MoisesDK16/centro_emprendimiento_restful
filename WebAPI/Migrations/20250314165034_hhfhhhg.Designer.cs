@@ -12,8 +12,8 @@ using Persistence.Context;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250314021903_dgfgdg")]
-    partial class dgfgdg
+    [Migration("20250314165034_hhfhhhg")]
+    partial class hhfhhhg
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -142,7 +142,7 @@ namespace WebAPI.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<long>("PromocionId")
+                    b.Property<long?>("PromocionId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("RutaImagen")
@@ -191,10 +191,15 @@ namespace WebAPI.Migrations
                     b.Property<DateTime>("FechaInicio")
                         .HasColumnType("datetime2");
 
+                    b.Property<long>("NegocioId")
+                        .HasColumnType("bigint");
+
                     b.Property<int>("TipoPromocion")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NegocioId");
 
                     b.ToTable("promocion", (string)null);
                 });
@@ -315,14 +320,24 @@ namespace WebAPI.Migrations
                     b.HasOne("Domain.Entities.Promocion", "Promocion")
                         .WithMany("Productos")
                         .HasForeignKey("PromocionId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Categoria");
 
                     b.Navigation("Negocio");
 
                     b.Navigation("Promocion");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Promocion", b =>
+                {
+                    b.HasOne("Domain.Entities.Negocio", "Negocio")
+                        .WithMany("Promociones")
+                        .HasForeignKey("NegocioId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Negocio");
                 });
 
             modelBuilder.Entity("Domain.Entities.Stock", b =>
@@ -338,6 +353,8 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("Domain.Entities.Negocio", b =>
                 {
+                    b.Navigation("Promociones");
+
                     b.Navigation("categorias");
                 });
 

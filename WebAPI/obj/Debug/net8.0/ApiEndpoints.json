@@ -245,6 +245,69 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebAPI.Controllers.ProductoController",
+    "Method": "SelectProductos",
+    "RelativePath": "api/v{version}/Producto/selectProductos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "NegocioId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.PromocionController",
+    "Method": "EditarPromocion",
+    "RelativePath": "api/v{version}/Promocion/actualizar",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Application.Feautures.PromocionC.Commands.ActualizarPromocion",
+        "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.PromocionController",
+    "Method": "PromocionById",
+    "RelativePath": "api/v{version}/Promocion/ById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.PromocionController",
     "Method": "CrearPromocion",
     "RelativePath": "api/v{version}/Promocion/crear",
@@ -256,6 +319,37 @@
         "Name": "command",
         "Type": "Application.Feautures.PromocionC.Commands.CrearPromocion",
         "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.PromocionController",
+    "Method": "ListarPromociones",
+    "RelativePath": "api/v{version}/Promocion/listarPromociones",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "NegocioId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
       },
       {
         "Name": "version",

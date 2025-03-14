@@ -35,6 +35,13 @@ namespace Persistence.Configuration
                 .WithOne(x => x.Promocion)
                 .HasForeignKey(x => x.PromocionId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            builder.HasOne(x => x.Negocio)
+                .WithMany(n => n.Promociones)
+                .HasForeignKey(x => x.NegocioId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
         }
     }
 }

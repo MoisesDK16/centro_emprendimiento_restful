@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.DTOs.Promociones;
 using Application.Feautures.CategoriaC.Commands;
 using Application.Feautures.ProductoC.Commands;
 using Application.Feautures.Proveedores.Commands.CreateProveedorCommand;

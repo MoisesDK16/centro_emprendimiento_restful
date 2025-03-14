@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Domain.Entities
@@ -30,6 +31,12 @@ namespace Domain.Entities
 
         //Relaciones
         public List<Producto> Productos { get; set; } = new List<Producto>();
+
+        [AllowNull]
+        public long NegocioId { get; set; }
+
+        [JsonIgnore]
+        public Negocio? Negocio { get; set; }
 
     }
 }

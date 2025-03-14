@@ -20,6 +20,13 @@ namespace Application.Specifications
             if (!string.IsNullOrEmpty(Categoria)) Query.Where(p => p.Categoria != null && p.Categoria.Nombre.Contains(Categoria));
             if (!string.IsNullOrEmpty(Negocio)) Query.Where(p => p.Negocio.nombre != null && p.Negocio.nombre.Contains(Negocio));
         }
+
+        public ProductoSpecification (long NegocioId)
+        {
+            Query
+                .Include(p => p.Negocio)
+                .Where(p => p.NegocioId == NegocioId);
+        }
     }
 
 }

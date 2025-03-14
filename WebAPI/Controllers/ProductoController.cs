@@ -43,5 +43,12 @@ namespace WebAPI.Controllers
             var producto = await Mediator.Send(request);
             return Ok(producto);
         }
+
+        [HttpGet("selectProductos")]
+        public async Task<IActionResult> SelectProductos([FromQuery] SelectProductos selectProductos)
+        {
+            var productos = await Mediator.Send(selectProductos);
+            return Ok(productos);
+        }
     }
 }
