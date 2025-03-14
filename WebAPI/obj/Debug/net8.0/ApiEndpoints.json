@@ -245,6 +245,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebAPI.Controllers.PromocionController",
+    "Method": "CrearPromocion",
+    "RelativePath": "api/v{version}/Promocion/crear",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Application.Feautures.PromocionC.Commands.CrearPromocion",
+        "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.ProveedorController",
     "Method": "Create",
     "RelativePath": "api/v{version}/Proveedor",

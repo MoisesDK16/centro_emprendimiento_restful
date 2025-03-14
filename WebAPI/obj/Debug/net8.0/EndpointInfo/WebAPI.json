@@ -414,6 +414,47 @@
         }
       }
     },
+    "/api/v{version}/Promocion/crear": {
+      "post": {
+        "tags": [
+          "Promocion"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPromocion"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPromocion"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPromocion"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v{version}/Proveedor": {
       "post": {
         "tags": [
@@ -1019,6 +1060,43 @@
         },
         "additionalProperties": false
       },
+      "CrearPromocion": {
+        "type": "object",
+        "properties": {
+          "tipoPromocion": {
+            "$ref": "#/components/schemas/TipoPromocion"
+          },
+          "descuento": {
+            "type": "number",
+            "format": "double"
+          },
+          "cantidadCompra": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cantidadGratis": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaInicio": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "fechaFin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "idProductos": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CrearStock": {
         "required": [
           "cantidad",
@@ -1152,6 +1230,13 @@
         "enum": [
           "NEGOCIO",
           "PRODUCTO"
+        ],
+        "type": "string"
+      },
+      "TipoPromocion": {
+        "enum": [
+          "DESCUENTO",
+          "DOS_POR_UNO"
         ],
         "type": "string"
       },

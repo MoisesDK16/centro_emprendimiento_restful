@@ -80,6 +80,15 @@ namespace Persistence.Repository
                 .ToList();
         }
 
+        public async Task UpdateRangeAsync(IEnumerable<T> entities)
+        {
+            await using var dbContext = _contextFactory.CreateDbContext();
+
+            dbContext.Set<T>().UpdateRange(entities); 
+            await dbContext.SaveChangesAsync();
+        }
+
+
 
     }
 }

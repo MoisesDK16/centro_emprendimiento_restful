@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -19,6 +20,10 @@ namespace Domain.Entities
         public long NegocioId { get; set; }
         public Negocio Negocio { get; set; }
 
+        [AllowNull]
+        public long? PromocionId { get; set; }
+        public Promocion? Promocion { get; set; }
+
         [JsonIgnore]
         public List<Stock> Stocks { get; set; } = new List<Stock>();
 
@@ -29,6 +34,5 @@ namespace Domain.Entities
         public Estado Estado { get; set; }
         public decimal Iva { get; set; }
         public string RutaImagen { get; set; }
-
     }
 }

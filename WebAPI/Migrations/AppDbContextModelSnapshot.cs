@@ -47,7 +47,7 @@ namespace WebAPI.Migrations
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("NegocioId")
+                    b.Property<long?>("NegocioId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Nombre")
@@ -139,6 +139,9 @@ namespace WebAPI.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<long>("PromocionId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("RutaImagen")
                         .IsRequired()
                         .HasMaxLength(1024)
@@ -150,7 +153,47 @@ namespace WebAPI.Migrations
 
                     b.HasIndex("NegocioId");
 
+                    b.HasIndex("PromocionId");
+
                     b.ToTable("producto", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Promocion", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<int>("CantidadCompra")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CantidadGratis")
+                        .HasMaxLength(5)
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Descuento")
+                        .HasPrecision(5, 2)
+                        .HasColumnType("decimal(5,2)");
+
+                    b.Property<int>("Estado")
+                        .ValueGeneratedOnAddOrUpdate()
+                        .HasColumnType("int")
+                        .HasComputedColumnSql("CASE WHEN DATEDIFF(DAY, GETDATE(), FechaFin) <= 0 THEN 0 ELSE 1 END");
+
+                    b.Property<DateTime>("FechaFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TipoPromocion")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("promocion", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Proveedor", b =>
@@ -247,9 +290,7 @@ namespace WebAPI.Migrations
                 {
                     b.HasOne("Domain.Entities.Negocio", "Negocio")
                         .WithMany("categorias")
-                        .HasForeignKey("NegocioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("NegocioId");
 
                     b.Navigation("Negocio");
                 });
@@ -268,9 +309,17 @@ namespace WebAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Domain.Entities.Promocion", "Promocion")
+                        .WithMany("Productos")
+                        .HasForeignKey("PromocionId")
+                        .OnDelete(DeleteBehavior.SetNull)
+                        .IsRequired();
+
                     b.Navigation("Categoria");
 
                     b.Navigation("Negocio");
+
+                    b.Navigation("Promocion");
                 });
 
             modelBuilder.Entity("Domain.Entities.Stock", b =>
@@ -292,6 +341,11 @@ namespace WebAPI.Migrations
             modelBuilder.Entity("Domain.Entities.Producto", b =>
                 {
                     b.Navigation("Stocks");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Promocion", b =>
+                {
+                    b.Navigation("Productos");
                 });
 #pragma warning restore 612, 618
         }
