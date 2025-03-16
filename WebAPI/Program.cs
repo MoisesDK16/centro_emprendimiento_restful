@@ -1,5 +1,6 @@
 using Application;
 using Application.Interfaces;
+using Application.Services;
 using Identity;
 using Identity.Contexts;
 using Identity.Models;
@@ -28,8 +29,10 @@ builder.Services.AddControllers().AddJsonOptions(options =>
     options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
+builder.Services.AddScoped<IAzureStorageService, AzureStorageService>();
+
 builder.Services.AddCors(options =>
-{
+{   
     options.AddPolicy("AllowAll", policy =>
         policy.AllowAnyOrigin() // Permite cualquier origen
               .AllowAnyMethod()  // Permite cualquier método (GET, POST, PUT, DELETE, etc.)
@@ -49,7 +52,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseCors("AllowAll");
 app.UseRouting();
 app.UseAuthentication();

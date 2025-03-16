@@ -25,7 +25,7 @@ namespace Identity
             services.AddDbContext<IdentityContext>(options =>
                 options.UseSqlServer(
                     configuration.GetConnectionString("cn"),
-                    b => b.MigrationsAssembly("Identity") // ✅ Más seguro
+                    b => b.MigrationsAssembly("WebAPI") 
                 )
             );
 

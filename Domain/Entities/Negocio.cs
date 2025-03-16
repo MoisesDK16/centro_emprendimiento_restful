@@ -26,6 +26,8 @@ namespace Domain.Entities
 
         public List<Promocion> Promociones { get; set; } = new List<Promocion>();
 
+        public ICollection<NegocioCliente> NegocioClientes { get; set; }
+
         /*[ForeignKey("Emprendedor")]
         public required string EmprendedorId { get; set; }  // Identity usa string como ID
         public virtual ApplicationUser Emprendedor { get; set; } = null!;

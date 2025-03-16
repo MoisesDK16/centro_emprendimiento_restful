@@ -1,5 +1,6 @@
 ﻿using Ardalis.Specification;
 using Domain.Entities;
+using Domain.Enums.Promocion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,12 @@ namespace Application.Specifications
             Query.Skip((PageNumber - 1) * PageSize);
             Query.Take(PageSize);
         }
+
+        public PromocionSpecification(long productoId)
+        {
+            Query
+                .Where(p => p.Productos.Any(x => x.Id == productoId));
+        }
+
     }
 }

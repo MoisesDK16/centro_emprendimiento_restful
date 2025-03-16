@@ -26,18 +26,26 @@ namespace Application.Feautures.PromocionC.Commands
             private readonly IRepositoryAsync<Producto> _productoRepository;
             private readonly IReadOnlyRepositoryAsync<Producto> _productoyReading;
             private readonly IRepositoryAsync<Domain.Entities.Negocio> _negocioRepository;
-            public CrearPromocionHandler(IRepositoryAsync<Promocion> repository, IRepositoryAsync<Producto> productoRepository, IReadOnlyRepositoryAsync<Producto> productoyReading)
+            private readonly IReadOnlyRepositoryAsync<Domain.Entities.Negocio> _negocioRepositoryReading;
+            public CrearPromocionHandler(
+                IRepositoryAsync<Promocion> repository,
+                IRepositoryAsync<Producto> productoRepository,
+                IReadOnlyRepositoryAsync<Producto> productoyReading,
+                IReadOnlyRepositoryAsync<Domain.Entities.Negocio> negocioRepositoryReading)
             {
                 _repository = repository;
                 _productoRepository = productoRepository;
                 _productoyReading = productoyReading;
+                _negocioRepositoryReading = negocioRepositoryReading;
             }
 
             public async Task<Response<long>> Handle(CrearPromocion request, CancellationToken cancellationToken)
             {
-                var negocioFound = await _negocioRepository.GetByIdAsync(request.NegocioId);
+                var negocioFound = await _negocioRepositoryReading.GetByIdAsync(request.NegocioId, cancellationToken);
+                if (negocioFound == null) throw new ApiException($"Negocio con Id {request.NegocioId} no encontrado");
 
                 var productosFound = await _productoyReading.ListAsync(new ProductoSpecification(request.IdProductos));
+                if(productosFound == null) throw new ApiException("No se encontraron los productos con los IDs proporcionados");
 
                 if (productosFound.Count != request.IdProductos.Count)
                 {

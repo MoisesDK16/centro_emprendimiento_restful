@@ -29,6 +29,7 @@ namespace Persistence.Configuration
                 .HasMaxLength(5);
 
             builder.Property(x => x.Estado)
+                .IsRequired()
                 .HasComputedColumnSql("CASE WHEN DATEDIFF(DAY, GETDATE(), FechaFin) <= 0 THEN 0 ELSE 1 END");
 
             builder.HasMany(x => x.Productos)

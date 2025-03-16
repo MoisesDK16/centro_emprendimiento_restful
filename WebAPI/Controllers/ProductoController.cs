@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("crear")]
-        public async Task<IActionResult> CrearProducto([FromBody] CrearProducto comando)
+        public async Task<IActionResult> CrearProducto([FromForm] CrearProducto comando)
         {
             return Ok(await Mediator.Send(comando));
         }

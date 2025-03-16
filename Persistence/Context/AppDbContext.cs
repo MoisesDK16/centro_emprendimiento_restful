@@ -26,6 +26,16 @@ namespace Persistence.Context
 
         public DbSet<Producto> productos { get; set; }
 
+        public DbSet<NegocioCliente> NegocioClientes { get; set; }
+
+        public DbSet<Cliente> Clientes { get; set; }
+
+        public DbSet<Promocion> Promociones { get; set; }
+
+        public DbSet<Venta> Ventas { get; set; }
+
+        public DbSet<Detalle> Detalles { get; set; }
+
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             foreach (var entry in ChangeTracker.Entries<AuditableBaseEntity>())

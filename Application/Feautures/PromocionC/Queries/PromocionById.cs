@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Productos;
 using Application.DTOs.Promociones;
+using Application.Exceptions;
 using Application.Interfaces;
 using Application.Wrappers;
 using Domain.Entities;
@@ -10,6 +11,8 @@ namespace Application.Feautures.PromocionC.Queries
     public class PromocionById : IRequest<Response<PromocionInfo>>
     {
         public long Id { get; set; }
+
+        public long NegocioId { get; set; }
 
         public class PromocionByIdHandler : IRequestHandler<PromocionById, Response<PromocionInfo>>
         {
@@ -24,6 +27,7 @@ namespace Application.Feautures.PromocionC.Queries
             public async Task<Response<PromocionInfo>> Handle(PromocionById request, CancellationToken cancellationToken)
             {
                 var promocionFound = await _repository.GetByIdAsync(request.Id);
+                if (promocionFound == null) throw new ApiException($"Promocion con Id {request.Id} no encontrada");
 
                 var promocionMapped = new PromocionInfo{
                     Id = promocionFound.Id,

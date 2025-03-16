@@ -4,6 +4,7 @@ using Application.Wrappers;
 using Domain.Entities;
 using Domain.Enums.Producto;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace Application.Feautures.ProductoC.Commands
 {
@@ -14,7 +15,7 @@ namespace Application.Feautures.ProductoC.Commands
         public string Descripcion { get; set; }
         public Estado Estado { get; set; }
         public decimal Iva { get; set; }
-        public string RutaImagen { get; set; }
+        //public IFormFile? Imagen { get; set; }
 
         //Relaciones
         public int CategoriaId { get; set; }
@@ -35,13 +36,15 @@ namespace Application.Feautures.ProductoC.Commands
             private readonly IRepositoryAsync<Stock> _stockRepository;
             private readonly IRepositoryAsync<Domain.Entities.Categoria> _categoriaRepository;
             private readonly IRepositoryAsync<Domain.Entities.Negocio> _negocioRepository;
+            private readonly IAzureStorageService _azureStorageService;
 
-            public CrearProductoHandler(IRepositoryAsync<Producto> repository, IRepositoryAsync<Stock> stockRepository, IRepositoryAsync<Domain.Entities.Categoria> categoriaRepository, IRepositoryAsync<Domain.Entities.Negocio> negocioRepository)
+            public CrearProductoHandler(IRepositoryAsync<Producto> repository, IRepositoryAsync<Stock> stockRepository, IRepositoryAsync<Domain.Entities.Categoria> categoriaRepository, IRepositoryAsync<Domain.Entities.Negocio> negocioRepository, IAzureStorageService azureStorageService)
             {
                 _repository = repository;
                 _stockRepository = stockRepository;
                 _categoriaRepository = categoriaRepository;
                 _negocioRepository = negocioRepository;
+                _azureStorageService = azureStorageService;
             }
 
             public async Task<Response<long>> Handle(CrearProducto request, CancellationToken cancellationToken)
@@ -61,10 +64,11 @@ namespace Application.Feautures.ProductoC.Commands
                     Descripcion = request.Descripcion,
                     Estado = request.Estado,
                     Iva = request.Iva,
-                    RutaImagen = request.RutaImagen,
+                    //RutaImagen = request.Imagen != null ? await _azureStorageService.UploadAsync(request.Imagen, Enums.ContainerEnum.IMAGES) : null,
                     CategoriaId = request.CategoriaId,
                     NegocioId = request.NegocioId
                 };
+
 
                 await _repository.AddAsync(producto);
                 await _repository.SaveChangesAsync(); 
