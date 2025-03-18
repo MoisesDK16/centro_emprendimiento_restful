@@ -39,5 +39,11 @@ namespace WebAPI.Controllers
                     Ciudad = filter.Ciudad 
                 }));
         }
+
+        [HttpGet("clienteByIdentificacion")]
+        public async Task<IActionResult> ClienteByIdentificacion([FromQuery] string identificacion)
+        {
+            return Ok(await Mediator.Send(new ClienteByIdentificacion { Identificacion = identificacion }));
+        }
     }
 }

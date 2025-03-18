@@ -168,6 +168,27 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.ClienteController",
+    "Method": "ClienteByIdentificacion",
+    "RelativePath": "api/v{version}/Cliente/clienteByIdentificacion",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "identificacion",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ClienteController",
     "Method": "CrearCliente",
     "RelativePath": "api/v{version}/Cliente/crear",
     "HttpMethod": "POST",

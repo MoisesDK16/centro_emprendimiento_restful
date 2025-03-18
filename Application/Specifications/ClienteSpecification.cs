@@ -29,5 +29,11 @@ namespace Application.Specifications
                 Query.Where(c => c.Ciudad.Contains(ciudad));
         }
 
+        public ClienteSpecification(string identificacion)
+        {
+            Query.Where(c => c.Identificacion == identificacion);
+
+
+        }
     }
 }
