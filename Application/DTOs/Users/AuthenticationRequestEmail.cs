@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.Users
 {
-    public class AuthenticationRequest
+    public class AuthenticationRequestEmail
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public required string Email { get; set; }
+        public required string Password { get; set; }
     }
 }

@@ -1,8 +1,10 @@
-﻿using Application.DTOs.Users;
+﻿using Application.Behaviors;
+using Application.DTOs.Users;
 using Application.Enums;
 using Application.Exceptions;
 using Application.Interfaces;
 using Application.Wrappers;
+using Azure.Core;
 using Domain.Settings;
 using Identity.Helpers;
 using Identity.Models;
@@ -10,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -24,7 +27,13 @@ namespace Identity.Services
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IDateTimeService _dateTimeService;
 
-        public AccountService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IOptions<Jwt> jwtSettings, SignInManager<ApplicationUser> signInManager, IDateTimeService dateTimeService)
+        public AccountService(
+            UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager,
+            IOptions<Jwt> jwtSettings,
+            SignInManager<ApplicationUser> signInManager,
+            IDateTimeService dateTimeService
+            )
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -32,13 +41,14 @@ namespace Identity.Services
             _signInManager = signInManager;
             _dateTimeService = dateTimeService;
         }
-        public async Task<Response<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request, string ipAddress)
+
+        public async Task<Response<AuthenticationResponse>> logInByEmail(AuthenticationRequestEmail request, string ipAddress)
         {
             var user = await _userManager.FindByEmailAsync(request.Email);
-            if (user == null) throw new ApiException($"No Accounts Registered with {request.Email}.");
+            if (user == null) throw new ApiException($"No existe cuenta registrada con el email de: {request.Email}.");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
-            if (!result.Succeeded) throw new ApiException("Invalid Credentials.");
+            if (!result.Succeeded) throw new ApiException("Credenciales Invalidas");
 
             var refreshToken = GenerateRefreshToken(ipAddress);
             JwtSecurityToken jwtSecurityToken = await generateJwtToken(user);
@@ -50,15 +60,42 @@ namespace Identity.Services
                 UserName = user.UserName,
                 Email = user.Email,
                 Roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false),
-                isVerified = user.EmailConfirmed,  
+                isVerified = user.EmailConfirmed,
                 RefreshToken = refreshToken.Token,
             };
 
             return new Response<AuthenticationResponse>(authenticationResponse, $"Usuario Autenticado {user.UserName}");
         }
 
+        public async Task<Response<AuthenticationResponse>> logInByUserName(AuthenticationRequestUserName request, string ipAddress)
+        {
+            var user = await _userManager.FindByNameAsync(request.UserName);
+            if (user == null) throw new ApiException($"No existe cuenta registrada con el nombre de usuario: {request.UserName}.");
+
+            var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+            if (!result.Succeeded) throw new ApiException("Credenciales Invalidas");
+
+            var refreshToken = GenerateRefreshToken(ipAddress);
+            JwtSecurityToken jwtSecurityToken = await generateJwtToken(user);
+
+            AuthenticationResponse authenticationResponse = new AuthenticationResponse
+            {
+                Id = user.Id,
+                JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+                UserName = user.UserName,
+                Email = user.Email,
+                Roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false),
+                isVerified = user.EmailConfirmed,
+                RefreshToken = refreshToken.Token,
+            };
+
+            return new Response<AuthenticationResponse>(authenticationResponse, $"Usuario Autenticado {user.UserName}");
+
+        }
+
         public async Task<Response<string>> RegisterAsync(RegisterRequest request, string origin)
         {
+
             var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
             if (userWithSameUserName != null)
                 throw new ApiException($"User with this username: {request.UserName} already exists.");
@@ -66,6 +103,15 @@ namespace Identity.Services
             var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
             if (userWithSameEmail != null)
                 throw new ApiException($"User with this email: {request.Email} already exists.");
+
+            if (request.Identificacion != null)
+            {
+               if(!ValidacionIdentificacion.VerificaIdentificacion(request.Identificacion))
+                    throw new ApiException($"Identificacion no valida");
+            }
+
+            if(request.UserName.Contains("@"))
+                throw new ApiException($"El nombre de usuario no puede contene @");
 
             var user = new ApplicationUser
             {
@@ -75,8 +121,8 @@ namespace Identity.Services
                 Apellido = request.Apellido,
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true,
-                Identificacion = request.Identificacion,
-                Telefono = request.Telefono,
+                Identificacion = request.Identificacion ?? null,
+                Telefono = request.Telefono ?? null,
                 CiudadOrigen = request.CiudadOrigen,
             };
 

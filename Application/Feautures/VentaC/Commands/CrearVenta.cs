@@ -1,11 +1,13 @@
 ﻿using Application.DTOs.Detalles;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Services.StockS;
 using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
 using Domain.Enums.Promocion;
 using MediatR;
+using System.Composition;
 
 namespace Application.Feautures.VentaC.Commands
 {
@@ -17,7 +19,7 @@ namespace Application.Feautures.VentaC.Commands
         //Relaciones
         public int ClienteId { get; set; }
         public int NegocioId { get; set; }
-        public List<DetalleDTO> Detalles { get; set; }
+        public required List<DetalleDTO> Detalles { get; set; }
 
         public class CrearVentaHandler : IRequestHandler<CrearVenta, Response<long>>
         {
@@ -25,13 +27,20 @@ namespace Application.Feautures.VentaC.Commands
             private readonly IRepositoryAsync<Detalle> _repositoryDetalle;
             private readonly IReadOnlyRepositoryAsync<Producto> _productoRepostoryReading;
             private readonly IReadOnlyRepositoryAsync<Promocion> _promocionRepostoryReading;
+            private readonly StockService _stockService;
 
-            public CrearVentaHandler(IRepositoryAsync<Venta> repositoryVenta, IRepositoryAsync<Detalle> repositoryDetalle, IReadOnlyRepositoryAsync<Producto> productoRepostoryReading, IReadOnlyRepositoryAsync<Promocion> promocionRepostoryReading)
+            public CrearVentaHandler(
+                IRepositoryAsync<Venta> repositoryVenta,
+                IRepositoryAsync<Detalle> repositoryDetalle,
+                IReadOnlyRepositoryAsync<Producto> productoRepostoryReading,
+                IReadOnlyRepositoryAsync<Promocion> promocionRepostoryReading,
+                StockService stockService)
             {
                 _repositoryVenta = repositoryVenta;
                 _repositoryDetalle = repositoryDetalle;
                 _productoRepostoryReading = productoRepostoryReading;
                 _promocionRepostoryReading = promocionRepostoryReading;
+                _stockService = stockService;
             }
 
             public async Task<Response<long>> Handle(CrearVenta request, CancellationToken cancellationToken)
@@ -94,6 +103,7 @@ namespace Application.Feautures.VentaC.Commands
                     totalCalculado += nuevoDetalle.Total; 
 
                     await _repositoryDetalle.AddAsync(nuevoDetalle);
+                    _stockService.RestarStock(nuevoDetalle.Cantidad, nuevoDetalle.ProductoId);
                 }
 
                 venta.Subtotal = subtotalCalculado;

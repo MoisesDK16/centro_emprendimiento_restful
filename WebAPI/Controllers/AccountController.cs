@@ -14,16 +14,29 @@ namespace WebAPI.Controllers
         {
         }
 
-        [HttpPost("authenticate")]
-        public async Task<IActionResult> AuthenticateAsync([FromBody] AuthenticationRequest request)
+        [HttpPost("authenticateByEmail")]
+        public async Task<IActionResult> AuthenticateAsync([FromBody] AuthenticationRequestEmail request)
         {
-            return Ok( await Mediator.Send(new AuthenticateCommand 
+            return Ok( await Mediator.Send(new AuthenticateByEmailCommand
             { 
                 Email = request.Email,
                 Password = request.Password,
                 IpAddress = generateIpAddress() 
             }));
         }
+
+        [HttpPost("authenticateByUserName")]
+        public async Task<IActionResult> AuthenticateByUserNameAsync([FromBody] AuthenticationRequestUserName request)
+        {
+            return Ok(await Mediator.Send(new AuthenticateByUserNameCommand
+            {
+                UserName = request.UserName,
+                Password = request.Password,
+                IpAddress = generateIpAddress()
+            }));
+        }
+
+
 
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequest request)

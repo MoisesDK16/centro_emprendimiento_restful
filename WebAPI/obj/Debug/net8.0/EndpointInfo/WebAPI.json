@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/v{version}/Account/authenticate": {
+    "/api/v{version}/Account/authenticateByEmail": {
       "post": {
         "tags": [
           "Account"
@@ -24,17 +24,58 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AuthenticationRequest"
+                "$ref": "#/components/schemas/AuthenticationRequestEmail"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/AuthenticationRequest"
+                "$ref": "#/components/schemas/AuthenticationRequestEmail"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/AuthenticationRequest"
+                "$ref": "#/components/schemas/AuthenticationRequestEmail"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v{version}/Account/authenticateByUserName": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "parameters": [
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthenticationRequestUserName"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthenticationRequestUserName"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthenticationRequestUserName"
               }
             }
           }
@@ -1579,10 +1620,32 @@
         },
         "additionalProperties": false
       },
-      "AuthenticationRequest": {
+      "AuthenticationRequestEmail": {
+        "required": [
+          "email",
+          "password"
+        ],
         "type": "object",
         "properties": {
           "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AuthenticationRequestUserName": {
+        "required": [
+          "password",
+          "userName"
+        ],
+        "type": "object",
+        "properties": {
+          "userName": {
             "type": "string",
             "nullable": true
           },
@@ -1747,6 +1810,9 @@
         "additionalProperties": false
       },
       "CrearVenta": {
+        "required": [
+          "detalles"
+        ],
         "type": "object",
         "properties": {
           "fecha": {
@@ -1933,10 +1999,8 @@
           "ciudadOrigen",
           "confirmPassword",
           "email",
-          "identificacion",
           "nombre",
           "password",
-          "telefono",
           "userName"
         ],
         "type": "object",

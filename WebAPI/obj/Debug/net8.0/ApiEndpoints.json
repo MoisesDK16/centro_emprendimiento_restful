@@ -2,14 +2,35 @@
   {
     "ContainingType": "WebAPI.Controllers.AccountController",
     "Method": "AuthenticateAsync",
-    "RelativePath": "api/v{version}/Account/authenticate",
+    "RelativePath": "api/v{version}/Account/authenticateByEmail",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "Application.DTOs.Users.AuthenticationRequest",
+        "Type": "Application.DTOs.Users.AuthenticationRequestEmail",
+        "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AccountController",
+    "Method": "AuthenticateByUserNameAsync",
+    "RelativePath": "api/v{version}/Account/authenticateByUserName",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.DTOs.Users.AuthenticationRequestUserName",
         "IsRequired": true
       },
       {

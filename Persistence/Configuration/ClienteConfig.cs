@@ -28,7 +28,8 @@ namespace Persistence.Configuration
                     .IsRequired()
                     .HasMaxLength(15);
 
-                builder.HasIndex(c => c.Identificacion).IsUnique();
+                builder.HasIndex(c => c.Identificacion)
+                    .IsUnique();
 
                 builder.Property(c => c.Nombres)
                     .IsRequired()

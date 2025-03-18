@@ -10,7 +10,9 @@ namespace Application.Interfaces
 {
     public interface IAccountService
     {
-        Task<Response<AuthenticationResponse>> AuthenticateAsync(AuthenticationRequest request, string ipAdress);
+        Task<Response<AuthenticationResponse>> logInByEmail(AuthenticationRequestEmail request, string ipAdress);
+
+        Task<Response<AuthenticationResponse>> logInByUserName(AuthenticationRequestUserName request, string ipAdress);
 
         Task<Response<string>> RegisterAsync(RegisterRequest request, string origin);
     }
