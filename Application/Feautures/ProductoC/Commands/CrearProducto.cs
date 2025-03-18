@@ -15,7 +15,7 @@ namespace Application.Feautures.ProductoC.Commands
         public string Descripcion { get; set; }
         public Estado Estado { get; set; }
         public decimal Iva { get; set; }
-        //public IFormFile? Imagen { get; set; }
+        public IFormFile? Imagen { get; set; }
 
         //Relaciones
         public int CategoriaId { get; set; }

@@ -1890,6 +1890,10 @@
             "type": "integer",
             "format": "int64"
           },
+          "stockId": {
+            "type": "integer",
+            "format": "int64"
+          },
           "promocionId": {
             "type": "integer",
             "format": "int64"

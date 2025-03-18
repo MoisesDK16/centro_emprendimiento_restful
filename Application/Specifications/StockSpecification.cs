@@ -24,9 +24,10 @@ namespace Application.Specifications
                  .Take(pageSize);
         }
 
-        public StockSpecification(long productoId)
+        public StockSpecification(long productoId, long stockId)
         {
-            Query.Where(stock => stock.ProductoId == productoId);
+            Query.Where(stock => stock.ProductoId == productoId && stock.Id == stockId);
         }
+
     }
 }

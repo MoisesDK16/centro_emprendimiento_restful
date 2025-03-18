@@ -27,7 +27,7 @@ namespace Application.Feautures.VentaC.Commands
             private readonly IRepositoryAsync<Detalle> _repositoryDetalle;
             private readonly IReadOnlyRepositoryAsync<Producto> _productoRepostoryReading;
             private readonly IReadOnlyRepositoryAsync<Promocion> _promocionRepostoryReading;
-            private readonly StockService _stockService;
+            private readonly StockService _stockService;  // <-------- como hago aqui??
 
             public CrearVentaHandler(
                 IRepositoryAsync<Venta> repositoryVenta,
@@ -69,8 +69,8 @@ namespace Application.Feautures.VentaC.Commands
 
                 foreach (var detalle in request.Detalles)
                 {
-                    var promocion = detalle.PromocionId != 0 ? 
-                        await _promocionRepostoryReading.FirstOrDefaultAsync(new PromocionSpecification(detalle.ProductoId), cancellationToken): null;
+                    var promocion = detalle.PromocionId != 0 ?
+                        await _promocionRepostoryReading.FirstOrDefaultAsync(new PromocionSpecification(detalle.ProductoId), cancellationToken) : null;
 
                     Console.WriteLine("Promoción de detalle: " + (promocion != null ? promocion.TipoPromocion.ToString() : "Ninguna"));
 
@@ -100,10 +100,14 @@ namespace Application.Feautures.VentaC.Commands
                     };
 
                     subtotalCalculado += nuevoDetalle.Total;
-                    totalCalculado += nuevoDetalle.Total; 
+                    totalCalculado += nuevoDetalle.Total;
 
                     await _repositoryDetalle.AddAsync(nuevoDetalle);
-                    _stockService.RestarStock(nuevoDetalle.Cantidad, nuevoDetalle.ProductoId);
+
+                    _stockService.RestarStock(
+                        nuevoDetalle.Cantidad,
+                        nuevoDetalle.ProductoId,
+                        detalle.StockId);
                 }
 
                 venta.Subtotal = subtotalCalculado;

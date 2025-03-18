@@ -104,6 +104,7 @@ namespace Identity.Services
             if (userWithSameEmail != null)
                 throw new ApiException($"User with this email: {request.Email} already exists.");
 
+
             if (request.Identificacion != null)
             {
                if(!ValidacionIdentificacion.VerificaIdentificacion(request.Identificacion))

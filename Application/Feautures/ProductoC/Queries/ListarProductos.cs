@@ -3,12 +3,6 @@ using Application.Interfaces;
 using Application.Specifications;
 using Application.Wrappers;
 using MediatR;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
-using System.Threading;
-using System.Threading.Tasks;
-
 namespace Application.Feautures.ProductoC.Queries
 {
     public class ListarProductos : IRequest<PagedResponse<IEnumerable<ProductoDTO>>>
