@@ -15,8 +15,8 @@ namespace Application.DTOs.Users
         public required string Password { get; set; }
         public required string ConfirmPassword { get; set; }
 
-        public string? Identificacion { get; set; }
-        public string? Telefono { get; set; }
+        public required string Identificacion { get; set; }
+        public required string Telefono { get; set; }
         public required string CiudadOrigen { get; set; }
     }
 }

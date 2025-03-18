@@ -27,7 +27,7 @@ namespace Application.Feautures.VentaC.Commands
             private readonly IRepositoryAsync<Detalle> _repositoryDetalle;
             private readonly IReadOnlyRepositoryAsync<Producto> _productoRepostoryReading;
             private readonly IReadOnlyRepositoryAsync<Promocion> _promocionRepostoryReading;
-            private readonly StockService _stockService;  // <-------- como hago aqui??
+            private readonly StockService _stockService; 
 
             public CrearVentaHandler(
                 IRepositoryAsync<Venta> repositoryVenta,

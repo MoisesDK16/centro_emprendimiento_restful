@@ -1,7 +1,9 @@
 ﻿using Application.DTOs.Users;
 using Application.Feautures.Authenticate.Commands.AuthenticateCommand;
 using Application.Feautures.Authenticate.Commands.RegisterCommand;
+using Application.Feautures.Authenticate.Commands.RegisterSellerCommand;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,7 +39,6 @@ namespace WebAPI.Controllers
         }
 
 
-
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequest request)
         {
@@ -55,6 +56,26 @@ namespace WebAPI.Controllers
                 Origin = Request.Headers["origin"],
             }));
         }
+
+        [Authorize(Roles = "Emprendedor")]
+        [HttpPost("registerSeller")]
+        public async Task<IActionResult> RegisterSellerAsync([FromBody] RegisterRequest request)
+        {
+            return Ok(await Mediator.Send(new RegisterSellerCommand
+            {
+                Nombre = request.Nombre,
+                Apellido = request.Apellido,
+                Email = request.Email,
+                Password = request.Password,
+                ConfirmPassword = request.ConfirmPassword,
+                UserName = request.UserName,
+                Identificacion = request.Identificacion,
+                Telefono = request.Telefono,
+                CiudadOrigen = request.CiudadOrigen,
+                Origin = Request.Headers["origin"],
+            }));
+        }
+
 
         private string generateIpAddress()
         {

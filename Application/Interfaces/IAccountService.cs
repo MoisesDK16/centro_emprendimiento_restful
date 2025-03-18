@@ -15,5 +15,7 @@ namespace Application.Interfaces
         Task<Response<AuthenticationResponse>> logInByUserName(AuthenticationRequestUserName request, string ipAdress);
 
         Task<Response<string>> RegisterAsync(RegisterRequest request, string origin);
+
+        Task<Response<string>> RegisterVendedorAsync(RegisterRequest request, string origin);
     }
 }

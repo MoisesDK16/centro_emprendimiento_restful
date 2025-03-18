@@ -141,6 +141,54 @@ namespace Identity.Services
             }
         }
 
+        public async Task<Response<string>> RegisterVendedorAsync(RegisterRequest request, string origin)
+        {
+
+            var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
+            if (userWithSameUserName != null)
+                throw new ApiException($"User with this username: {request.UserName} already exists.");
+
+            var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
+            if (userWithSameEmail != null)
+                throw new ApiException($"User with this email: {request.Email} already exists.");
+
+
+            if (request.Identificacion != null)
+            {
+                if (!ValidacionIdentificacion.VerificaIdentificacion(request.Identificacion))
+                    throw new ApiException($"Identificacion no valida");
+            }
+
+            if (request.UserName.Contains("@"))
+                throw new ApiException($"El nombre de usuario no puede contene @");
+
+            var user = new ApplicationUser
+            {
+                Email = request.Email,
+                UserName = request.UserName,
+                Nombre = request.Nombre,
+                Apellido = request.Apellido,
+                EmailConfirmed = true,
+                PhoneNumberConfirmed = true,
+                Identificacion = request.Identificacion ?? null,
+                Telefono = request.Telefono ?? null,
+                CiudadOrigen = request.CiudadOrigen,
+            };
+
+            var result = await _userManager.CreateAsync(user, request.Password);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, Roles.Vendedor.ToString());
+                return new Response<string>($"Usuario registrado exitosamente: {request.UserName}");
+            }
+            else
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new ApiException($"User account could not be created. Errors: {errors}");
+            }
+        }
+
         private async Task<JwtSecurityToken> generateJwtToken(ApplicationUser user)
         {
             var userClaims = await _userManager.GetClaimsAsync(user);

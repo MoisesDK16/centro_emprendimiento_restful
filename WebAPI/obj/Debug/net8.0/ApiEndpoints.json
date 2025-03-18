@@ -63,6 +63,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebAPI.Controllers.AccountController",
+    "Method": "RegisterSellerAsync",
+    "RelativePath": "api/v{version}/Account/registerSeller",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.DTOs.Users.RegisterRequest",
+        "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.CategoriaController",
     "Method": "Create",
     "RelativePath": "api/v{version}/Categoria",
@@ -327,6 +348,11 @@
       {
         "Name": "Iva",
         "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Imagen",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
         "IsRequired": false
       },
       {
