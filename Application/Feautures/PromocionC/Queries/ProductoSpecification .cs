@@ -5,9 +5,10 @@ namespace Application.Feautures.PromocionC.Queries
 {
     public class ProductoSpecification : Specification<Producto>
     {
-        public ProductoSpecification(List<long> idProductos)
+        public ProductoSpecification(long productId)
         {
-            Query.Where(p => idProductos.Contains(p.Id));
+            Query.Where(p => p.Id == productId);
         }
+
     }
 }

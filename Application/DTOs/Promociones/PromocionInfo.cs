@@ -14,11 +14,11 @@ namespace Application.DTOs.Promociones
 
         public TipoPromocion TipoPromocion { get; set; }
 
-        public decimal Descuento { get; set; }
+        public decimal? Descuento { get; set; }
 
-        public int CantidadCompra { get; set; }
+        public int? CantidadCompra { get; set; }
 
-        public int CantidadGratis { get; set; }
+        public int? CantidadGratis { get; set; }
 
         public DateTime FechaInicio { get; set; }
 

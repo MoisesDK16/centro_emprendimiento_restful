@@ -6,6 +6,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.Web.CodeGeneration.Design;
+using System;
 using System.Reflection;
 
 namespace Application
@@ -23,7 +24,9 @@ namespace Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             // Registrar MediatR
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            services.AddMediatR(cfg => {
+                cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+            });
 
         }
     }

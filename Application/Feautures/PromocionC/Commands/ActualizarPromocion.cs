@@ -36,12 +36,19 @@ namespace Application.Feautures.PromocionC.Commands
             }
             public async Task<Response<long>> Handle(ActualizarPromocion request, CancellationToken cancellationToken)
             {
-                var productosFound = await _productoyReading.ListAsync(new ProductoSpecification(request.IdProductos));
-                if (productosFound.Count != request.IdProductos.Count)
+                var productosFound = await Task.WhenAll(request.IdProductos.Select(async id => 
+                await _productoyReading.FirstOrDefaultAsync(new ProductoSpecification(id))));
+
+                var productosList = productosFound.Where(p => p != null).ToList();
+
+                var idsNoEncontrados = request.IdProductos.Except(productosList.Select(p => p.Id)).ToList();
+
+                if (idsNoEncontrados.Any())
                 {
-                    var idsNoEncontrados = request.IdProductos.Except(productosFound.Select(p => p.Id));
                     throw new ApiException($"No se encontraron los productos con los IDs: {string.Join(", ", idsNoEncontrados)}");
                 }
+
+
                 var promocion = await _repository.GetByIdAsync(request.Id);
 
                 promocion.Descuento = request.Descuento;
@@ -49,12 +56,12 @@ namespace Application.Feautures.PromocionC.Commands
                 promocion.CantidadGratis = request.CantidadGratis;
                 promocion.FechaInicio = request.FechaInicio;
                 promocion.FechaFin = request.FechaFin;
-                productosFound.ForEach(p => promocion.Productos.Add(p));
+                productosList.ForEach(p => promocion.Productos.Add(p));
 
                 await _repository.UpdateAsync(promocion);
                 await _repository.SaveChangesAsync();
 
-                productosFound.ForEach(p => p.PromocionId = promocion.Id);
+                productosList.ForEach(p => p.PromocionId = promocion.Id);
                 await _productoRepository.UpdateRangeAsync(productosFound);
                 await _productoRepository.SaveChangesAsync();
                 return new Response<long>(promocion.Id);

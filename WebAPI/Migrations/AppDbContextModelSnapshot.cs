@@ -271,16 +271,15 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("CantidadCompra")
+                    b.Property<int?>("CantidadCompra")
                         .HasColumnType("int");
 
-                    b.Property<int>("CantidadGratis")
-                        .HasMaxLength(5)
+                    b.Property<int?>("CantidadGratis")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Descuento")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
+                    b.Property<decimal?>("Descuento")
+                        .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Estado")
                         .ValueGeneratedOnAddOrUpdate()
@@ -448,14 +447,14 @@ namespace WebAPI.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.Promocion", "Promocion")
-                        .WithMany()
+                        .WithMany("Detalles")
                         .HasForeignKey("PromocionId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Domain.Entities.Venta", "Venta")
                         .WithMany("Detalles")
                         .HasForeignKey("VentaId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Producto");
@@ -572,6 +571,8 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("Domain.Entities.Promocion", b =>
                 {
+                    b.Navigation("Detalles");
+
                     b.Navigation("Productos");
                 });
 

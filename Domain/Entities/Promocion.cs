@@ -16,21 +16,21 @@ namespace Domain.Entities
         public TipoPromocion TipoPromocion { get; set; }
 
         [AllowNull]
-        public decimal Descuento { get; set; }
+        public decimal? Descuento { get; set; }
 
         [AllowNull]
-        public int CantidadCompra { get; set; }
+        public int? CantidadCompra { get; set; }
 
         [AllowNull]
-        public int CantidadGratis { get; set; }
+        public int? CantidadGratis { get; set; }
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
-
-        [EnumDataType(typeof(Estado))]
-        public Estado Estado { get; set; }
+        public Estado Estado { get; set; } = Estado.ACTIVA;
 
         //Relaciones
-        public List<Producto> Productos { get; set; } = new List<Producto>();
+        public List<Producto>? Productos { get; set; } = new List<Producto>();
+
+        public List<Detalle>? Detalles { get; set; } = new List<Detalle>();
 
         [AllowNull]
         public long NegocioId { get; set; }

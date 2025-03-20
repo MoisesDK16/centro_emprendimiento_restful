@@ -21,16 +21,16 @@ namespace Persistence.Configuration
             builder.Property(x => x.Estado).IsRequired();
 
             builder.Property(x => x.Descuento)
-                .HasPrecision(5, 2);
+                .HasPrecision(18, 2)
+                .IsRequired(false);
 
-            builder.Property(x => x.CantidadCompra);
+            builder.Property(x => x.CantidadCompra)
+                .HasColumnType("int")
+                .IsRequired(false); 
 
             builder.Property(x => x.CantidadGratis)
-                .HasMaxLength(5);
-
-            builder.Property(x => x.Estado)
-                .IsRequired()
-                .HasComputedColumnSql("CASE WHEN DATEDIFF(DAY, GETDATE(), FechaFin) <= 0 THEN 0 ELSE 1 END");
+                .HasColumnType("int")
+                .IsRequired(false); 
 
             builder.HasMany(x => x.Productos)
                 .WithOne(x => x.Promocion)

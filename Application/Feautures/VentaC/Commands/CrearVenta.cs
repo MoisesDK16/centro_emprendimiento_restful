@@ -5,17 +5,14 @@ using Application.Services.StockS;
 using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
-using Domain.Enums.Promocion;
 using MediatR;
-using System.Composition;
 
 namespace Application.Feautures.VentaC.Commands
 {
     public class CrearVenta : IRequest<Response<long>>
     {
         public DateTime Fecha { get; set; }
-        public decimal Subtotal { get; set; }
-        public decimal Total { get; set; }
+
         //Relaciones
         public int ClienteId { get; set; }
         public int NegocioId { get; set; }
@@ -27,96 +24,118 @@ namespace Application.Feautures.VentaC.Commands
             private readonly IRepositoryAsync<Detalle> _repositoryDetalle;
             private readonly IReadOnlyRepositoryAsync<Producto> _productoRepostoryReading;
             private readonly IReadOnlyRepositoryAsync<Promocion> _promocionRepostoryReading;
-            private readonly StockService _stockService; 
+            private readonly StockService _stockService;
+            private readonly IUnitOfWork _unitOfWork;
 
             public CrearVentaHandler(
                 IRepositoryAsync<Venta> repositoryVenta,
                 IRepositoryAsync<Detalle> repositoryDetalle,
                 IReadOnlyRepositoryAsync<Producto> productoRepostoryReading,
                 IReadOnlyRepositoryAsync<Promocion> promocionRepostoryReading,
-                StockService stockService)
+                StockService stockService,
+                IUnitOfWork unitOfWork
+                )
             {
                 _repositoryVenta = repositoryVenta;
                 _repositoryDetalle = repositoryDetalle;
                 _productoRepostoryReading = productoRepostoryReading;
                 _promocionRepostoryReading = promocionRepostoryReading;
                 _stockService = stockService;
+                _unitOfWork = unitOfWork;
             }
 
             public async Task<Response<long>> Handle(CrearVenta request, CancellationToken cancellationToken)
             {
-                foreach (var detalle in request.Detalles)
+                Console.WriteLine("📌 Entrando a CrearVentaHandler...");
+
+                await _unitOfWork.BeginTransactionAsync(); 
+
+                try
                 {
-                    var producto = await _productoRepostoryReading.GetByIdAsync(detalle.ProductoId);
-                    if (producto == null) throw new ApiException($"Producto con ID {detalle.ProductoId} no encontrado.");
-                }
-
-                var venta = new Venta
-                {
-                    Fecha = request.Fecha,
-                    Subtotal = 0,  
-                    Total = 0,     
-                    ClienteId = request.ClienteId,
-                    NegocioId = request.NegocioId,
-                    Detalles = new List<Detalle>() 
-                };
-
-                venta = await _repositoryVenta.AddAsync(venta);
-                await _repositoryVenta.SaveChangesAsync();
-
-                decimal subtotalCalculado = 0;
-                decimal totalCalculado = 0;
-
-                foreach (var detalle in request.Detalles)
-                {
-                    var promocion = detalle.PromocionId != 0 ?
-                        await _promocionRepostoryReading.FirstOrDefaultAsync(new PromocionSpecification(detalle.ProductoId), cancellationToken) : null;
-
-                    Console.WriteLine("Promoción de detalle: " + (promocion != null ? promocion.TipoPromocion.ToString() : "Ninguna"));
-
-                    decimal precioFinal = detalle.Precio;
-                    int cantidadFinal = detalle.Cantidad;
-
-                    if (promocion != null)
+                    foreach (var detalle in request.Detalles)
                     {
-                        if (promocion.TipoPromocion == TipoPromocion.DESCUENTO)
-                        {
-                            precioFinal = detalle.Precio - (detalle.Precio * (promocion.Descuento / 100));
-                        }
-                        if (promocion.TipoPromocion == TipoPromocion.DOS_POR_UNO)
-                        {
-                            cantidadFinal += promocion.CantidadGratis;
-                        }
+                        var producto = await _productoRepostoryReading.GetByIdAsync(detalle.ProductoId);
+                        if (producto == null) throw new ApiException($"Producto con ID {detalle.ProductoId} no encontrado.");
                     }
 
-                    var nuevoDetalle = new Detalle
+                    Console.WriteLine("Creando venta...");
+
+                    var venta = new Venta
                     {
-                        Precio = precioFinal,
-                        Cantidad = cantidadFinal,
-                        Total = precioFinal * cantidadFinal,
-                        ProductoId = detalle.ProductoId,
-                        VentaId = venta.Id,
-                        PromocionId = promocion == null ? null : promocion.Id
+                        Fecha = request.Fecha,
+                        Subtotal = 0,
+                        Total = 0,
+                        ClienteId = request.ClienteId,
+                        NegocioId = request.NegocioId,
+                        Detalles = new List<Detalle>()
                     };
 
-                    subtotalCalculado += nuevoDetalle.Total;
-                    totalCalculado += nuevoDetalle.Total;
+                    venta = await _repositoryVenta.AddAsync(venta);
+                    await _repositoryVenta.SaveChangesAsync();
 
-                    await _repositoryDetalle.AddAsync(nuevoDetalle);
+                    decimal subtotalCalculado = 0;
+                    decimal totalCalculado = 0;
 
-                    _stockService.RestarStock(
-                        nuevoDetalle.Cantidad,
-                        nuevoDetalle.ProductoId,
-                        detalle.StockId);
+                    foreach (var detalle in request.Detalles)
+                    {
+                        Console.WriteLine($"Procesando detalle ProductoId: {detalle.ProductoId}");
+
+                        Promocion? promocion = null;
+
+                        if (detalle.PromocionId != 0)
+                        {
+                            promocion = await _promocionRepostoryReading.FirstOrDefaultAsync(new PromocionSpecification(detalle.ProductoId, detalle.PromocionId), cancellationToken);
+
+                            if (promocion == null) throw new ApiException($"El producto con ID {detalle.ProductoId} no tiene una promoción válida con ID {detalle.PromocionId}.");
+
+                            _ = _stockService.VerificarCasosPromocionAsync(detalle, promocion, venta);
+                        }
+                        else
+                        {
+                            _ = _stockService.VerificarPrecioAsync(detalle.ProductoId, detalle.StockId, detalle.Precio);
+                        }
+
+                        decimal precioFinal = detalle.Precio;
+                        int cantidadFinal = detalle.Cantidad;
+
+                        var nuevoDetalle = new Detalle
+                        {
+                            Precio = precioFinal,
+                            Cantidad = cantidadFinal,
+                            Total = detalle.Total,
+                            ProductoId = detalle.ProductoId,
+                            VentaId = venta.Id,
+                            PromocionId = promocion == null ? null : promocion.Id
+                        };
+
+                        subtotalCalculado += nuevoDetalle.Total;
+                        totalCalculado += nuevoDetalle.Total;
+
+                        await _repositoryDetalle.AddAsync(nuevoDetalle);
+
+                        await _stockService.RestarStock(
+                            nuevoDetalle.Cantidad,
+                            nuevoDetalle.ProductoId,
+                            detalle.StockId);
+                    }
+
+                    venta.Subtotal = subtotalCalculado;
+                    venta.Total = totalCalculado;
+                    await _repositoryVenta.UpdateAsync(venta);
+                    await _repositoryVenta.SaveChangesAsync();
+
+                    await _unitOfWork.CommitAsync(); // ✅ Confirmar transacción
+
+                    return new Response<long>(venta.Id);
                 }
-
-                venta.Subtotal = subtotalCalculado;
-                venta.Total = totalCalculado;
-                await _repositoryVenta.UpdateAsync(venta);
-                await _repositoryVenta.SaveChangesAsync();
-
-                return new Response<long>(venta.Id);
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"❌ ERROR en CrearVentaHandler: {ex.Message}");
+                    await _unitOfWork.RollbackAsync(); // ✅ Revertir en caso de error
+                    throw;
+                }
             }
+
 
         }
     }

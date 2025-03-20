@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Ardalis.Specification.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using Persistence.Context;
 using System.Linq.Expressions;
 
@@ -9,57 +10,47 @@ namespace Persistence.Repository
 {
     public class MyRepositoryAsync<T> : RepositoryBase<T>, IRepositoryAsync<T>, IReadOnlyRepositoryAsync<T> where T : class
     {
-        private readonly IDbContextFactory<AppDbContext> _contextFactory;
+        private readonly AppDbContext _dbContext;
+        private readonly IUnitOfWork _unitOfWork; // ✅ Agregamos UnitOfWork
 
-        public MyRepositoryAsync(IDbContextFactory<AppDbContext> contextFactory) : base(contextFactory.CreateDbContext())
+        public MyRepositoryAsync(AppDbContext dbContext, IUnitOfWork unitOfWork) : base(dbContext)
         {
-            _contextFactory = contextFactory;
+            _dbContext = dbContext;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<T> AddAsync(T entity)
         {
-            await using var dbContext = _contextFactory.CreateDbContext();
-            var result = await dbContext.Set<T>().AddAsync(entity);
-            await dbContext.SaveChangesAsync();
-            return result.Entity;
+            var result = await _dbContext.Set<T>().AddAsync(entity);
+            return result.Entity; // ⛔ NO LLAMAR `SaveChangesAsync()`
         }
-
 
         public async Task<T> GetByIdAsync(long id)
         {
-            await using var dbContext = _contextFactory.CreateDbContext();
-
-            IQueryable<T> query = dbContext.Set<T>();
-            foreach (var includeExpression in GetAllNavigationProperties<T>(dbContext))
-            {
-                query = query.Include(includeExpression);
-            }
-
-            var entity = await query.FirstOrDefaultAsync(e => EF.Property<long>(e, "Id") == id);
-            return entity ?? throw new ApiException($"Entity {typeof(T).Name} with id {id} not found");
+            return await _dbContext.Set<T>().FindAsync(id);
         }
 
-
-
-        public async Task UpdateAsync(T entity)
+        public Task UpdateAsync(T entity)
         {
-            await using var dbContext = _contextFactory.CreateDbContext();
-            dbContext.Entry(entity).State = EntityState.Modified;
-            await dbContext.SaveChangesAsync();
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            return Task.CompletedTask; // ⛔ NO LLAMAR `SaveChangesAsync()`
+        }
+
+        public Task<bool> DeleteAsync(T entity)
+        {
+            _dbContext.Set<T>().Remove(entity);
+            return Task.FromResult(true); // ⛔ NO LLAMAR `SaveChangesAsync()`
+        }
+
+        public Task UpdateRangeAsync(IEnumerable<T> entities)
+        {
+            _dbContext.Set<T>().UpdateRange(entities);
+            return Task.CompletedTask; // ⛔ NO LLAMAR `SaveChangesAsync()`
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            await using var dbContext = _contextFactory.CreateDbContext();
-            return await dbContext.SaveChangesAsync();
-        }
-
-        public async Task<bool> DeleteAsync(T entity)
-        {
-            await using var dbContext = _contextFactory.CreateDbContext();
-            dbContext.Set<T>().Remove(entity);
-            await dbContext.SaveChangesAsync();
-            return true;
+            return await _unitOfWork.SaveChangesAsync(); // ✅ Delegamos a `UnitOfWork`
         }
 
         private static List<Expression<Func<T, object>>> GetAllNavigationProperties<T>(DbContext dbContext) where T : class
@@ -80,16 +71,6 @@ namespace Persistence.Repository
                 })
                 .ToList();
         }
-
-        public async Task UpdateRangeAsync(IEnumerable<T> entities)
-        {
-            await using var dbContext = _contextFactory.CreateDbContext();
-
-            dbContext.Set<T>().UpdateRange(entities); 
-            await dbContext.SaveChangesAsync();
-        }
-
-
 
     }
 }

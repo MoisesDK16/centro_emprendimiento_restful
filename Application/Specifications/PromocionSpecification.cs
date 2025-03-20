@@ -18,10 +18,11 @@ namespace Application.Specifications
             Query.Take(PageSize);
         }
 
-        public PromocionSpecification(long productoId)
+        public PromocionSpecification(long productoId, long promocionId)
         {
             Query
-                .Where(p => p.Productos.Any(x => x.Id == productoId));
+                .Where(p => p.Id == promocionId && p.Productos.Any(prod => prod.Id == productoId))
+                .Include(p => p.Productos);
         }
 
     }

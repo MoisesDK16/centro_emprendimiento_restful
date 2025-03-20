@@ -43,7 +43,8 @@ namespace Application.Feautures.PromocionC.Queries
                     CantidadCompra = p.CantidadCompra,
                     CantidadGratis = p.CantidadGratis,
                     FechaInicio = p.FechaInicio,
-                    FechaFin = p.FechaFin
+                    FechaFin = p.FechaFin,
+                    estado = p.Estado
                 });
 
                 return new PagedResponse<IEnumerable<GeneralPromocion>>(promocionesDTO, request.PageNumber, request.PageSize);

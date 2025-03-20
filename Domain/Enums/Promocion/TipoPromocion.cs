@@ -8,7 +8,7 @@ namespace Domain.Enums.Promocion
 {
     public enum TipoPromocion
     {
-        DESCUENTO,
-        DOS_POR_UNO
+        DESCUENTO = 0,
+        REGALO = 1
     }
 }

@@ -1,7 +1,9 @@
 ﻿using Application.Interfaces;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Persistence.Attributes;
 using Persistence.Context;
 using Persistence.Repository;
 
@@ -20,6 +22,12 @@ namespace Persistence
 
             services.AddTransient(typeof(IRepositoryAsync<>), typeof(MyRepositoryAsync<>));
             services.AddTransient(typeof(IReadOnlyRepositoryAsync<>), typeof(MyRepositoryAsync<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+            // ✅ Sustituimos `AddTransactionalBehavior<AppDbContext>()` por:
+            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionalBehavior<,>));
+
 
             services.AddStackExchangeRedisCache(options =>
             {

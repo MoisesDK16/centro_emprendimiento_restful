@@ -2,10 +2,6 @@ using Application;
 using Application.Interfaces;
 using Application.Services;
 using Identity;
-using Identity.Contexts;
-using Identity.Models;
-using Identity.Services;
-using Microsoft.AspNetCore.Identity;
 using Persistence;
 using Shared.Services;
 using System.Text.Json.Serialization;
@@ -43,6 +39,7 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 await app.Services.SeedDatabaseAsync();
+//GlobalServiceProvider.Instance = app.Services;
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

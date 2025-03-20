@@ -33,9 +33,9 @@ namespace Persistence.Configuration
             builder.HasOne(x => x.Venta)
                 .WithMany(x => x.Detalles)
                 .HasForeignKey(x => x.VentaId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasOne(x => x.Promocion).WithMany()
+            builder.HasOne(x => x.Promocion).WithMany(x => x.Detalles)
                 .HasForeignKey(x => x.PromocionId)
                 .OnDelete(DeleteBehavior.NoAction);
         }

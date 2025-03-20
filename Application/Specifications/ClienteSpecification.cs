@@ -32,8 +32,6 @@ namespace Application.Specifications
         public ClienteSpecification(string identificacion)
         {
             Query.Where(c => c.Identificacion == identificacion);
-
-
         }
     }
 }

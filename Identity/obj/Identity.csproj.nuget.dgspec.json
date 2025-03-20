@@ -132,6 +132,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[9.0.0, )"
+            },
+            "Uno.Core": {
+              "target": "Package",
+              "version": "[4.1.1, )"
             }
           },
           "imports": [

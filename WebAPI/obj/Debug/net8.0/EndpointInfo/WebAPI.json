@@ -1781,15 +1781,18 @@
           },
           "descuento": {
             "type": "number",
-            "format": "double"
+            "format": "double",
+            "nullable": true
           },
           "cantidadCompra": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "cantidadGratis": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "fechaInicio": {
             "type": "string",
@@ -1866,14 +1869,6 @@
           "fecha": {
             "type": "string",
             "format": "date-time"
-          },
-          "subtotal": {
-            "type": "number",
-            "format": "double"
-          },
-          "total": {
-            "type": "number",
-            "format": "double"
           },
           "clienteId": {
             "type": "integer",
@@ -2108,7 +2103,7 @@
       "TipoPromocion": {
         "enum": [
           "DESCUENTO",
-          "DOS_POR_UNO"
+          "REGALO"
         ],
         "type": "string"
       },

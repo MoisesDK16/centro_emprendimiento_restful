@@ -1,4 +1,5 @@
 ﻿using Ardalis.Specification;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 
 namespace Application.Interfaces
