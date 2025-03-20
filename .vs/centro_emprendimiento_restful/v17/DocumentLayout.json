@@ -3,116 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\clientec\\commands\\crearcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\feautures\\clientec\\commands\\crearcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\ventac\\commands\\crearventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\feautures\\ventac\\commands\\crearventa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\persistence\\repository\\myrepositoryasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|solutionrelative:persistence\\repository\\myrepositoryasync.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\persistence\\serviceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|solutionrelative:persistence\\serviceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\persistence\\repository\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|solutionrelative:persistence\\repository\\unitofwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\specifications\\promocionspecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\specifications\\promocionspecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\stockc\\commands\\crearstock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\feautures\\stockc\\commands\\crearstock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\serviceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\serviceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7A88D96C-3400-4D9A-B1F2-355F336EA1A7}|Shared\\Shared.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\shared\\services\\serviceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7A88D96C-3400-4D9A-B1F2-355F336EA1A7}|Shared\\Shared.csproj|solutionrelative:shared\\services\\serviceextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\persistence\\configuration\\stockconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|solutionrelative:persistence\\configuration\\stockconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\promocionc\\queries\\promocionbyid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\feautures\\promocionc\\queries\\promocionbyid.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\promocionc\\queries\\listarpromociones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\feautures\\promocionc\\queries\\listarpromociones.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\webapi\\controllers\\promocioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\promocioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E17262C-A9C0-4FFE-ACCA-0D1E6A3C86FB}|Identity\\Identity.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\identity\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E17262C-A9C0-4FFE-ACCA-0D1E6A3C86FB}|Identity\\Identity.csproj|solutionrelative:identity\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\persistence\\configuration\\productoconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|solutionrelative:persistence\\configuration\\productoconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\specifications\\productospecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\specifications\\productospecification.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\persistence\\configuration\\detalleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|solutionrelative:persistence\\configuration\\detalleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\persistence\\configuration\\ventaconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|solutionrelative:persistence\\configuration\\ventaconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F28EF7E0-9829-4126-9653-119C7C1CD732}|Domain\\Domain.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\domain\\entities\\venta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F28EF7E0-9829-4126-9653-119C7C1CD732}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\venta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\webapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\productoc\\queries\\listarproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\feautures\\productoc\\queries\\listarproductos.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\clientec\\queries\\listarclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\feautures\\clientec\\queries\\listarclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\webapi\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\clientecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\clientec\\commands\\actualizarcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\feautures\\clientec\\commands\\actualizarcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\webapi\\controllers\\ventacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\ventacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\webapi\\controllers\\stockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\stockcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E17262C-A9C0-4FFE-ACCA-0D1E6A3C86FB}|Identity\\Identity.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\identity\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E17262C-A9C0-4FFE-ACCA-0D1E6A3C86FB}|Identity\\Identity.csproj|solutionrelative:identity\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\webapi\\middlewares\\errorhandlermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\middlewares\\errorhandlermiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\stockc\\commands\\crearstock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\feautures\\stockc\\commands\\crearstock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\persistence\\configuration\\productoconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|solutionrelative:persistence\\configuration\\productoconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\persistence\\configuration\\ventaconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9A89162F-866E-42A5-A30D-A0AFF2E008EC}|Persistence\\Persistence.csproj|solutionrelative:persistence\\configuration\\ventaconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\clientec\\queries\\listarclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\feautures\\clientec\\queries\\listarclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\pc\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\clientec\\commands\\actualizarcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\feautures\\clientec\\commands\\actualizarcliente.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -122,48 +42,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PromocionSpecification.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Specifications\\PromocionSpecification.cs",
-              "RelativeDocumentMoniker": "Application\\Specifications\\PromocionSpecification.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Specifications\\PromocionSpecification.cs",
-              "RelativeToolTip": "Application\\Specifications\\PromocionSpecification.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T19:53:34.956Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ServiceExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\ServiceExtensions.cs",
-              "RelativeDocumentMoniker": "Persistence\\ServiceExtensions.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\ServiceExtensions.cs",
-              "RelativeToolTip": "Persistence\\ServiceExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBgAAAA2AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T21:48:19.688Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "CrearVenta.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\VentaC\\Commands\\CrearVenta.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\VentaC\\Commands\\CrearVenta.cs",
               "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\VentaC\\Commands\\CrearVenta.cs",
               "RelativeToolTip": "Application\\Feautures\\VentaC\\Commands\\CrearVenta.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAAAuwEEAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAuwGsAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T22:22:28.516Z",
-              "IsPinned": true,
+              "WhenOpened": "2025-03-20T18:56:06.129Z",
               "EditorCaption": ""
             },
             {
@@ -180,150 +71,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CrearCliente.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\ClienteC\\Commands\\CrearCliente.cs",
-              "RelativeDocumentMoniker": "Application\\Feautures\\ClienteC\\Commands\\CrearCliente.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\ClienteC\\Commands\\CrearCliente.cs",
-              "RelativeToolTip": "Application\\Feautures\\ClienteC\\Commands\\CrearCliente.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAkwC4AAAAhAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "VentaController.cs",
+              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\VentaController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\VentaController.cs",
+              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\VentaController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\VentaController.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAABNAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-20T01:42:25.422Z",
+              "WhenOpened": "2025-03-20T18:56:03.633Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "MyRepositoryAsync.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Repository\\MyRepositoryAsync.cs",
-              "RelativeDocumentMoniker": "Persistence\\Repository\\MyRepositoryAsync.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Repository\\MyRepositoryAsync.cs",
-              "RelativeToolTip": "Persistence\\Repository\\MyRepositoryAsync.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAA5wDcAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T22:21:45.878Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UnitOfWork.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Repository\\UnitOfWork.cs",
-              "RelativeDocumentMoniker": "Persistence\\Repository\\UnitOfWork.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Repository\\UnitOfWork.cs",
-              "RelativeToolTip": "Persistence\\Repository\\UnitOfWork.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAQwAwAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T22:21:24.564Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "ServiceExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\ServiceExtensions.cs",
-              "RelativeDocumentMoniker": "Application\\ServiceExtensions.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\ServiceExtensions.cs",
-              "RelativeToolTip": "Application\\ServiceExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T21:44:36.399Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "ServiceExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Shared\\Services\\ServiceExtensions.cs",
-              "RelativeDocumentMoniker": "Shared\\Services\\ServiceExtensions.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Shared\\Services\\ServiceExtensions.cs",
-              "RelativeToolTip": "Shared\\Services\\ServiceExtensions.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T21:37:24.474Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Program.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Program.cs",
-              "RelativeToolTip": "WebAPI\\Program.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABMAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T21:13:03.396Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "StockConfig.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Configuration\\StockConfig.cs",
-              "RelativeDocumentMoniker": "Persistence\\Configuration\\StockConfig.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Configuration\\StockConfig.cs",
-              "RelativeToolTip": "Persistence\\Configuration\\StockConfig.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T20:08:19.804Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "PromocionById.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\PromocionC\\Queries\\PromocionById.cs",
-              "RelativeDocumentMoniker": "Application\\Feautures\\PromocionC\\Queries\\PromocionById.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\PromocionC\\Queries\\PromocionById.cs",
-              "RelativeToolTip": "Application\\Feautures\\PromocionC\\Queries\\PromocionById.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAAwCIAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T15:06:47.23Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ListarPromociones.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\PromocionC\\Queries\\ListarPromociones.cs",
-              "RelativeDocumentMoniker": "Application\\Feautures\\PromocionC\\Queries\\ListarPromociones.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\PromocionC\\Queries\\ListarPromociones.cs",
-              "RelativeToolTip": "Application\\Feautures\\PromocionC\\Queries\\ListarPromociones.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAwwB4AAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T15:06:19.822Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
               "Title": "AccountService.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\Services\\AccountService.cs",
               "RelativeDocumentMoniker": "Identity\\Services\\AccountService.cs",
               "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\Services\\AccountService.cs",
               "RelativeToolTip": "Identity\\Services\\AccountService.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAuwDMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAswDMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-19T14:38:00.5Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "CrearStock.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\StockC\\Commands\\CrearStock.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\StockC\\Commands\\CrearStock.cs",
               "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\StockC\\Commands\\CrearStock.cs",
               "RelativeToolTip": "Application\\Feautures\\StockC\\Commands\\CrearStock.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAqwCAAAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAAuwDYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-19T03:29:47.693Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 4,
               "Title": "ProductoConfig.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Configuration\\ProductoConfig.cs",
               "RelativeDocumentMoniker": "Persistence\\Configuration\\ProductoConfig.cs",
@@ -336,85 +123,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "ProductoSpecification.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Specifications\\ProductoSpecification.cs",
-              "RelativeDocumentMoniker": "Application\\Specifications\\ProductoSpecification.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Specifications\\ProductoSpecification.cs",
-              "RelativeToolTip": "Application\\Specifications\\ProductoSpecification.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAIBJwBwAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T02:18:19.925Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "DetalleConfig.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Configuration\\DetalleConfig.cs",
-              "RelativeDocumentMoniker": "Persistence\\Configuration\\DetalleConfig.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Configuration\\DetalleConfig.cs",
-              "RelativeToolTip": "Persistence\\Configuration\\DetalleConfig.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAxwB0AAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T01:50:21.8Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Venta.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Domain\\Entities\\Venta.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Venta.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Domain\\Entities\\Venta.cs",
-              "RelativeToolTip": "Domain\\Entities\\Venta.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-19T01:48:54.712Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "ListarProductos.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\ProductoC\\Queries\\ListarProductos.cs",
-              "RelativeDocumentMoniker": "Application\\Feautures\\ProductoC\\Queries\\ListarProductos.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\ProductoC\\Queries\\ListarProductos.cs",
-              "RelativeToolTip": "Application\\Feautures\\ProductoC\\Queries\\ListarProductos.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T20:21:18.355Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "AccountController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\AccountController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\AccountController.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\AccountController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\AccountController.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAIwAIAAABCAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T17:54:44.197Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "ClienteController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\ClienteController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\ClienteController.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\ClienteController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\ClienteController.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAowC0AAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-18T02:52:05.471Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 6,
               "Title": "ListarClientes.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\ClienteC\\Queries\\ListarClientes.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\ClienteC\\Queries\\ListarClientes.cs",
@@ -427,46 +136,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "StockController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\StockController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\StockController.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\StockController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\StockController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T17:40:21.867Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 5,
               "Title": "VentaConfig.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Configuration\\VentaConfig.cs",
               "RelativeDocumentMoniker": "Persistence\\Configuration\\VentaConfig.cs",
               "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Persistence\\Configuration\\VentaConfig.cs",
               "RelativeToolTip": "Persistence\\Configuration\\VentaConfig.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAIBJwBgAAABgAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAIBZwBgAAABgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-16T01:56:39.183Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "VentaController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\VentaController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\VentaController.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\VentaController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\VentaController.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAgwCAAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T01:50:43.629Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 7,
               "Title": "ActualizarCliente.cs",
               "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\ClienteC\\Commands\\ActualizarCliente.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\ClienteC\\Commands\\ActualizarCliente.cs",
@@ -475,32 +158,6 @@
               "ViewState": "AgIAABsAAAAAAAAAAAAkwC0AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-15T20:03:34.42Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "PromocionController.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\PromocionController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\PromocionController.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\PromocionController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\PromocionController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAIBJwBAAAABRAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-14T16:24:33.448Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "ErrorHandlerMiddleware.cs",
-              "DocumentMoniker": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Middlewares\\ErrorHandlerMiddleware.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Middlewares\\ErrorHandlerMiddleware.cs",
-              "ToolTip": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Middlewares\\ErrorHandlerMiddleware.cs",
-              "RelativeToolTip": "WebAPI\\Middlewares\\ErrorHandlerMiddleware.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAowC8AAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-08T17:43:19.33Z",
               "EditorCaption": ""
             }
           ]

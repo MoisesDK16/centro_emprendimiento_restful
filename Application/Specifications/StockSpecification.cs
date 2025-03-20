@@ -1,4 +1,5 @@
-﻿using Ardalis.Specification;
+﻿using Application.Feautures.Negocio.Queries;
+using Ardalis.Specification;
 using Domain.Entities;
 
 namespace Application.Specifications
@@ -37,6 +38,18 @@ namespace Application.Specifications
                 stock => stock.ProductoId == ProductoId &&
                 stock.Producto.NegocioId == NegocioId &&
                 stock.Id == stockId);
+        }
+
+        public StockSpecification(int pageNumber, int pageSize, long negocioId, long categoriaId)
+        {
+           Query.Include(s => s.Producto) 
+                .ThenInclude(p => p.Categoria)
+                .Where(stock => stock.Producto.NegocioId == negocioId);
+
+            if (categoriaId > 0)
+                Query.Where(stock => stock.Producto.CategoriaId == categoriaId);
+
+            Query.Skip((pageNumber - 1) * pageSize).Take(pageSize); 
         }
 
     }

@@ -973,8 +973,8 @@ C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\D
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\WebAPI.pdb
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\WebAPI.genruntimeconfig.cache
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\obj\Debug\net8.0\ref\WebAPI.dll
-C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
-C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\StackExchange.Redis.dll
+C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\System.Memory.Data.dll
+C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Features.resources.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\appsettings.json
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\WebAPI.exe
@@ -1025,6 +1025,7 @@ C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Deb
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
@@ -1071,6 +1072,7 @@ C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Deb
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\NuGet.Protocol.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\NuGet.Versioning.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\Pipelines.Sockets.Unofficial.dll
+C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\StackExchange.Redis.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -1087,7 +1089,6 @@ C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Deb
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\System.IO.Hashing.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\System.IO.Pipelines.dll
-C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\System.Memory.Data.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\System.Reflection.MetadataLoadContext.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\System.Runtime.Caching.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
@@ -1213,7 +1214,6 @@ C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Deb
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\pt-BR\Microsoft.CodeAnalysis.Features.resources.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\ru\Microsoft.CodeAnalysis.Features.resources.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\tr\Microsoft.CodeAnalysis.Features.resources.dll
-C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\zh-Hans\Microsoft.CodeAnalysis.Features.resources.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\zh-Hant\Microsoft.CodeAnalysis.Features.resources.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\cs\Microsoft.CodeAnalysis.Scripting.resources.dll
 C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\WebAPI\bin\Debug\net8.0\de\Microsoft.CodeAnalysis.Scripting.resources.dll

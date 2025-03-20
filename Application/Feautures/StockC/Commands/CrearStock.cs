@@ -20,16 +20,18 @@ namespace Application.Feautures.StockC.Commands
         public class CrearStockCommandHandler : IRequestHandler<CrearStock, Response<long>>
         {
             private readonly IRepositoryAsync<Stock> _repository;
+            private readonly IReadOnlyRepositoryAsync<Producto> _repositoryReadingProducto;
 
 
-            public CrearStockCommandHandler(IRepositoryAsync<Stock> repository)
+            public CrearStockCommandHandler(IRepositoryAsync<Stock> repository, IReadOnlyRepositoryAsync<Producto> repositoryReadingProducto)
             {
                 _repository = repository;
+                _repositoryReadingProducto = repositoryReadingProducto;
             }
 
             public async Task<Response<long>> Handle(CrearStock request, CancellationToken cancellationToken)
             {
-                  var productoExiste = await _repository.GetByIdAsync(request.ProductoId) ?? throw new ApiException($"Producto no encontrado con el ID: {request.ProductoId}");
+                  var productoExiste = await _repositoryReadingProducto.GetByIdAsync(request.ProductoId) ?? throw new ApiException($"Producto no encontrado con el ID: {request.ProductoId}");
                   var stockEntity = new Stock
                    {
                        ProductoId = request.ProductoId,  

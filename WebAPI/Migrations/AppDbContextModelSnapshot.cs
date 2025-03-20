@@ -138,6 +138,12 @@ namespace WebAPI.Migrations
                     b.Property<long?>("PromocionId")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("StockId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("StockId1")
+                        .HasColumnType("bigint");
+
                     b.Property<decimal>("Total")
                         .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");
@@ -150,6 +156,10 @@ namespace WebAPI.Migrations
                     b.HasIndex("ProductoId");
 
                     b.HasIndex("PromocionId");
+
+                    b.HasIndex("StockId");
+
+                    b.HasIndex("StockId1");
 
                     b.HasIndex("VentaId");
 
@@ -207,7 +217,7 @@ namespace WebAPI.Migrations
 
                     b.HasIndex("ClienteId");
 
-                    b.ToTable("NegocioClientes");
+                    b.ToTable("NegocioClientes", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Producto", b =>
@@ -282,9 +292,7 @@ namespace WebAPI.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("Estado")
-                        .ValueGeneratedOnAddOrUpdate()
-                        .HasColumnType("int")
-                        .HasComputedColumnSql("CASE WHEN DATEDIFF(DAY, GETDATE(), FechaFin) <= 0 THEN 0 ELSE 1 END");
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("FechaFin")
                         .HasColumnType("datetime2");
@@ -451,6 +459,16 @@ namespace WebAPI.Migrations
                         .HasForeignKey("PromocionId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("Domain.Entities.Stock", "Stock")
+                        .WithMany()
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Stock", null)
+                        .WithMany("Detalles")
+                        .HasForeignKey("StockId1");
+
                     b.HasOne("Domain.Entities.Venta", "Venta")
                         .WithMany("Detalles")
                         .HasForeignKey("VentaId")
@@ -460,6 +478,8 @@ namespace WebAPI.Migrations
                     b.Navigation("Producto");
 
                     b.Navigation("Promocion");
+
+                    b.Navigation("Stock");
 
                     b.Navigation("Venta");
                 });
@@ -574,6 +594,11 @@ namespace WebAPI.Migrations
                     b.Navigation("Detalles");
 
                     b.Navigation("Productos");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Stock", b =>
+                {
+                    b.Navigation("Detalles");
                 });
 
             modelBuilder.Entity("Domain.Entities.Venta", b =>

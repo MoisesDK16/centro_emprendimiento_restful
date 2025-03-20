@@ -105,6 +105,7 @@ namespace Application.Feautures.VentaC.Commands
                             Total = detalle.Total,
                             ProductoId = detalle.ProductoId,
                             VentaId = venta.Id,
+                            StockId = detalle.StockId,
                             PromocionId = promocion == null ? null : promocion.Id
                         };
 

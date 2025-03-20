@@ -22,7 +22,7 @@ namespace Persistence.Repository
         public async Task<T> AddAsync(T entity)
         {
             var result = await _dbContext.Set<T>().AddAsync(entity);
-            return result.Entity; // ⛔ NO LLAMAR `SaveChangesAsync()`
+            return result.Entity; 
         }
 
         public async Task<T> GetByIdAsync(long id)
@@ -33,24 +33,24 @@ namespace Persistence.Repository
         public Task UpdateAsync(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
-            return Task.CompletedTask; // ⛔ NO LLAMAR `SaveChangesAsync()`
+            return Task.CompletedTask; 
         }
 
         public Task<bool> DeleteAsync(T entity)
         {
             _dbContext.Set<T>().Remove(entity);
-            return Task.FromResult(true); // ⛔ NO LLAMAR `SaveChangesAsync()`
+            return Task.FromResult(true); 
         }
 
         public Task UpdateRangeAsync(IEnumerable<T> entities)
         {
             _dbContext.Set<T>().UpdateRange(entities);
-            return Task.CompletedTask; // ⛔ NO LLAMAR `SaveChangesAsync()`
+            return Task.CompletedTask; 
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            return await _unitOfWork.SaveChangesAsync(); // ✅ Delegamos a `UnitOfWork`
+            return await _unitOfWork.SaveChangesAsync();
         }
 
         private static List<Expression<Func<T, object>>> GetAllNavigationProperties<T>(DbContext dbContext) where T : class
