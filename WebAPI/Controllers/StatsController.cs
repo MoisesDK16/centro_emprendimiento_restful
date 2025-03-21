@@ -24,13 +24,15 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("gananciasPorNegocio")]
-        public async Task<IActionResult> Ganancias([FromQuery] long NegocioId)
+        public async Task<IActionResult> Ganancias([FromQuery] TotalGanancias totalGanancias)
         {
-            return Ok(await Mediator.Send(
-                new TotalGanancias
-                {
-                    NegocioId = NegocioId
-                }));
+            return Ok(await Mediator.Send(totalGanancias));
+        }
+
+        [HttpGet("ventasPorNegocio")]
+        public async Task<IActionResult> Ventas([FromQuery] TotalVentas totalVentas)
+        {
+            return Ok(await Mediator.Send(totalVentas));
         }
     }
 }

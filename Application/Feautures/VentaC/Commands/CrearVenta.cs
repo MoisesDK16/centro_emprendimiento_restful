@@ -76,10 +76,13 @@ namespace Application.Feautures.VentaC.Commands
                     decimal subtotalCalculado = 0;
                     decimal totalCalculado = 0;
 
+                    await _stockService.VerificarStockAsync(request.Detalles, request.NegocioId);
+
                     foreach (var detalle in request.Detalles)
                     {
                         Console.WriteLine($"Procesando detalle ProductoId: {detalle.ProductoId}");
 
+                       
                         Promocion? promocion = null;
 
                         if (detalle.PromocionId != 0)

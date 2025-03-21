@@ -33,6 +33,12 @@ namespace WebAPI.Controllers
             });
         }
 
+        [HttpGet("ventaInfoById")]
+        public async Task<ActionResult<Response<VentaInfo>>> VentaById([FromQuery] VentaInfoById request)
+        {
+            return Ok(await Mediator.Send(request));
+        }
+
 
     }
 }

@@ -40,5 +40,12 @@ namespace WebAPI.Controllers
             });
             return Ok(result);
         }
+
+        [HttpGet("stockById")]
+        public async Task<IActionResult> StockById([FromQuery] StockById request)
+        {
+            var result = await Mediator.Send(request);
+            return Ok(result);
+        }
     }
 }

@@ -12,11 +12,23 @@ namespace Application.Specifications
     {
         public DetalleSpecification(long negocioId)
         {
-            Query.Include(d => d.Stock) // Asegura que Stock se incluya en la consulta
+            Query.Include(d => d.Stock)
                  .Include(d => d.Producto)
                  .Include(d => d.Venta)
                  .ThenInclude(v => v.Negocio)
                  .Where(d => d.Venta.NegocioId == negocioId);
         }
+
+        public DetalleSpecification(long negocioId, DateOnly fechaInicio, DateOnly fechaFin)
+        {
+            Query.Include(d => d.Stock) 
+                 .Include(d => d.Producto)
+                 .Include(d => d.Venta)
+                 .ThenInclude(v => v.Negocio)
+                 .Where(d => d.Venta.NegocioId == negocioId)
+                 .Where(d => DateOnly.FromDateTime(d.Venta.Fecha) >= fechaInicio
+                          && DateOnly.FromDateTime(d.Venta.Fecha) <= fechaFin);
+        }
+
     }
 }

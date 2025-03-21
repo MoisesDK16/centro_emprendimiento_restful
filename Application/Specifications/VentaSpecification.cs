@@ -19,5 +19,19 @@ namespace Application.Specifications
                 Query.Where(x => DateOnly.FromDateTime(x.Fecha) == Fecha);
             }
         }
+
+        public VentaSpecification(long ventaId)
+        {
+            Query
+                .Include(x => x.Cliente)
+                .Include(x => x.Detalles)
+                    .ThenInclude(d => d.Producto) 
+                        .ThenInclude(p => p.Categoria) 
+                .Include(x => x.Detalles)
+                    .ThenInclude(d => d.Promocion) 
+                .Include(x => x.Negocio)
+                .Where(x => x.Id == ventaId);
+        }
+
     }
 }

@@ -83,15 +83,45 @@ namespace Application.Services.StockS
             
         }
 
-        private async Task<Stock> ObtenerStockAsync(long negocioId, long productoId, long stockId)
+        public async Task<Stock> ObtenerStockAsync(long negocioId, long productoId, long stockId)
         {
             var stockFound = await _stockRepository.FirstOrDefaultAsync(new StockSpecification(negocioId, productoId, stockId))
                 ?? throw new ApiException($"No se encontró el stock del producto {productoId} en el proceso de obtención de su stock");
 
-            if(stockFound.Cantidad <= 0) throw new ApiException($"El stock del producto {stockFound.Producto.Nombre} está agotado");
+            if(stockFound.Cantidad == 0) throw new ApiException($"El stock del producto {stockFound.Producto.Nombre} está agotado");
 
             return stockFound;
         }
+
+        public async Task VerificarStockAsync(List<DetalleDTO> detalles, long negocioId)
+        {
+            List<string> errores = new List<string>(); // Lista para almacenar los errores
+
+            foreach (var detalle in detalles) 
+            {
+                var stock = await ObtenerStockAsync(negocioId, detalle.ProductoId, detalle.StockId);
+
+                if (stock == null)
+                {
+                    errores.Add($"No se encontró stock para el producto con ID {detalle.ProductoId} y stock ID {detalle.StockId}");
+                    continue; 
+                }
+
+                if (stock.Cantidad < detalle.Cantidad)
+                {
+                    errores.Add($"No hay suficiente stock del producto '{stock.Producto.Nombre}'. Disponible: {stock.Cantidad}, Requerido: {detalle.Cantidad}");
+                }
+            }
+
+            if (errores.Any())
+            {
+                throw new ApiException("Se encontraron problemas con el stock:\n" + string.Join("\n", errores) + "\n");
+            }
+
+
+        }
+
+
 
     }
 }

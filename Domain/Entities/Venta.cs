@@ -20,6 +20,6 @@ namespace Domain.Entities
         public long NegocioId { get; set; }
         public Negocio Negocio { get; set; }
 
-        public List<Detalle> Detalles { get; set; }
+        public virtual List<Detalle> Detalles { get; set; } = new List<Detalle>();
     }
 }

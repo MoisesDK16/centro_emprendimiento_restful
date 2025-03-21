@@ -14,6 +14,8 @@ namespace Application.Feautures.StatsC
     public class TotalGanancias : IRequest<Response<decimal>>
     {
         public long NegocioId { get; set; }
+        public required DateOnly FechaInicio { get; set; }
+        public required DateOnly FechaFin { get; set; }
     }
 
     public class TotalGananciasHandler : IRequestHandler<TotalGanancias, Response<decimal>>
@@ -25,7 +27,7 @@ namespace Application.Feautures.StatsC
         }
         public async Task<Response<decimal>> Handle(TotalGanancias request, CancellationToken cancellationToken)
         {
-            var detalles = await _repository.ListAsync(new DetalleSpecification(request.NegocioId));
+            var detalles = await _repository.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin));
 
             var ganancias = detalles
               .Sum(d => (d.Precio - d.Stock.PrecioCompra) * d.Cantidad); 

@@ -52,5 +52,11 @@ namespace Application.Specifications
             Query.Skip((pageNumber - 1) * pageSize).Take(pageSize); 
         }
 
+        public StockSpecification(long StockId)
+        {
+            Query.Include(s => s.Producto)
+                .Where(stock => stock.Id == StockId);
+        }
+
     }
 }

@@ -1,31 +1,29 @@
 ﻿using Application.DTOs.Productos;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Specifications;
 using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Feautures.ProductoC.Queries
 {
     public class ProductoById : IRequest<ProductoDTO>
     {
-        public required long Id { get; set; }
+        public long ProductoId { get; set; }
+        public long NegocioId { get; set; }
+    }
 
-        public class ProductoByIdHandler : IRequestHandler<ProductoById, ProductoDTO>
+    public class ProductoByIdHandler : IRequestHandler<ProductoById, ProductoDTO>
         {
-            private readonly IRepositoryAsync<Producto> _repository;
-            public ProductoByIdHandler(IRepositoryAsync<Producto> repository)
+            private readonly IReadOnlyRepositoryAsync<Producto> _repository;
+            public ProductoByIdHandler(IReadOnlyRepositoryAsync<Producto> repository)
             {
                 _repository = repository;
             }
             public async Task<ProductoDTO> Handle(ProductoById request, CancellationToken cancellationToken)
             {
-                var product = await _repository.GetByIdAsync(request.Id);
-                if (product == null) throw new ApiException("No se ha encontrado objeto con Id: "+request.Id);
+                var product = await _repository.FirstOrDefaultAsync(new ProductoSpecification(request.ProductoId, request.NegocioId));
+                if (product == null) throw new ApiException("No se ha encontrado objeto con Id: "+request.ProductoId);
                 return new ProductoDTO
                 {
                     Id = product.Id,
@@ -42,6 +40,6 @@ namespace Application.Feautures.ProductoC.Queries
                 };
             }
 
-        }
+        
     }
 }

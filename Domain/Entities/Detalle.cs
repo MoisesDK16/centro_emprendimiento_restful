@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Domain.Entities
@@ -19,7 +20,8 @@ namespace Domain.Entities
         public long ProductoId { get; set; }
         public Producto Producto { get; set; }
 
-        public long VentaId { get; set; }    
+        public long VentaId { get; set; }
+        [JsonIgnore]
         public Venta Venta { get; set; }
 
         public long StockId { get; set; }

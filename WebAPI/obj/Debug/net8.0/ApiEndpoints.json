@@ -448,7 +448,12 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Id",
+        "Name": "ProductoId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "NegocioId",
         "Type": "System.Int64",
         "IsRequired": false
       },
@@ -714,6 +719,16 @@
         "IsRequired": false
       },
       {
+        "Name": "FechaInicio",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaFin",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
         "Name": "version",
         "Type": "",
         "IsRequired": true
@@ -747,6 +762,37 @@
       {
         "Name": "PageSize",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.StatsController",
+    "Method": "Ventas",
+    "RelativePath": "api/v{version}/Stats/ventasPorNegocio",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "NegocioId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaInicio",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaFin",
+        "Type": "System.DateOnly",
         "IsRequired": false
       },
       {
@@ -846,6 +892,27 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebAPI.Controllers.StockController",
+    "Method": "StockById",
+    "RelativePath": "api/v{version}/Stock/stockById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.VentaController",
     "Method": "CrearVenta",
     "RelativePath": "api/v{version}/Venta/crear",
@@ -918,6 +985,37 @@
     "ReturnTypes": [
       {
         "Type": "Application.Wrappers.PagedResponse\u00601[[System.Collections.Generic.IEnumerable\u00601[[Application.DTOs.Ventas.GeneralVenta, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.VentaController",
+    "Method": "VentaById",
+    "RelativePath": "api/v{version}/Venta/ventaInfoById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Id",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Application.Wrappers.Response\u00601[[Application.DTOs.Ventas.VentaInfo, Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
         "MediaTypes": [
           "text/plain",
           "application/json",
