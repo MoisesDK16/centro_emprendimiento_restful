@@ -5,7 +5,7 @@ namespace Application.Specifications
 {
     public class VentaSpecification : Specification<Venta>
     {
-        public VentaSpecification(int PageNumber, int PageSize, long NegocioId, string? IdentificacionCliente, DateOnly? Fecha)
+        public VentaSpecification(int PageNumber, int PageSize, long NegocioId, string? IdentificacionCliente, DateOnly FechaInicio, DateOnly FechaFin)
         {
             Query
                 .Skip((PageNumber - 1) * PageSize)
@@ -13,11 +13,11 @@ namespace Application.Specifications
                 .Include(x => x.Cliente)
                 .Where(x => x.NegocioId == NegocioId);
 
+            Query.Where(x => DateOnly.FromDateTime(x.Fecha) >= FechaInicio && DateOnly.FromDateTime(x.Fecha) <= FechaFin);
+
             if (!string.IsNullOrEmpty(IdentificacionCliente)) { Query.Where(x => x.Cliente.Identificacion == IdentificacionCliente); }
-            if (Fecha.HasValue)
-            {
-                Query.Where(x => DateOnly.FromDateTime(x.Fecha) == Fecha);
-            }
+
+           
         }
 
         public VentaSpecification(long ventaId)

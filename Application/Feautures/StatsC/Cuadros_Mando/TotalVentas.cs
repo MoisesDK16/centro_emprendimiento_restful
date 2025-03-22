@@ -3,13 +3,8 @@ using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Application.Feautures.StatsC
+namespace Application.Feautures.StatsC.Cuadros_Mando
 {
     public class TotalVentas : IRequest<Response<decimal>>
     {

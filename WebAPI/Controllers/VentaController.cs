@@ -29,7 +29,8 @@ namespace WebAPI.Controllers
                 PageSize = filter.PageSize,
                 NegocioId = filter.NegocioId,
                 IdentificacionCliente = filter.IdentificacionCliente,
-                Fecha = filter.Fecha
+                FechaInicio = filter.FechaInicio,
+                FechaFin = filter.FechaFin
             });
         }
 

@@ -5,24 +5,24 @@ using Application.Wrappers;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Feautures.StatsC
+namespace Application.Feautures.StatsC.Sock
 {
     public class StockByProductos : IRequest<PagedResponse<List<StockReportDto>>>
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public long NegocioId { get; set; }
-        public long CategoriaId { get; set; }    
+        public long CategoriaId { get; set; }
     }
 
-       public class StockByProductosHandler : IRequestHandler<StockByProductos, PagedResponse<List<StockReportDto>>>
-         {
-          private readonly IReadOnlyRepositoryAsync<Stock> _stockRepository;
+    public class StockByProductosHandler : IRequestHandler<StockByProductos, PagedResponse<List<StockReportDto>>>
+    {
+        private readonly IReadOnlyRepositoryAsync<Stock> _stockRepository;
 
-          public StockByProductosHandler(IReadOnlyRepositoryAsync<Stock> stockRepository)
-          {
-              _stockRepository = stockRepository;
-          }
+        public StockByProductosHandler(IReadOnlyRepositoryAsync<Stock> stockRepository)
+        {
+            _stockRepository = stockRepository;
+        }
 
         public async Task<PagedResponse<List<StockReportDto>>> Handle(StockByProductos request, CancellationToken cancellationToken)
         {
@@ -43,10 +43,10 @@ namespace Application.Feautures.StatsC
 
             return new PagedResponse<List<StockReportDto>>(productosStock, request.PageNumber, request.PageSize);
 
-          }
-       }
+        }
+    }
 
-        public class StockReportDto
+    public class StockReportDto
     {
         public string Producto { get; set; }
         public int Stock { get; set; }

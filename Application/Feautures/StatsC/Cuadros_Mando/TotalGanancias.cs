@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Feautures.StatsC
+namespace Application.Feautures.StatsC.Cuadros_Mando
 {
     public class TotalGanancias : IRequest<Response<decimal>>
     {
@@ -30,7 +30,7 @@ namespace Application.Feautures.StatsC
             var detalles = await _repository.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin));
 
             var ganancias = detalles
-              .Sum(d => (d.Precio - d.Stock.PrecioCompra) * d.Cantidad); 
+              .Sum(d => (d.Precio - d.Stock.PrecioCompra) * d.Cantidad);
 
             return new Response<decimal>(ganancias);
         }

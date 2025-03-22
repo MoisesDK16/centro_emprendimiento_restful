@@ -21,7 +21,9 @@ namespace Application.Feautures.VentaC.Queries
         public required long NegocioId { get; set; }
         public string? IdentificacionCliente { get; set; }
 
-        public DateOnly? Fecha { get; set; }
+        public required DateOnly FechaInicio { get; set; }
+
+        public required DateOnly FechaFin { get; set; }
 
         public class ListarVentasHandler : IRequestHandler<ListarVentas, PagedResponse<IEnumerable<GeneralVenta>>>
         {
@@ -38,7 +40,8 @@ namespace Application.Feautures.VentaC.Queries
                         request.PageSize,
                         request.NegocioId,
                         request.IdentificacionCliente,
-                        request.Fecha),
+                        request.FechaInicio,
+                        request.FechaFin),
                     cancellationToken);
                 
                 var ventasDto = ventas.Select(x => new GeneralVenta

@@ -25,7 +25,7 @@ namespace Domain.Entities
         public Venta Venta { get; set; }
 
         public long StockId { get; set; }
-        public Stock? Stock { get; set; }
+        public Stock Stock { get; set; }
 
         [AllowNull]
         public long? PromocionId { get; set; }

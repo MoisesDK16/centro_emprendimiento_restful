@@ -11,6 +11,8 @@ namespace Application.Feautures.VentaC.Queries
     {
         public long NegocioId { get; set; }
         public string? IdentificacionCliente { get; set; }
-        public DateOnly? Fecha { get; set; }
+        public DateOnly FechaInicio { get; set; }
+
+        public DateOnly FechaFin { get; set; }  
     }
 }

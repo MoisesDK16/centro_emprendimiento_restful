@@ -52,10 +52,20 @@ namespace Application.Specifications
             Query.Skip((pageNumber - 1) * pageSize).Take(pageSize); 
         }
 
-        public StockSpecification(long StockId)
+        public StockSpecification(int pageNumber, int pageSize, long negocioId, DateOnly FechaInicio, DateOnly FechaFin)
         {
             Query.Include(s => s.Producto)
-                .Where(stock => stock.Id == StockId);
+                .ThenInclude(p => p.Negocio)
+                .Where(stock => stock.Producto.NegocioId == negocioId &&
+                DateOnly.FromDateTime( stock.FechaIngreso) >= FechaInicio &&
+                 DateOnly.FromDateTime(stock.FechaIngreso) <= FechaFin);
+            Query.Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize);
+        }
+
+        public StockSpecification(long stockId)
+        {
+            Query.Where(stock => stock.Id == stockId);
         }
 
     }
