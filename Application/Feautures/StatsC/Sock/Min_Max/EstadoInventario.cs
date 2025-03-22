@@ -1,4 +1,4 @@
-﻿using Application.DTOs.Stats.Stock;
+﻿using Application.DTOs.Stats.Stock.Min_Max;
 using Application.Interfaces;
 using Application.Parameters;
 using Application.Specifications;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Feautures.StatsC.Sock
+namespace Application.Feautures.StatsC.Sock.Min_Max
 {
     public class EstadoInventario : IRequest<Response<List<StockInfoDTO>>>
     {

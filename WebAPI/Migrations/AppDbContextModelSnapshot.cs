@@ -141,9 +141,6 @@ namespace WebAPI.Migrations
                     b.Property<long>("StockId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("StockId1")
-                        .HasColumnType("bigint");
-
                     b.Property<decimal>("Total")
                         .HasPrecision(10, 2)
                         .HasColumnType("decimal(10,2)");
@@ -159,11 +156,41 @@ namespace WebAPI.Migrations
 
                     b.HasIndex("StockId");
 
-                    b.HasIndex("StockId1");
-
                     b.HasIndex("VentaId");
 
                     b.ToTable("detalle", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Historial_Stock", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<decimal>("CostoTotal")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("Existencias")
+                        .HasColumnType("int");
+
+                    b.Property<DateOnly>("FechaCorte")
+                        .HasColumnType("date");
+
+                    b.Property<long>("NegocioId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ProductoId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NegocioId");
+
+                    b.HasIndex("ProductoId");
+
+                    b.ToTable("Historial_Stock", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Negocio", b =>
@@ -217,7 +244,7 @@ namespace WebAPI.Migrations
 
                     b.HasIndex("ClienteId");
 
-                    b.ToTable("NegocioClientes", (string)null);
+                    b.ToTable("NegocioClientes");
                 });
 
             modelBuilder.Entity("Domain.Entities.Producto", b =>
@@ -460,14 +487,10 @@ namespace WebAPI.Migrations
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("Domain.Entities.Stock", "Stock")
-                        .WithMany()
-                        .HasForeignKey("StockId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Stock", null)
                         .WithMany("Detalles")
-                        .HasForeignKey("StockId1");
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.HasOne("Domain.Entities.Venta", "Venta")
                         .WithMany("Detalles")
@@ -482,6 +505,25 @@ namespace WebAPI.Migrations
                     b.Navigation("Stock");
 
                     b.Navigation("Venta");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Historial_Stock", b =>
+                {
+                    b.HasOne("Domain.Entities.Negocio", "Negocio")
+                        .WithMany()
+                        .HasForeignKey("NegocioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Producto", "Producto")
+                        .WithMany()
+                        .HasForeignKey("ProductoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Negocio");
+
+                    b.Navigation("Producto");
                 });
 
             modelBuilder.Entity("Domain.Entities.NegocioCliente", b =>

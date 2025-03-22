@@ -1,6 +1,7 @@
 ﻿using Application.Exceptions;
 using Application.Feautures.PromocionC.Queries;
 using Application.Interfaces;
+using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
 using Domain.Enums.Promocion;
@@ -46,7 +47,7 @@ namespace Application.Feautures.PromocionC.Commands
                     throw new ApiException($"Negocio con Id {request.NegocioId} no encontrado");
 
                 var productosFound = (await Task.WhenAll(request.IdProductos.Select(async id =>
-                    await _productoyReading.FirstOrDefaultAsync(new ProductoSpecification(id))
+                    await _productoyReading.FirstOrDefaultAsync(new ProductoSpecification(id, true))
                 ))).Where(p => p != null).ToList();
 
                 if (!productosFound.Any())

@@ -1,6 +1,7 @@
 ﻿using Application.Feautures.StatsC.Cuadros_Mando;
 using Application.Feautures.StatsC.Ganancias;
-using Application.Feautures.StatsC.Sock;
+using Application.Feautures.StatsC.Sock.Existencia;
+using Application.Feautures.StatsC.Sock.Min_Max;
 using Application.Feautures.StatsC.Ventas;
 using MediatR;
 using Microsoft.AspNetCore.Http;

@@ -5,7 +5,7 @@ using Application.Wrappers;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Feautures.StatsC.Sock
+namespace Application.Feautures.StatsC.Sock.Existencia
 {
     public class StockByProductos : IRequest<PagedResponse<List<StockReportDto>>>
     {
