@@ -25,5 +25,12 @@ namespace Application.Specifications
                 .Include(p => p.Productos);
         }
 
+        public PromocionSpecification(long promocionId)
+        {
+            Query
+                .Where(p => p.Id == promocionId)
+                .Include(p => p.Productos);
+        }
+
     }
 }

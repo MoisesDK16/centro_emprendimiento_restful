@@ -2,6 +2,7 @@
 using Application.DTOs.Promociones;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
 using MediatR;
@@ -12,21 +13,19 @@ namespace Application.Feautures.PromocionC.Queries
     {
         public long Id { get; set; }
 
-        public long NegocioId { get; set; }
-
         public class PromocionByIdHandler : IRequestHandler<PromocionById, Response<PromocionInfo>>
         {
 
-            private readonly IRepositoryAsync<Promocion> _repository;
+            private readonly IReadOnlyRepositoryAsync<Promocion> _repository;
 
-            public PromocionByIdHandler(IRepositoryAsync<Promocion> repository)
+            public PromocionByIdHandler(IReadOnlyRepositoryAsync<Promocion> repository)
             {
                 _repository = repository;
             }
 
             public async Task<Response<PromocionInfo>> Handle(PromocionById request, CancellationToken cancellationToken)
             {
-                var promocionFound = await _repository.GetByIdAsync(request.Id);
+                var promocionFound = await _repository.FirstOrDefaultAsync(new PromocionSpecification(request.Id));
                 if (promocionFound == null) throw new ApiException($"Promocion con Id {request.Id} no encontrada");
 
                 var promocionMapped = new PromocionInfo{
