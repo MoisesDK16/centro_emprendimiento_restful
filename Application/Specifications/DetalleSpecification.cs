@@ -23,7 +23,9 @@ namespace Application.Specifications
         {
             Query.Include(d => d.Stock) 
                  .Include(d => d.Venta)
+                 .Include(d => d.Venta.Cliente)
                  .Include(d => d.Producto)
+                 .Include(d => d.Producto.Categoria)
                  .ThenInclude(v => v.Negocio)
                  .Where(d => d.Venta.NegocioId == negocioId)
                  .Where(d => DateOnly.FromDateTime(d.Venta.Fecha) >= fechaInicio

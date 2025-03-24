@@ -298,6 +298,52 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.GananciasStatsController",
+    "Method": "GananciasPorCategoria",
+    "RelativePath": "api/v{version}/GananciasStats/gananciasPorCategoria",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "NegocioId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoriaId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaInicio",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaFin",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.GananciasStatsController",
     "Method": "Ganancias",
     "RelativePath": "api/v{version}/GananciasStats/gananciasPorNegocio",
     "HttpMethod": "GET",
@@ -363,6 +409,37 @@
       {
         "Name": "PageSize",
         "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.GananciasStatsController",
+    "Method": "MejoresClientes",
+    "RelativePath": "api/v{version}/GananciasStats/MejoresClientes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "NegocioId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaInicio",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaFin",
+        "Type": "System.DateOnly",
         "IsRequired": false
       },
       {

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.Stats.Stock.Existencia
 {
-    public class StockReport
+    public class StockReportDTO
     {
-        public required string NombreProducto { get; set; }
+        public string Producto { get; set; }
         public int Stock { get; set; }
     }
 }

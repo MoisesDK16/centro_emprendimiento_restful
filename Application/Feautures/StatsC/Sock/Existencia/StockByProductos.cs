@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.DTOs.Stats.Stock.Existencia;
+using Application.Interfaces;
 using Application.Parameters;
 using Application.Specifications;
 using Application.Wrappers;
@@ -7,7 +8,7 @@ using MediatR;
 
 namespace Application.Feautures.StatsC.Sock.Existencia
 {
-    public class StockByProductos : IRequest<PagedResponse<List<StockReportDto>>>
+    public class StockByProductos : IRequest<PagedResponse<List<StockReportDTO>>>
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
@@ -15,7 +16,7 @@ namespace Application.Feautures.StatsC.Sock.Existencia
         public long CategoriaId { get; set; }
     }
 
-    public class StockByProductosHandler : IRequestHandler<StockByProductos, PagedResponse<List<StockReportDto>>>
+    public class StockByProductosHandler : IRequestHandler<StockByProductos, PagedResponse<List<StockReportDTO>>>
     {
         private readonly IReadOnlyRepositoryAsync<Stock> _stockRepository;
 
@@ -24,7 +25,7 @@ namespace Application.Feautures.StatsC.Sock.Existencia
             _stockRepository = stockRepository;
         }
 
-        public async Task<PagedResponse<List<StockReportDto>>> Handle(StockByProductos request, CancellationToken cancellationToken)
+        public async Task<PagedResponse<List<StockReportDTO>>> Handle(StockByProductos request, CancellationToken cancellationToken)
         {
             var stockList = await _stockRepository.ListAsync(new StockSpecification(
                request.PageNumber, request.PageSize, request.NegocioId, request.CategoriaId)
@@ -33,7 +34,7 @@ namespace Application.Feautures.StatsC.Sock.Existencia
             var productosStock = stockList
                  .GroupBy(s => s.Producto.Nombre)
                  .Distinct()
-                 .Select(g => new StockReportDto
+                 .Select(g => new StockReportDTO
                  {
                      Producto = g.Key,
                      Stock = g.Sum(s => s.Cantidad)
@@ -41,16 +42,11 @@ namespace Application.Feautures.StatsC.Sock.Existencia
                  .OrderByDescending(p => p.Stock)
                  .ToList();
 
-            return new PagedResponse<List<StockReportDto>>(productosStock, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<StockReportDTO>>(productosStock, request.PageNumber, request.PageSize);
 
         }
     }
 
-    public class StockReportDto
-    {
-        public string Producto { get; set; }
-        public int Stock { get; set; }
-    }
 
     public class StockByProductosParameters : RequestParameter
     {

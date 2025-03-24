@@ -2,7 +2,6 @@
 using Application.Feautures.StatsC.Sock.Existencia;
 using Application.Feautures.StatsC.Sock.Min_Max;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers

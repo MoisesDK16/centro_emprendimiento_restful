@@ -29,7 +29,7 @@ namespace Domain.Entities
 
         //Propiedades
         public string Codigo { get; set; }
-        public string Nombre { get; set; }
+        public required string Nombre { get; set; }
         public string Descripcion { get; set; }
         public Estado Estado { get; set; }
         public decimal Iva { get; set; }

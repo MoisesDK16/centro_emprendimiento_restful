@@ -8,5 +8,11 @@ namespace Application.DTOs.Stats.Ganancias
 {
     public class GananciasPorCategoriaDTO
     {
+        public required string Categoria { get; set; }
+
+        public int CantidadVendida { get; set; }
+        public decimal CostoTotal { get; set; }
+        public decimal Ventas { get; set; }
+        public decimal Ganancias { get; set; }
     }
 }
