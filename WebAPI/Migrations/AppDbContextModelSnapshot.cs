@@ -178,6 +178,9 @@ namespace WebAPI.Migrations
                     b.Property<DateOnly>("FechaCorte")
                         .HasColumnType("date");
 
+                    b.Property<DateOnly?>("FechaInicio")
+                        .HasColumnType("date");
+
                     b.Property<long>("NegocioId")
                         .HasColumnType("bigint");
 

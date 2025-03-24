@@ -36,6 +36,14 @@ namespace Application.Specifications
                 .Where(p => p.Id == productId && p.NegocioId == NegocioId);
         }
 
+        public ProductoSpecification(long NegocioId, long categoriaId, Boolean byCategory)
+        {
+            Query
+                .Include(p => p.Categoria)
+                .Include(p => p.Negocio)
+                .Where(p => p.NegocioId == NegocioId && p.CategoriaId == categoriaId);
+        }
+
         public ProductoSpecification(long productId, bool isProduct)
         {
             Query.Where(p => p.Id == productId);

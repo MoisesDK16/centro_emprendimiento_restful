@@ -40,12 +40,14 @@ namespace Application.Feautures.StatsC.Sock.Min_Max
             // Obtener los stocks de los productos vendidos
             var stockList = await _stockRepository.ListAsync(new StockSpecification(request.PageNumber, request.PageSize, request.NegocioId, request.FechaInicio, request.FechaFin));
 
+            Console.WriteLine("stockList: " + stockList.Count);   
+
             var productos = detalles
                 .GroupBy(d => d.ProductoId)
                 .Select(g =>
                 {
                     var producto = g.First().Producto;
-                    var stock = stockList.FirstOrDefault(s => s.ProductoId == producto.Id);
+                    var stock = stockList.FirstOrDefault(s => s.Producto.Id == producto.Id);
                     int ventasTotales = g.Sum(d => d.Cantidad);
                     double promedio12 = ventasTotales / 12.0;
                     double mesesInvt = stock != null && promedio12 > 0 ? stock.Cantidad / promedio12 : 0;

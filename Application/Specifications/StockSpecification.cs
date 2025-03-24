@@ -63,9 +63,34 @@ namespace Application.Specifications
                 .Take(pageSize);
         }
 
+        public StockSpecification(long negocioId, DateOnly FechaInicio, DateOnly FechaFin)
+        {
+            Query.Include(s => s.Producto)
+                .ThenInclude(p => p.Negocio)
+                .Where(stock => stock.Producto.NegocioId == negocioId &&
+                DateOnly.FromDateTime(stock.FechaIngreso) >= FechaInicio &&
+                DateOnly.FromDateTime(stock.FechaIngreso) <= FechaFin);
+        }
+
+        public StockSpecification(long negocioId, List<long> productoIds, DateOnly FechaInicio, DateOnly FechaFin)
+        {
+            Query.Include(s => s.Producto)
+                .ThenInclude(p => p.Negocio)
+                .Where(stock => stock.Producto.NegocioId == negocioId &&
+                productoIds.Contains(stock.ProductoId) &&
+                DateOnly.FromDateTime(stock.FechaIngreso) >= FechaInicio &&
+                DateOnly.FromDateTime(stock.FechaIngreso) <= FechaFin);
+        }
+
         public StockSpecification(long stockId)
         {
             Query.Where(stock => stock.Id == stockId);
+        }
+
+        public StockSpecification (long productId, bool producto)
+        {
+            Query.Include(s => s.Producto)
+                .Where(stock => stock.ProductoId == productId);
         }
 
     }
