@@ -34,17 +34,19 @@ namespace Application.Feautures.ClienteC.Queries
         public async Task<PagedResponse<IEnumerable<Cliente>>> Handle(ListarClientes request, CancellationToken cancellationToken)
         {
             var clientes = await _repository.ListAsync(new ClienteSpecification(
-                request.PageNumber,
-                request.PageSize,
                 request.Identificacion,
                 request.Nombres,
                 request.PrimerApellido,
                 request.Ciudad
             ), cancellationToken);
 
+            var totalRecords = clientes.Count;
+            var totalPages = (int)Math.Ceiling((double)totalRecords / request.PageSize);
+            clientes.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
+
             if (!clientes.Any()) throw new ApiException($"No se encontraron clientes");
 
-            return new PagedResponse<IEnumerable<Cliente>>(clientes, request.PageNumber, request.PageSize);
+            return new PagedResponse<IEnumerable<Cliente>>(clientes, request.PageNumber, request.PageSize, totalPages, totalRecords);
         }
     }
 }

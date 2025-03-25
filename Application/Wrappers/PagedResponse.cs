@@ -10,11 +10,25 @@ namespace Application.Wrappers
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
+        public int TotalPages { get; set; }
+        public int TotalElements { get; set; }
 
         public PagedResponse(T data, int PageNumber, int PageSize)
         {
             this.PageNumber = PageNumber;
             this.PageSize = PageSize;
+            this.Data = data;
+            this.Message = null;
+            this.Succeeded = true;
+            this.Errors = null;
+        }
+
+        public PagedResponse(T data, int PageNumber, int PageSize, int TotalPages, int TotalElements)
+        {
+            this.PageNumber = PageNumber;
+            this.PageSize = PageSize;
+            this.TotalPages = TotalPages;
+            this.TotalElements = TotalElements;
             this.Data = data;
             this.Message = null;
             this.Succeeded = true;

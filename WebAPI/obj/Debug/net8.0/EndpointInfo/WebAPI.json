@@ -2562,6 +2562,12 @@
         "additionalProperties": false
       },
       "CrearCliente": {
+        "required": [
+          "ciudad",
+          "identificacion",
+          "nombres",
+          "primerApellido"
+        ],
         "type": "object",
         "properties": {
           "identificacion": {
@@ -2879,6 +2885,14 @@
             "format": "int32"
           },
           "pageSize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalPages": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalElements": {
             "type": "integer",
             "format": "int32"
           }

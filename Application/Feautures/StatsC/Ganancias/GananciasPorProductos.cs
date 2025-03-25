@@ -34,10 +34,7 @@ namespace Application.Feautures.StatsC.Ganancias
 
         public async Task<PagedResponse<List<GananciasPorProductoDTO>>> Handle(GananciasPorProductos request, CancellationToken cancellationToken)
         {
-            var detalles = await _detalleRepository.ListAsync(new DetalleSpecification(
-                request.PageNumber, request.PageSize, request.NegocioId, request.FechaInicio, request.FechaFin, request.CategoriaId));
-
-            Console.WriteLine("detalles extraidos: "+ detalles.Count);
+            var detalles = await _detalleRepository.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin, request.CategoriaId));
 
 
             var gananciasPorProducto = detalles
@@ -52,7 +49,12 @@ namespace Application.Feautures.StatsC.Ganancias
                 .OrderByDescending(p => p.GananciaTotal)
                 .ToList();
 
-            return new PagedResponse<List<GananciasPorProductoDTO>>(gananciasPorProducto, request.PageNumber, request.PageSize);
+            var totalPages = (int)Math.Ceiling((double)gananciasPorProducto.Count / request.PageSize);
+
+            gananciasPorProducto.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
+
+            return new PagedResponse<List<GananciasPorProductoDTO>>(gananciasPorProducto, request.PageNumber,
+                request.PageSize, totalPages, gananciasPorProducto.Count);
         }
     }
 

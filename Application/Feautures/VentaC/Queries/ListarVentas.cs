@@ -36,8 +36,6 @@ namespace Application.Feautures.VentaC.Queries
             {
                 var ventas = await _repositoryVenta.ListAsync(
                     new VentaSpecification(
-                        request.PageNumber,
-                        request.PageSize,
                         request.NegocioId,
                         request.IdentificacionCliente,
                         request.FechaInicio,
@@ -53,7 +51,11 @@ namespace Application.Feautures.VentaC.Queries
                     ClienteId = x.ClienteId,
                     NegocioId = x.NegocioId
                 });
-                return new PagedResponse<IEnumerable<GeneralVenta>>(ventasDto, request.PageNumber, request.PageSize);
+
+                var TotalPages = (int)Math.Ceiling((double)ventas.Count / request.PageSize);
+                ventasDto = ventasDto.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
+
+                return new PagedResponse<IEnumerable<GeneralVenta>>(ventasDto, request.PageNumber, request.PageSize, TotalPages, ventas.Count);
             }
         }
 

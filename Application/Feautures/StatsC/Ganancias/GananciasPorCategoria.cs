@@ -47,10 +47,9 @@ namespace Application.Feautures.StatsC.Ganancias
                     Ganancias = d.Sum(d => (d.Precio - d.Stock.PrecioCompra) * d.Cantidad)
                 }).ToList();
 
-            var paged = gananciasPorProducto.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToList();
+            gananciasPorProducto.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToList();
 
-            Console.WriteLine("gananciasPorProducto: " + gananciasPorProducto);
-            return new PagedResponse<List<GananciasPorCategoriaDTO>>(paged, request.PageNumber, request.PageNumber);
+            return new PagedResponse<List<GananciasPorCategoriaDTO>>(gananciasPorProducto, request.PageNumber, request.PageNumber);
         }
 
         public class GananciasPorCategoriaParameters : RequestParameter

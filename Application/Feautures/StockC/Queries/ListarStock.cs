@@ -42,11 +42,12 @@ namespace Application.Feautures.StockC.Queries
                         filter.ProductoId,
                         filter.Cantidad,
                         filter.FechaCaducidad
-                    ),
-                    cancellationToken
-                ).ConfigureAwait(false);
+                    )
+                );
+                var TotalPages = (int)Math.Ceiling((double)stockFiltered.Count / filter.PageSize);
+                stockFiltered.Skip((filter.PageNumber - 1) * filter.PageSize).Take(filter.PageSize);
 
-                return new PagedResponse<IEnumerable<Stock>>(stockFiltered, filter.PageNumber, filter.PageSize);
+                return new PagedResponse<IEnumerable<Stock>>(stockFiltered, filter.PageNumber, filter.PageSize, TotalPages, stockFiltered.Count);
             }
         }
     }

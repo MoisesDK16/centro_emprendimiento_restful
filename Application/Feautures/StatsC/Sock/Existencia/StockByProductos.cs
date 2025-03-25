@@ -42,7 +42,10 @@ namespace Application.Feautures.StatsC.Sock.Existencia
                  .OrderByDescending(p => p.Stock)
                  .ToList();
 
-            return new PagedResponse<List<StockReportDTO>>(productosStock, request.PageNumber, request.PageSize);
+            var TotalPages = (int)Math.Ceiling((double)productosStock.Count / request.PageSize);
+            productosStock.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
+
+            return new PagedResponse<List<StockReportDTO>>(productosStock, request.PageNumber, request.PageSize, TotalPages, productosStock.Count);
 
         }
     }

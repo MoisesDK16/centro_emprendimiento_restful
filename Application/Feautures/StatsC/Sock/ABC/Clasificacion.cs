@@ -74,12 +74,10 @@ namespace Application.Feautures.StatsC.Sock.ABC
                 };
             }).ToList();
 
-            var paged = resultado
-                .Skip((request.PageNumber - 1) * request.PageSize)
-                .Take(request.PageSize)
-                .ToList();
+            var totalPages = (int)Math.Ceiling((double)resultado.Count / request.PageSize);
+            resultado.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
 
-            return new PagedResponse<List<ClasificacionDTO>>(paged, request.PageNumber, request.PageSize);
+            return new PagedResponse<List<ClasificacionDTO>>(resultado, request.PageNumber, request.PageSize, totalPages, resultado.Count);
         }
 
     }

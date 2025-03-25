@@ -10,11 +10,8 @@ namespace Application.Specifications
 {
     public class ClienteSpecification : Specification<Cliente>
     {
-        public ClienteSpecification(int pageNumber, int pageSize, string? identificacion, string? nombres, string? primerApellido, string? ciudad)
+        public ClienteSpecification(string? identificacion, string? nombres, string? primerApellido, string? ciudad)
         {
-            Query.Skip((pageNumber - 1) * pageSize)
-                 .Take(pageSize);
-
             //Filtros dinámicos
             if (!string.IsNullOrEmpty(identificacion))
                 Query.Where(c => c.Identificacion != null && c.Identificacion.Contains(identificacion));

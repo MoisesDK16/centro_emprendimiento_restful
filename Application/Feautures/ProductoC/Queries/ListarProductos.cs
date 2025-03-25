@@ -25,7 +25,7 @@ namespace Application.Feautures.ProductoC.Queries
             public async Task<PagedResponse<IEnumerable<ProductoDTO>>> Handle(ListarProductos filter, CancellationToken cancellationToken)
             {
                 var products = await _repository.ListAsync(
-                        new ProductoSpecification(filter.PageSize, filter.PageNumber, filter.Categoria, filter.Negocio),
+                        new ProductoSpecification(filter.Categoria, filter.Negocio),
                         cancellationToken
                     ).ConfigureAwait(false);
 
@@ -49,7 +49,11 @@ namespace Application.Feautures.ProductoC.Queries
                     });
                 }
 
-                return new PagedResponse<IEnumerable<ProductoDTO>>(productosDTO, filter.PageNumber, filter.PageSize);
+                var totalPages = (int)Math.Ceiling((double)products.Count / filter.PageSize);
+                productosDTO = productosDTO.Skip((filter.PageNumber - 1) * filter.PageSize).Take(filter.PageSize).ToList();
+
+                return new PagedResponse<IEnumerable<ProductoDTO>>(productosDTO, filter.PageNumber,
+                    filter.PageSize, totalPages, products.Count);
             }
         }
     }

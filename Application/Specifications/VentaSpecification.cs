@@ -5,11 +5,9 @@ namespace Application.Specifications
 {
     public class VentaSpecification : Specification<Venta>
     {
-        public VentaSpecification(int PageNumber, int PageSize, long NegocioId, string? IdentificacionCliente, DateOnly FechaInicio, DateOnly FechaFin)
+        public VentaSpecification(long NegocioId, string? IdentificacionCliente, DateOnly FechaInicio, DateOnly FechaFin)
         {
             Query
-                .Skip((PageNumber - 1) * PageSize)
-                .Take(PageSize)
                 .Include(x => x.Cliente)
                 .Where(x => x.NegocioId == NegocioId);
 

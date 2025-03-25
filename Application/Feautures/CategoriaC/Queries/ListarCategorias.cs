@@ -26,12 +26,15 @@ namespace Application.Feautures.CategoriaC.Queries
             public async Task<PagedResponse<IEnumerable<Domain.Entities.Categoria>>> Handle(ListarCategorias request, CancellationToken cancellationToken)
             {
                 var categories = await _repository.ListAsync(
-                        new CategoriaSpecification(request.PageSize, request.PageNumber, request.Tipo, request.NegocioId),
+                        new CategoriaSpecification(request.Tipo, request.NegocioId),
                         cancellationToken 
                     ).ConfigureAwait(false);
 
+                var TotalPages = (int)Math.Ceiling((double)categories.Count / request.PageSize);
+                categories.Skip(request.PageNumber - 1 * request.PageSize).Take(request.PageSize);
 
-                return new PagedResponse<IEnumerable<Domain.Entities.Categoria>>(categories, request.PageNumber, request.PageSize);
+                return new PagedResponse<IEnumerable<Domain.Entities.Categoria>>(categories, request.PageNumber,
+                    request.PageSize, TotalPages, categories.Count);
             }
         }
     }
