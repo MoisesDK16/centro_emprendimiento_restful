@@ -11,10 +11,12 @@ namespace Application.Services.StockS
     public class StockService
     {
         private readonly IReadOnlyRepositoryAsync<Stock> _stockRepository;
+        private readonly IReadOnlyRepositoryAsync<Producto> _productoRepository;
 
-        public StockService(IReadOnlyRepositoryAsync<Stock> stockRepository)
+        public StockService(IReadOnlyRepositoryAsync<Stock> stockRepository, IReadOnlyRepositoryAsync<Producto> productRepository)
         {
             _stockRepository = stockRepository;
+            _productoRepository = productRepository;
         }
 
        public async Task RestarStock(int cantidad, long idProducto, long stockId)
@@ -34,6 +36,20 @@ namespace Application.Services.StockS
             {
                 throw new ApiException("El precio del producto no coincide con el precio receptado desde backend");
             }
+        }
+
+        public async Task<decimal> AplicarIva(long idProducto,long NegocioId, decimal detallePrecio)
+        {
+            var productoFound = await _productoRepository.FirstOrDefaultAsync(new ProductoSpecification(idProducto, NegocioId))
+                ?? throw new ApiException($"No se encontró el producto con id: {idProducto}");
+
+            if (productoFound.Iva != 0)
+            {
+                decimal iva = (productoFound.Iva / 100) * detallePrecio;
+                detallePrecio += iva;
+            }
+
+            return detallePrecio;
         }
 
         public async Task VerificarPrecioConPromocionDescuentoAsync(long negocioId, long productoId, long stockId, decimal detallePrecio)

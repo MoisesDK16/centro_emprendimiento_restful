@@ -14,7 +14,9 @@ namespace Domain.Entities
         public decimal Precio { get; set; }
         public int Cantidad { get; set; }
 
-        public decimal Total;
+        public decimal Total { get; set; }
+
+        public decimal? TotalConIva { get; set; }
 
         //Relaciones
         public long ProductoId { get; set; }

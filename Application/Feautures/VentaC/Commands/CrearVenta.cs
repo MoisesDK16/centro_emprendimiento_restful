@@ -46,8 +46,6 @@ namespace Application.Feautures.VentaC.Commands
 
             public async Task<Response<long>> Handle(CrearVenta request, CancellationToken cancellationToken)
             {
-                Console.WriteLine("📌 Entrando a CrearVentaHandler...");
-
                 await _unitOfWork.BeginTransactionAsync(); 
 
                 try
@@ -57,8 +55,6 @@ namespace Application.Feautures.VentaC.Commands
                         var producto = await _productoRepostoryReading.GetByIdAsync(detalle.ProductoId);
                         if (producto == null) throw new ApiException($"Producto con ID {detalle.ProductoId} no encontrado.");
                     }
-
-                    Console.WriteLine("Creando venta...");
 
                     var venta = new Venta
                     {
@@ -79,10 +75,7 @@ namespace Application.Feautures.VentaC.Commands
                     await _stockService.VerificarStockAsync(request.Detalles, request.NegocioId);
 
                     foreach (var detalle in request.Detalles)
-                    {
-                        Console.WriteLine($"Procesando detalle ProductoId: {detalle.ProductoId}");
-
-                       
+                    {     
                         Promocion? promocion = null;
 
                         if (detalle.PromocionId != 0)
@@ -93,19 +86,19 @@ namespace Application.Feautures.VentaC.Commands
 
                             await _stockService.VerificarCasosPromocionAsync(detalle, promocion, venta);
                         }
-                        else
-                        {
-                            await _stockService.VerificarPrecioAsync(detalle.ProductoId, detalle.StockId, detalle.Precio);
-                        }
+                        else await _stockService.VerificarPrecioAsync(detalle.ProductoId, detalle.StockId, detalle.Precio);
 
-                        decimal precioFinal = detalle.Precio;
+                        var precioConIva = await _stockService.AplicarIva(detalle.ProductoId, request.NegocioId, detalle.Precio);
+
+                        decimal precioFinal = precioConIva;
                         int cantidadFinal = detalle.Cantidad;
 
                         var nuevoDetalle = new Detalle
                         {
-                            Precio = precioFinal,
+                            Precio = detalle.Precio,
                             Cantidad = cantidadFinal,
                             Total = detalle.Total,
+                            TotalConIva = precioConIva * cantidadFinal,
                             ProductoId = detalle.ProductoId,
                             VentaId = venta.Id,
                             StockId = detalle.StockId,
@@ -113,7 +106,7 @@ namespace Application.Feautures.VentaC.Commands
                         };
 
                         subtotalCalculado += nuevoDetalle.Total;
-                        totalCalculado += nuevoDetalle.Total;
+                        totalCalculado += (decimal) nuevoDetalle.TotalConIva;
 
                         await _repositoryDetalle.AddAsync(nuevoDetalle);
 
@@ -128,7 +121,7 @@ namespace Application.Feautures.VentaC.Commands
                     await _repositoryVenta.UpdateAsync(venta);
                     await _repositoryVenta.SaveChangesAsync();
 
-                    await _unitOfWork.CommitAsync(); // ✅ Confirmar transacción
+                    await _unitOfWork.CommitAsync(); // Confirmar transacción
 
                     return new Response<long>(venta.Id);
                 }

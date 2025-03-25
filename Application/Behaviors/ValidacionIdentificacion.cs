@@ -25,7 +25,6 @@ namespace Application.Behaviors
                     {
                         if (valced.Length == 13)
                         {
-                            //Se agrega la validación de excluir de la validación de RUC, las identificaciones cuyo tercer dígito sea 6 o 9.
                             estado = VerificaRUCPersonaNatural(valced);
                         }
                         else

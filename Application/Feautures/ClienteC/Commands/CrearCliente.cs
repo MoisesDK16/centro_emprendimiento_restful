@@ -1,4 +1,5 @@
-﻿using Application.Exceptions;
+﻿using Application.Behaviors;
+using Application.Exceptions;
 using Application.Interfaces;
 using Application.Specifications;
 using Application.Wrappers;
@@ -9,13 +10,13 @@ namespace Application.Feautures.ClienteC.Commands
 {
     public class CrearCliente : IRequest<Response<long>>
     {
-        public string? Identificacion { get; set; }
-        public string Nombres { get; set; }
-        public string PrimerApellido { get; set; }
+        public required string Identificacion { get; set; }
+        public required string Nombres { get; set; }
+        public required string PrimerApellido { get; set; }
         public string? SegundoApellido { get; set; }
         public string? Email { get; set; }
         public string? Telefono { get; set; }
-        public string Ciudad { get; set; }
+        public required string Ciudad { get; set; }
         public string? Direccion { get; set; }
         public long NegocioId { get; set; }
 
@@ -49,6 +50,14 @@ namespace Application.Feautures.ClienteC.Commands
                     var clienteExistente = await _repositoryClienteReading.FirstOrDefaultAsync(new ClienteSpecification(request.Identificacion));
                     if (clienteExistente != null) throw new ApiException($"Cliente con identificacion {request.Identificacion} ya existe");
                 }
+                if(request.Identificacion != null)
+                {
+                    if (ValidacionIdentificacion.VerificaIdentificacion(request.Identificacion))
+                        throw new ApiException("Identificacion no valida");
+
+                    if(_repositoryClienteReading.FirstOrDefaultAsync(new ClienteSpecification(request.Identificacion)) != null)
+                        throw new ApiException($"Cliente con Identificacion: {request.Identificacion} ya existe");
+                } 
 
                 var cliente = new Cliente
                 {
@@ -59,8 +68,7 @@ namespace Application.Feautures.ClienteC.Commands
                     Email = request.Email,
                     Telefono = request.Telefono,
                     Ciudad = request.Ciudad,
-                    Direccion = request.Direccion,
-                    NegocioClientes = new List<NegocioCliente>() 
+                    Direccion = request.Direccion
                 };
 
                 var clienteGuardado = await _repository.AddAsync(cliente);

@@ -9,6 +9,7 @@ using Domain.Settings;
 using Identity.Helpers;
 using Identity.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -104,14 +105,19 @@ namespace Identity.Services
             if (userWithSameEmail != null)
                 throw new ApiException($"User with this email: {request.Email} already exists.");
 
-
             if (request.Identificacion != null)
             {
                if(!ValidacionIdentificacion.VerificaIdentificacion(request.Identificacion))
                     throw new ApiException($"Identificacion no valida");
             }
 
-            if(request.UserName.Contains("@"))
+            var userWithSameIdentification = await _userManager.Users.FirstOrDefaultAsync(x => x.Identificacion == request.Identificacion);
+
+            if (userWithSameIdentification != null)
+                throw new ApiException($"User with this identification: {request.Identificacion} already exists.");
+
+
+            if (request.UserName.Contains("@"))
                 throw new ApiException($"El nombre de usuario no puede contene @");
 
             var user = new ApplicationUser

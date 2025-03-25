@@ -29,7 +29,7 @@ namespace Domain.Entities
         public string? Direccion { get; set; }
 
         [JsonIgnore]
-        public ICollection<NegocioCliente> NegocioClientes { get; set; }
+        public List<NegocioCliente> NegocioClientes { get; set; } = new List<NegocioCliente>();
 
     }
 }
