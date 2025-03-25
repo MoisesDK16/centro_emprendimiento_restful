@@ -47,7 +47,6 @@ namespace Application.Feautures.StatsC.Sock.Existencia
         }
     }
 
-
     public class StockByProductosParameters : RequestParameter
     {
         public long NegocioId { get; set; }

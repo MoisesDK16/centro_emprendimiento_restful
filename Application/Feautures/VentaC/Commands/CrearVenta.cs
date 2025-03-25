@@ -91,11 +91,11 @@ namespace Application.Feautures.VentaC.Commands
 
                             if (promocion == null) throw new ApiException($"El producto con ID {detalle.ProductoId} no tiene una promoción válida con ID {detalle.PromocionId}.");
 
-                            _ = _stockService.VerificarCasosPromocionAsync(detalle, promocion, venta);
+                            await _stockService.VerificarCasosPromocionAsync(detalle, promocion, venta);
                         }
                         else
                         {
-                            _ = _stockService.VerificarPrecioAsync(detalle.ProductoId, detalle.StockId, detalle.Precio);
+                            await _stockService.VerificarPrecioAsync(detalle.ProductoId, detalle.StockId, detalle.Precio);
                         }
 
                         decimal precioFinal = detalle.Precio;
