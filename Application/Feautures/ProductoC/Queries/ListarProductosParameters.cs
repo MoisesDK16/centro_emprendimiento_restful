@@ -9,8 +9,10 @@ namespace Application.Feautures.ProductoC.Queries
 {
     public class ListarProductosParameters : RequestParameter
     {
-        public string? Categoria { get; set; }
+        public long CategoriaId { get; set; }
 
-        public string? Negocio { get; set; }
+        public long NegocioId { get; set; }
+
+        public string NombreProducto { get; set; }
     }
 }

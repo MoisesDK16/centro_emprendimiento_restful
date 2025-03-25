@@ -10,13 +10,12 @@ namespace Application.Specifications
 {
     public class ProductoSpecification : Specification<Producto>
     {
-        public ProductoSpecification(string Categoria, string Negocio)
+        public ProductoSpecification(long NegocioId, long CategoriaId)
         {
             Query.Include(p => p.Categoria)
                  .Include(p => p.Negocio);
 
-            if (!string.IsNullOrEmpty(Categoria)) Query.Where(p => p.Categoria != null && p.Categoria.Nombre.Contains(Categoria));
-            if (!string.IsNullOrEmpty(Negocio)) Query.Where(p => p.Negocio.nombre != null && p.Negocio.nombre.Contains(Negocio));
+            Query.Where(p => p.CategoriaId == CategoriaId && p.NegocioId == NegocioId);
         }
 
         public ProductoSpecification (long NegocioId)
@@ -26,13 +25,21 @@ namespace Application.Specifications
                 .Where(p => p.NegocioId == NegocioId);
         }
 
-        public ProductoSpecification(long productId, long NegocioId)
+        public ProductoSpecification(long negocioId, long categoriaId, string? nombreProducto)
         {
             Query
                 .Include(p => p.Categoria)
                 .Include(p => p.Negocio)
-                .Where(p => p.Id == productId && p.NegocioId == NegocioId);
+                .Where(p => p.NegocioId == negocioId);
+
+            if (categoriaId != 0)
+                Query.Where(p => p.CategoriaId == categoriaId);
+
+            if (!string.IsNullOrEmpty(nombreProducto))
+                Query.Search(p => p.Nombre, "%"+nombreProducto+"%"); 
+
         }
+
 
         public ProductoSpecification(long NegocioId, long categoriaId, Boolean byCategory)
         {

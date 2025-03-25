@@ -1326,14 +1326,23 @@
         ],
         "parameters": [
           {
-            "name": "Categoria",
+            "name": "CategoriaId",
             "in": "query",
             "schema": {
-              "type": "string"
+              "type": "integer",
+              "format": "int64"
             }
           },
           {
-            "name": "Negocio",
+            "name": "NegocioId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "NombreProducto",
             "in": "query",
             "schema": {
               "type": "string"

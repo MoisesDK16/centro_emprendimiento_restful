@@ -9,9 +9,9 @@ namespace Application.Feautures.ProductoC.Queries
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public string Categoria { get; set; }
-
-        public string Negocio { get; set; }
+        public long CategoriaId { get; set; }
+        public long NegocioId { get; set; }
+        public string NombreProducto { get; set; }
 
         public class ListarProductosHandler : IRequestHandler<ListarProductos, PagedResponse<IEnumerable<ProductoDTO>>>
         {
@@ -25,9 +25,10 @@ namespace Application.Feautures.ProductoC.Queries
             public async Task<PagedResponse<IEnumerable<ProductoDTO>>> Handle(ListarProductos filter, CancellationToken cancellationToken)
             {
                 var products = await _repository.ListAsync(
-                        new ProductoSpecification(filter.Categoria, filter.Negocio),
-                        cancellationToken
-                    ).ConfigureAwait(false);
+                        new ProductoSpecification(filter.NegocioId, filter.CategoriaId, filter.NombreProducto)
+                    );
+
+                Console.WriteLine("productos "+ products.Count);
 
                 List<ProductoDTO> productosDTO = new();
 

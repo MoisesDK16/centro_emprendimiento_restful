@@ -32,7 +32,10 @@ namespace WebAPI.Controllers
             {
                 PageNumber = filter.PageNumber,
                 PageSize = filter.PageSize,
-                Categoria = filter.Categoria });
+                NegocioId = filter.NegocioId,
+                CategoriaId = filter.CategoriaId,
+                NombreProducto = filter.NombreProducto
+            });
 
             return Ok(productos);
         }

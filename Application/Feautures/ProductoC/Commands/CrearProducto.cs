@@ -64,7 +64,7 @@ namespace Application.Feautures.ProductoC.Commands
                     Descripcion = request.Descripcion,
                     Estado = request.Estado,
                     Iva = request.Iva,
-                    //RutaImagen = request.Imagen != null ? await _azureStorageService.UploadAsync(request.Imagen, Enums.ContainerEnum.IMAGES) : null,
+                    RutaImagen = request.Imagen != null ? await _azureStorageService.UploadAsync(request.Imagen, Enums.ContainerEnum.IMAGES) : null,
                     CategoriaId = request.CategoriaId,
                     NegocioId = request.NegocioId
                 };

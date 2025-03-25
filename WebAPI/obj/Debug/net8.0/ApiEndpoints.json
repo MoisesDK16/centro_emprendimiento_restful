@@ -833,12 +833,17 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "Categoria",
-        "Type": "System.String",
+        "Name": "CategoriaId",
+        "Type": "System.Int64",
         "IsRequired": false
       },
       {
-        "Name": "Negocio",
+        "Name": "NegocioId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "NombreProducto",
         "Type": "System.String",
         "IsRequired": false
       },
