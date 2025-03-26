@@ -11,7 +11,7 @@ namespace Application.Feautures.ProductoC.Queries
         public int PageSize { get; set; }
         public long CategoriaId { get; set; }
         public long NegocioId { get; set; }
-        public string NombreProducto { get; set; }
+        public string? NombreProducto { get; set; }
 
         public class ListarProductosHandler : IRequestHandler<ListarProductos, PagedResponse<IEnumerable<ProductoDTO>>>
         {

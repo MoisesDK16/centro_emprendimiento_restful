@@ -13,6 +13,6 @@ namespace Application.Feautures.ProductoC.Queries
 
         public long NegocioId { get; set; }
 
-        public string NombreProducto { get; set; }
+        public string? NombreProducto { get; set; }
     }
 }
