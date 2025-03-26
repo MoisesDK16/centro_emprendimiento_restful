@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Kj8GMuxu8yo=",
+  "dgSpecHash": "7LjZ6qKGOHw=",
   "success": true,
   "projectFilePath": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\WebAPI.csproj",
   "expectedPackageFiles": [
@@ -148,6 +148,7 @@
     "C:\\Users\\PC\\.nuget\\packages\\nuget.protocol\\6.11.0\\nuget.protocol.6.11.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\nuget.versioning\\6.11.0\\nuget.versioning.6.11.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\pipelines.sockets.unofficial\\2.2.8\\pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\questpdf\\2025.1.7\\questpdf.2025.1.7.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\stackexchange.redis\\2.7.27\\stackexchange.redis.2.7.27.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\swashbuckle.aspnetcore\\6.6.2\\swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.6.2\\swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",

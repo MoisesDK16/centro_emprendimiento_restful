@@ -1273,6 +1273,27 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.VentaController",
+    "Method": "GenerarNotaPDF",
+    "RelativePath": "api/v{version}/Venta/GenerarNotaPDF",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Ventaid",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.VentaController",
     "Method": "ListarVentas",
     "RelativePath": "api/v{version}/Venta/listar",
     "HttpMethod": "GET",

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "06Dbf59ZSSM=",
+  "dgSpecHash": "A8ms1fGQFYI=",
   "success": true,
   "projectFilePath": "C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Shared\\Shared.csproj",
   "expectedPackageFiles": [
@@ -135,6 +135,7 @@
     "C:\\Users\\PC\\.nuget\\packages\\nuget.projectmodel\\6.11.0\\nuget.projectmodel.6.11.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\nuget.protocol\\6.11.0\\nuget.protocol.6.11.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\nuget.versioning\\6.11.0\\nuget.versioning.6.11.0.nupkg.sha512",
+    "C:\\Users\\PC\\.nuget\\packages\\questpdf\\2025.1.7\\questpdf.2025.1.7.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\system.clientmodel\\1.1.0\\system.clientmodel.1.1.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\system.codedom\\6.0.0\\system.codedom.6.0.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\system.collections.immutable\\8.0.0\\system.collections.immutable.8.0.0.nupkg.sha512",

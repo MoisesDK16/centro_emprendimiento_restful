@@ -2177,6 +2177,36 @@
         }
       }
     },
+    "/api/v{version}/Venta/GenerarNotaPDF": {
+      "get": {
+        "tags": [
+          "Venta"
+        ],
+        "parameters": [
+          {
+            "name": "Ventaid",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/v{version}/VentasStats/ventasPorNegocio": {
       "get": {
         "tags": [

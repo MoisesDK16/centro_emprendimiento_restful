@@ -41,5 +41,12 @@ namespace WebAPI.Controllers
         }
 
 
+        [HttpGet("GenerarNotaPDF")]
+        public async Task<IActionResult> GenerarNotaPDF([FromQuery] GenerarNotaPDF request)
+        {
+            var stream = await Mediator.Send(request);
+            return File(stream, "application/pdf", "nota-de-venta.pdf");
+        }
+
     }
 }
