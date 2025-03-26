@@ -41,8 +41,6 @@ namespace Persistence.Configuration
                 .WithMany(n => n.Promociones)
                 .HasForeignKey(x => x.NegocioId)
                 .OnDelete(DeleteBehavior.NoAction);
-
-
         }
     }
 }

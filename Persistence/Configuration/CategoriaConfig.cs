@@ -16,7 +16,7 @@ namespace Persistence.Configuration
                 .HasMaxLength(20);
 
             builder.Property(x => x.Descripcion)
-                .HasMaxLength(50);
+                .HasMaxLength(200);
 
         }
     }

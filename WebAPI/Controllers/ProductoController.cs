@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("actualizar")]
-        public async Task<IActionResult> ActualizarProducto([FromBody] ActualizarProducto comando)
+        public async Task<IActionResult> ActualizarProducto([FromForm] ActualizarProducto comando)
         {
             return Ok(await Mediator.Send(comando));
         }

@@ -726,9 +726,74 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "comando",
-        "Type": "Application.Feautures.ProductoC.Commands.ActualizarProducto",
-        "IsRequired": true
+        "Name": "Id",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Codigo",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Nombre",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Descripcion",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Iva",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Imagen",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoriaId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "StockId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "PrecioCompra",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "PrecioVenta",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "Cantidad",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaElaboracion",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaCaducidad",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaIngreso",
+        "Type": "System.DateTime",
+        "IsRequired": false
       },
       {
         "Name": "version",

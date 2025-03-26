@@ -1,9 +1,11 @@
-﻿using Application.Exceptions;
+﻿using Application.Enums;
+using Application.Exceptions;
 using Application.Interfaces;
 using Application.Wrappers;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 
 namespace Application.Feautures.ProductoC.Commands
@@ -15,7 +17,7 @@ namespace Application.Feautures.ProductoC.Commands
         public required string Nombre { get; set; }
         public required string Descripcion { get; set; }
         public decimal Iva { get; set; }
-        public required string RutaImagen { get; set; }
+        public IFormFile? Imagen { get; set; }
         //Relaciones
         public long CategoriaId { get; set; }
 
@@ -31,14 +33,19 @@ namespace Application.Feautures.ProductoC.Commands
         public class ActualizarProductoHandler: IRequestHandler<ActualizarProducto, Response<long>>
         {
             private readonly IRepositoryAsync<Producto> _repository;
-            private readonly IRepositoryAsync<Stock> _stockRepository;
             private readonly IRepositoryAsync<Domain.Entities.Categoria> _categoriaRepository;
+            private readonly IAzureStorageService _azureStorageService;
 
-            public ActualizarProductoHandler(IRepositoryAsync<Producto> repository, IRepositoryAsync<Stock> stockRepository, IRepositoryAsync<Domain.Entities.Categoria> categoriaRepository)
+            public ActualizarProductoHandler(
+                IRepositoryAsync<Producto> repository,
+                IRepositoryAsync<Stock> stockRepository,
+                IRepositoryAsync<Domain.Entities.Categoria> categoriaRepository,
+                IAzureStorageService azureStorageService
+                )
             {
                 _repository = repository;
-                _stockRepository = stockRepository;
                 _categoriaRepository = categoriaRepository;
+                _azureStorageService = azureStorageService;
             }
             public async Task<Response<long>> Handle(ActualizarProducto request, CancellationToken cancellationToken)
             {
@@ -48,11 +55,16 @@ namespace Application.Feautures.ProductoC.Commands
                 _ = await _categoriaRepository.GetByIdAsync(request.CategoriaId)
                     ?? throw new ApiException($"Categoría con Id {request.CategoriaId} no encontrada");
 
+                string? path = null; 
+
+                if(request.Imagen != null)
+                    path = await _azureStorageService.UploadAsync(request.Imagen, ContainerEnum.IMAGES, request.Imagen.FileName);
+
                 productFound.Codigo = request.Codigo;
                 productFound.Nombre = request.Nombre;
                 productFound.Descripcion = request.Descripcion;
                 productFound.Iva = request.Iva;
-                productFound.RutaImagen = request.RutaImagen;
+                productFound.RutaImagen = path;
                 productFound.CategoriaId = request.CategoriaId;
 
                 await _repository.UpdateAsync(productFound);

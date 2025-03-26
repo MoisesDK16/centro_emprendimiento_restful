@@ -28,9 +28,9 @@ namespace Domain.Entities
         public List<Stock> Stocks { get; set; } = new List<Stock>();
 
         //Propiedades
-        public string Codigo { get; set; }
+        public string? Codigo { get; set; }
         public required string Nombre { get; set; }
-        public string Descripcion { get; set; }
+        public string? Descripcion { get; set; }
         public Estado Estado { get; set; }
         public decimal Iva { get; set; }
         public string? RutaImagen { get; set; }

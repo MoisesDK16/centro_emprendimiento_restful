@@ -49,13 +49,13 @@ namespace Application.Feautures.ProductoC.Commands
 
             public async Task<Response<long>> Handle(CrearProducto request, CancellationToken cancellationToken)
             {
-                var categoria = await _categoriaRepository.GetByIdAsync(request.CategoriaId);
-                if (categoria == null)
-                    throw new ApiException($"Categoría con Id {request.CategoriaId} no encontrada");
+                _ = await _categoriaRepository.GetByIdAsync(request.CategoriaId) ?? throw new ApiException($"Categoría con Id {request.CategoriaId} no encontrada");
+                _ = await _negocioRepository.GetByIdAsync(request.NegocioId) ?? throw new ApiException($"Negocio con Id {request.NegocioId} no encontrado");
+                
+                string? path = null;
 
-                var negocio = await _negocioRepository.GetByIdAsync(request.NegocioId);
-                if (negocio == null)
-                    throw new ApiException($"Negocio con Id {request.NegocioId} no encontrado");
+                if (request.Imagen != null)
+                    path = await _azureStorageService.UploadAsync(request.Imagen, Enums.ContainerEnum.IMAGES);
 
                 var producto = new Producto 
                 {
@@ -64,7 +64,7 @@ namespace Application.Feautures.ProductoC.Commands
                     Descripcion = request.Descripcion,
                     Estado = request.Estado,
                     Iva = request.Iva,
-                    RutaImagen = request.Imagen != null ? await _azureStorageService.UploadAsync(request.Imagen, Enums.ContainerEnum.IMAGES) : null,
+                    RutaImagen = path,
                     CategoriaId = request.CategoriaId,
                     NegocioId = request.NegocioId
                 };

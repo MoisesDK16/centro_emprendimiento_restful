@@ -99,11 +99,11 @@ namespace Identity.Services
 
             var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
             if (userWithSameUserName != null)
-                throw new ApiException($"User with this username: {request.UserName} already exists.");
+                throw new ApiException($"Usuario con este nombre: {request.UserName} ya existe.");
 
             var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
             if (userWithSameEmail != null)
-                throw new ApiException($"User with this email: {request.Email} already exists.");
+                throw new ApiException($"User con este email: {request.Email} ya existe.");
 
             if (request.Identificacion != null)
             {
@@ -114,8 +114,7 @@ namespace Identity.Services
             var userWithSameIdentification = await _userManager.Users.FirstOrDefaultAsync(x => x.Identificacion == request.Identificacion);
 
             if (userWithSameIdentification != null)
-                throw new ApiException($"User with this identification: {request.Identificacion} already exists.");
-
+                throw new ApiException($"User con esta identificacion: {request.Identificacion} ya existe.");
 
             if (request.UserName.Contains("@"))
                 throw new ApiException($"El nombre de usuario no puede contene @");
@@ -143,7 +142,7 @@ namespace Identity.Services
             else
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-                throw new ApiException($"User account could not be created. Errors: {errors}");
+                throw new ApiException($"La cuenta de Usuario no se pudo crear. Errors: {errors}");
             }
         }
 
@@ -152,11 +151,11 @@ namespace Identity.Services
 
             var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
             if (userWithSameUserName != null)
-                throw new ApiException($"User with this username: {request.UserName} already exists.");
+                throw new ApiException($"User con este Nombre Usuario: {request.UserName} ya existe.");
 
             var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
             if (userWithSameEmail != null)
-                throw new ApiException($"User with this email: {request.Email} already exists.");
+                throw new ApiException($"User con este email: {request.Email} ya existe.");
 
 
             if (request.Identificacion != null)
@@ -191,7 +190,7 @@ namespace Identity.Services
             else
             {
                 var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-                throw new ApiException($"User account could not be created. Errors: {errors}");
+                throw new ApiException($"La cuenta de Usuario no se pudo crear. Errors: {errors}");
             }
         }
 

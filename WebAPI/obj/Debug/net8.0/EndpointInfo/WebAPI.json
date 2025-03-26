@@ -1295,19 +1295,113 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/ActualizarProducto"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ActualizarProducto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/ActualizarProducto"
+                "required": [
+                  "Codigo",
+                  "Descripcion",
+                  "Nombre"
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "Codigo": {
+                    "type": "string"
+                  },
+                  "Nombre": {
+                    "type": "string"
+                  },
+                  "Descripcion": {
+                    "type": "string"
+                  },
+                  "Iva": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Imagen": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "CategoriaId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "StockId": {
+                    "type": "integer",
+                    "format": "int64"
+                  },
+                  "PrecioCompra": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "PrecioVenta": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Cantidad": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "FechaElaboracion": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "FechaCaducidad": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "FechaIngreso": {
+                    "type": "string",
+                    "format": "date-time"
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "Codigo": {
+                  "style": "form"
+                },
+                "Nombre": {
+                  "style": "form"
+                },
+                "Descripcion": {
+                  "style": "form"
+                },
+                "Iva": {
+                  "style": "form"
+                },
+                "Imagen": {
+                  "style": "form"
+                },
+                "CategoriaId": {
+                  "style": "form"
+                },
+                "StockId": {
+                  "style": "form"
+                },
+                "PrecioCompra": {
+                  "style": "form"
+                },
+                "PrecioVenta": {
+                  "style": "form"
+                },
+                "Cantidad": {
+                  "style": "form"
+                },
+                "FechaElaboracion": {
+                  "style": "form"
+                },
+                "FechaCaducidad": {
+                  "style": "form"
+                },
+                "FechaIngreso": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -2384,74 +2478,6 @@
           "direccion": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "ActualizarProducto": {
-        "required": [
-          "codigo",
-          "descripcion",
-          "nombre",
-          "rutaImagen"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "codigo": {
-            "type": "string",
-            "nullable": true
-          },
-          "nombre": {
-            "type": "string",
-            "nullable": true
-          },
-          "descripcion": {
-            "type": "string",
-            "nullable": true
-          },
-          "iva": {
-            "type": "number",
-            "format": "double"
-          },
-          "rutaImagen": {
-            "type": "string",
-            "nullable": true
-          },
-          "categoriaId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "stockId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "precioCompra": {
-            "type": "number",
-            "format": "double"
-          },
-          "precioVenta": {
-            "type": "number",
-            "format": "double"
-          },
-          "cantidad": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "fechaElaboracion": {
-            "type": "string",
-            "format": "date"
-          },
-          "fechaCaducidad": {
-            "type": "string",
-            "format": "date"
-          },
-          "fechaIngreso": {
-            "type": "string",
-            "format": "date-time"
           }
         },
         "additionalProperties": false

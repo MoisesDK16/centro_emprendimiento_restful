@@ -69,7 +69,7 @@ namespace Application.Feautures.VentaC.Commands
 
                         headerCol.Item().PaddingTop(10)
                             .AlignCenter()
-                            .Text($"Nota de venta N.º {venta.Id.ToString("D6")}")
+                            .Text($"Nota de venta N.º {venta.Id.ToString()}")
                             .Bold().FontSize(12).FontColor(Colors.Black);
                     });
 
