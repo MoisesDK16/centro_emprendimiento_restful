@@ -28,6 +28,8 @@ namespace WebAPI.Controllers
                 {
                     PageSize = filter.PageSize,
                     PageNumber = filter.PageNumber,
+                    FechaInicio = filter.FechaInicio,
+                    FechaFin = filter.FechaFin,
                     NegocioId = filter.NegocioId,
                     CategoriaId = filter.CategoriaId
                 }));
@@ -42,9 +44,9 @@ namespace WebAPI.Controllers
                     PageSize = filter.PageSize,
                     PageNumber = filter.PageNumber,
                     NegocioId = filter.NegocioId,
-                    CategoriaId = filter.CategoriaId,
                     FechaInicio = filter.FechaInicio,
-                    FechaFin = filter.FechaFin
+                    FechaFin = filter.FechaFin,
+                    CategoriaId = filter.CategoriaId
                 }));
         }
 

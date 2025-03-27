@@ -27,8 +27,7 @@ namespace Application.Feautures.StatsC.Sock.Existencia
 
         public async Task<PagedResponse<List<StockReportDTO>>> Handle(StockByProductos request, CancellationToken cancellationToken)
         {
-            var stockList = await _stockRepository.ListAsync(new StockSpecification(
-               request.PageNumber, request.PageSize, request.NegocioId, request.CategoriaId)
+            var stockList = await _stockRepository.ListAsync(new StockSpecification(request.NegocioId, request.CategoriaId)
             );
 
             var productosStock = stockList

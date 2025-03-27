@@ -37,7 +37,8 @@ namespace WebAPI.Controllers
                     PageSize = filter.PageSize,
                     NegocioId = filter.NegocioId,
                     FechaInicio = filter.FechaInicio,
-                    FechaFin = filter.FechaFin
+                    FechaFin = filter.FechaFin,
+                    CategoriaId = filter.CategoriaId
                 }));
         }
 
@@ -62,9 +63,9 @@ namespace WebAPI.Controllers
                     PageNumber = command.PageNumber,
                     PageSize = command.PageSize,
                     NegocioId = command.NegocioId,
-                    categoriaId = command.CategoriaId,
                     FechaInicio = command.FechaInicio,
-                    FechaFin = command.FechaFin
+                    FechaFin = command.FechaFin,
+                    CategoriaId = command.CategoriaId
                 }));
         }
 
@@ -77,11 +78,24 @@ namespace WebAPI.Controllers
                     PageNumber = command.PageNumber,
                     PageSize = command.PageSize,
                     NegocioId = command.NegocioId,
-                    categoriaId = command.categoriaId,
                     FechaInicio = command.FechaInicio,
-                    FechaFin = command.FechaFin
+                    FechaFin = command.FechaFin,
+                    categoriaId = command.categoriaId
                 }));
         }
+
+        [HttpGet("InvInicialPorMes")]
+        public async Task<IActionResult> InvInicialPorMes([FromQuery] InvInicialPorMes command)
+        {
+            return Ok(await Mediator.Send(command));
+        }
+
+        [HttpGet("CostoAlmacenadoPorMes")]
+        public async Task<IActionResult> CostoAlmacenadoPorMes([FromQuery] CostoAlmacenadoPorMes command)
+        {
+            return Ok(await Mediator.Send(command));
+        }
+
 
         [HttpGet("AnalisisPorMes")]
         public async Task<IActionResult> AnalisisPorMes([FromQuery] AnalisisPorMes command)

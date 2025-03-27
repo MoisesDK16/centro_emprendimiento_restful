@@ -571,6 +571,14 @@
             }
           },
           {
+            "name": "CategoriaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
             "name": "version",
             "in": "path",
             "required": true,
@@ -620,7 +628,6 @@
           {
             "name": "CategoriaId",
             "in": "query",
-            "required": true,
             "schema": {
               "type": "integer",
               "format": "int64"
@@ -673,14 +680,6 @@
             }
           },
           {
-            "name": "CategoriaId",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
             "name": "FechaInicio",
             "in": "query",
             "schema": {
@@ -694,6 +693,14 @@
             "schema": {
               "type": "string",
               "format": "date"
+            }
+          },
+          {
+            "name": "CategoriaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
             }
           },
           {
@@ -862,6 +869,14 @@
             }
           },
           {
+            "name": "CategoriaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
             "name": "PageNumber",
             "in": "query",
             "schema": {
@@ -924,6 +939,14 @@
             }
           },
           {
+            "name": "CategoriaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
             "name": "version",
             "in": "path",
             "required": true,
@@ -967,6 +990,14 @@
             "schema": {
               "type": "string",
               "format": "date"
+            }
+          },
+          {
+            "name": "CategoriaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
             }
           },
           {
@@ -1107,6 +1138,114 @@
             "schema": {
               "type": "integer",
               "format": "int32"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v{version}/InventarioStats/InvInicialPorMes": {
+      "get": {
+        "tags": [
+          "InventarioStats"
+        ],
+        "parameters": [
+          {
+            "name": "NegocioId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "FechaInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "FechaFin",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "CategoriaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v{version}/InventarioStats/CostoAlmacenadoPorMes": {
+      "get": {
+        "tags": [
+          "InventarioStats"
+        ],
+        "parameters": [
+          {
+            "name": "NegocioId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "FechaInicio",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "FechaFin",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "CategoriaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
             }
           },
           {
@@ -2364,6 +2503,14 @@
             }
           },
           {
+            "name": "CategoriaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
             "name": "version",
             "in": "path",
             "required": true,
@@ -2410,6 +2557,14 @@
             "schema": {
               "type": "string",
               "format": "date"
+            }
+          },
+          {
+            "name": "CategoriaId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
             }
           },
           {

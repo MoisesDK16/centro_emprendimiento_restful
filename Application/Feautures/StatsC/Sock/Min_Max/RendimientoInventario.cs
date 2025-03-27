@@ -13,9 +13,9 @@ namespace Application.Feautures.StatsC.Sock.Min_Max
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public long NegocioId { get; set; }
-        public long categoriaId { get; set; }
         public DateOnly FechaInicio { get; set; }
         public DateOnly FechaFin { get; set; }
+        public long CategoriaId { get; set; }
 
     }
 
@@ -37,12 +37,13 @@ namespace Application.Feautures.StatsC.Sock.Min_Max
 
         public async Task<PagedResponse<List<RendimientoInventarioDTO>>> Handle(RendimientoInventario request, CancellationToken cancellationToken)
         {
-            var productos = await _productoRepository.ListAsync(new ProductoSpecification(request.NegocioId, request.categoriaId, true));
+            var productos = await _productoRepository.ListAsync(new ProductoSpecification(request.NegocioId, request.CategoriaId));
             Console.WriteLine("productos: " + productos.Count);
 
             var historial = await _repostoryHistorical.ListAsync(new HistorialStockSpecification(request.NegocioId, request.FechaInicio, request.FechaFin));
+            
             Console.WriteLine("historial: " + historial.Count);
-            var detalles = await _repositoryDetalle.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin));
+            var detalles = await _repositoryDetalle.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin, request.CategoriaId));
 
             var rendimientos = historial.GroupBy(h => h.ProductoId).Select(g =>
             {

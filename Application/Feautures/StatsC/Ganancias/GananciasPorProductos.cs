@@ -15,7 +15,7 @@ namespace Application.Feautures.StatsC.Ganancias
         public required long NegocioId { get; set; }
         public DateOnly FechaInicio { get; set; }
         public DateOnly FechaFin { get; set; }
-        public required long CategoriaId { get; set; }
+        public long? CategoriaId { get; set; }
     }
 
     public class GananciasPorProductosHandler : IRequestHandler<GananciasPorProductos, PagedResponse<List<GananciasPorProductoDTO>>>
@@ -29,8 +29,11 @@ namespace Application.Feautures.StatsC.Ganancias
 
         public async Task<PagedResponse<List<GananciasPorProductoDTO>>> Handle(GananciasPorProductos request, CancellationToken cancellationToken)
         {
-            var detalles = await _detalleRepository.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin, request.CategoriaId));
+            Console.WriteLine("FechaInicio: " + request.FechaInicio);
+            Console.WriteLine("FechaFin: " + request.FechaFin);
+            var detalles = await _detalleRepository.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin));
 
+            Console.WriteLine("DETALLES: " + detalles.Count);
 
             var gananciasPorProducto = detalles
                 .GroupBy(d => d.Producto.Nombre)
@@ -58,7 +61,7 @@ namespace Application.Feautures.StatsC.Ganancias
         public required long NegocioId { get; set; }
         public DateOnly FechaInicio { get; set; }
         public DateOnly FechaFin { get; set; }
-        public required long CategoriaId { get; set; }
+        public long CategoriaId { get; set; }
     }
 
 }

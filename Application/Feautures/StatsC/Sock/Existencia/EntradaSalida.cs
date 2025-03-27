@@ -16,6 +16,8 @@ namespace Application.Feautures.StatsC.Sock.Existencia
         public long NegocioId { get; set; }
         public DateOnly FechaInicio { get; set; }
         public DateOnly FechaFin { get; set; }
+
+        public long CategoriaId { get; set; }
     }
 
     public class EntradaSalidaHandler : IRequestHandler<EntradaSalida, IDictionary<int, int[]>>
@@ -48,11 +50,11 @@ namespace Application.Feautures.StatsC.Sock.Existencia
                 var finMes = new DateOnly(fecha.Year, mes, DateTime.DaysInMonth(fecha.Year, mes));
 
                 // Cantidad de Salidas (Ventas)
-                var detalles = await _detalleRepository.ListAsync(new DetalleSpecification(request.NegocioId, inicioMes, finMes));
+                var detalles = await _detalleRepository.ListAsync(new DetalleSpecification(request.NegocioId, inicioMes, finMes, request.CategoriaId));
                 int totalSalidas = detalles.Sum(d => d.Cantidad);
 
                 // Cantidad de Entradas (Ingresos por compras al stock)
-                var stocks = await _stockRepository.ListAsync(new StockSpecification(request.NegocioId, inicioMes, finMes));
+                var stocks = await _stockRepository.ListAsync(new StockSpecification(request.NegocioId, inicioMes, finMes, request.CategoriaId));
                 int totalEntradas = stocks.Sum(s => s.Cantidad);
 
                 result[mes] = new int[] { totalEntradas, totalSalidas };

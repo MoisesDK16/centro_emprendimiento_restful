@@ -15,7 +15,7 @@ namespace Domain.Entities
         public long NegocioId { get; set; }
         public Negocio Negocio { get; set; }
 
-        public DateOnly? FechaInicio { get; set; }
+        public DateOnly FechaInicio { get; set; }
         public DateOnly FechaCorte { get; set; }
         public int Existencias { get; set; }
 

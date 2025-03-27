@@ -3,13 +3,7 @@ using Application.Interfaces;
 using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
-using Humanizer;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Feautures.StatsC.Sock.Existencia
 {
@@ -18,6 +12,7 @@ namespace Application.Feautures.StatsC.Sock.Existencia
         public long NegocioId { get; set; }
         public DateOnly FechaInicio { get; set; }
         public DateOnly FechaFin { get; set; }
+        public long CategoriaId { get; set; }
 
     }
 
@@ -40,22 +35,22 @@ namespace Application.Feautures.StatsC.Sock.Existencia
         public async Task<Response<List<IndicadoresDTO>>> Handle(Indicadores request, CancellationToken cancellationToken)
         {
             var stockInicial = await _historialRepository.ListAsync(
-                new HistorialStockSpecification(request.NegocioId, request.FechaInicio, true));
+                new HistorialStockSpecification(request.NegocioId, request.FechaInicio, request.CategoriaId));
 
             var existenciaInicial = stockInicial.Sum(s => s.Existencias);
             var costoInicial = stockInicial.Sum(s => s.CostoTotal);
 
-            var entradas = await _stockRepository.ListAsync(new StockSpecification(request.NegocioId, request.FechaInicio, request.FechaFin));
+            var entradas = await _stockRepository.ListAsync(new StockSpecification(request.NegocioId, request.FechaInicio, request.FechaFin, request.CategoriaId));
 
             var cantidadEntrada = entradas.Sum(e => e.Cantidad);
             var costoEntrada = entradas.Sum(e => e.Cantidad * e.PrecioCompra);
 
-            var detalles = await _detalleRepository.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin));
+            var detalles = await _detalleRepository.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin, request.CategoriaId));
 
             var cantidadSalida = detalles.Sum(d => d.Cantidad);
             var ingresosSalida = detalles.Sum(d => d.Total);
 
-            var stockFinal = await _historialRepository.ListAsync(new HistorialStockSpecification(request.NegocioId, request.FechaFin));
+            var stockFinal = await _historialRepository.ListAsync(new HistorialStockSpecification(request.NegocioId, request.FechaFin, request.CategoriaId, true));
 
             var existenciaFinal = stockFinal.Sum(s => s.Existencias);
             var costoFinal = stockFinal.Sum(s => s.CostoTotal);

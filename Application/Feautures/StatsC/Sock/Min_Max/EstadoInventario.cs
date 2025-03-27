@@ -20,6 +20,8 @@ namespace Application.Feautures.StatsC.Sock.Min_Max
         public required long NegocioId { get; set; }
         public required DateOnly FechaInicio { get; set; }
         public required DateOnly FechaFin { get; set; }
+
+        public long? CategoriaId { get; set; }
     }
 
     public class EstadoInventarioHandler : IRequestHandler<EstadoInventario, Response<List<StockInfoDTO>>>
@@ -35,10 +37,10 @@ namespace Application.Feautures.StatsC.Sock.Min_Max
 
         public async Task<Response<List<StockInfoDTO>>> Handle(EstadoInventario request, CancellationToken cancellationToken)
         {
-            var detalles = await _repository.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin));
+            var detalles = await _repository.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin, request.CategoriaId));
 
             // Obtener los stocks de los productos vendidos
-            var stockList = await _stockRepository.ListAsync(new StockSpecification(request.PageNumber, request.PageSize, request.NegocioId, request.FechaInicio, request.FechaFin));
+            var stockList = await _stockRepository.ListAsync(new StockSpecification(request.NegocioId, request.FechaInicio, request.FechaFin, request.CategoriaId));
 
             Console.WriteLine("stockList: " + stockList.Count);   
 
@@ -94,6 +96,8 @@ namespace Application.Feautures.StatsC.Sock.Min_Max
         public required long NegocioId { get; set; }
         public required DateOnly FechaInicio { get; set; }
         public required DateOnly FechaFin { get; set; }
+
+        public long? CategoriaId { get; set; }
     }
 
 }

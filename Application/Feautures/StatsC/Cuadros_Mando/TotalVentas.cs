@@ -11,6 +11,8 @@ namespace Application.Feautures.StatsC.Cuadros_Mando
         public long NegocioId { get; set; }
         public required DateOnly FechaInicio { get; set; }
         public required DateOnly FechaFin { get; set; }
+        public long CategoriaId { get; set; }
+
         public class TotalVentasHandler : IRequestHandler<TotalVentas, Response<decimal>>
         {
             private readonly IReadOnlyRepositoryAsync<Detalle> _repository;
@@ -21,7 +23,7 @@ namespace Application.Feautures.StatsC.Cuadros_Mando
 
             public async Task<Response<decimal>> Handle(TotalVentas request, CancellationToken cancellationToken)
             {
-                var detalles = await _repository.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin));
+                var detalles = await _repository.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin, request.CategoriaId));
                 var ventas = detalles
                   .Sum(d => d.Precio * d.Cantidad);
                 return new Response<decimal>(ventas);

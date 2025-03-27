@@ -37,36 +37,16 @@ namespace Application.Specifications
                 stock.Id == stockId);
         }
 
-        public StockSpecification(int pageNumber, int pageSize, long negocioId, long categoriaId)
-        {
-           Query.Include(s => s.Producto) 
-                .ThenInclude(p => p.Categoria)
-                .Where(stock => stock.Producto.NegocioId == negocioId);
-
-            if (categoriaId > 0)
-                Query.Where(stock => stock.Producto.CategoriaId == categoriaId);
-
-            Query.Skip((pageNumber - 1) * pageSize).Take(pageSize); 
-        }
-
-        public StockSpecification(int pageNumber, int pageSize, long negocioId, DateOnly FechaInicio, DateOnly FechaFin)
-        {
-            Query.Include(s => s.Producto)
-                .ThenInclude(p => p.Negocio)
-                .Where(stock => stock.Producto.NegocioId == negocioId &&
-                DateOnly.FromDateTime( stock.FechaIngreso) >= FechaInicio &&
-                 DateOnly.FromDateTime(stock.FechaIngreso) <= FechaFin);
-            Query.Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize);
-        }
-
-        public StockSpecification(long negocioId, DateOnly FechaInicio, DateOnly FechaFin)
+        public StockSpecification(long negocioId, DateOnly FechaInicio, DateOnly FechaFin, long? categoriaId)
         {
             Query.Include(s => s.Producto)
                 .ThenInclude(p => p.Negocio)
                 .Where(stock => stock.Producto.NegocioId == negocioId &&
                 DateOnly.FromDateTime(stock.FechaIngreso) >= FechaInicio &&
                 DateOnly.FromDateTime(stock.FechaIngreso) <= FechaFin);
+
+            if (categoriaId > 0)
+                Query.Where(stock => stock.Producto.CategoriaId == categoriaId);
         }
 
         public StockSpecification(long negocioId, List<long> productoIds, DateOnly FechaInicio, DateOnly FechaFin)

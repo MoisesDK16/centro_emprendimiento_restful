@@ -331,11 +331,6 @@
         "IsRequired": false
       },
       {
-        "Name": "CategoriaId",
-        "Type": "System.Int64",
-        "IsRequired": false
-      },
-      {
         "Name": "FechaInicio",
         "Type": "System.DateOnly",
         "IsRequired": false
@@ -343,6 +338,11 @@
       {
         "Name": "FechaFin",
         "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoriaId",
+        "Type": "System.Nullable\u00601[[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -384,6 +384,11 @@
       {
         "Name": "FechaFin",
         "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoriaId",
+        "Type": "System.Int64",
         "IsRequired": false
       },
       {
@@ -555,6 +560,42 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.InventarioStatsController",
+    "Method": "CostoAlmacenadoPorMes",
+    "RelativePath": "api/v{version}/InventarioStats/CostoAlmacenadoPorMes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "NegocioId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaInicio",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaFin",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoriaId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.InventarioStatsController",
     "Method": "EntradaSalida",
     "RelativePath": "api/v{version}/InventarioStats/EntradaSalida",
     "HttpMethod": "GET",
@@ -574,6 +615,11 @@
       {
         "Name": "FechaFin",
         "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoriaId",
+        "Type": "System.Int64",
         "IsRequired": false
       },
       {
@@ -605,6 +651,11 @@
       {
         "Name": "FechaFin",
         "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoriaId",
+        "Type": "System.Nullable\u00601[[System.Int64, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
       },
       {
@@ -646,6 +697,47 @@
       {
         "Name": "FechaFin",
         "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoriaId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.InventarioStatsController",
+    "Method": "InvInicialPorMes",
+    "RelativePath": "api/v{version}/InventarioStats/InvInicialPorMes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "NegocioId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaInicio",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "FechaFin",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoriaId",
+        "Type": "System.Int64",
         "IsRequired": false
       },
       {
@@ -1489,6 +1581,11 @@
         "IsRequired": false
       },
       {
+        "Name": "CategoriaId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
         "Name": "version",
         "Type": "",
         "IsRequired": true
@@ -1517,6 +1614,11 @@
       {
         "Name": "FechaFin",
         "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "CategoriaId",
+        "Type": "System.Int64",
         "IsRequired": false
       },
       {

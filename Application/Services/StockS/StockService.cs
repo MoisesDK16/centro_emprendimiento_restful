@@ -38,7 +38,7 @@ namespace Application.Services.StockS
             }
         }
 
-        public async Task<decimal> AplicarIva(long idProducto,long NegocioId, decimal detallePrecio)
+        public async Task<decimal> AplicarIva(long idProducto, long NegocioId, decimal detallePrecio)
         {
             var productoFound = await _productoRepository.FirstOrDefaultAsync(new ProductoSpecification(idProducto, NegocioId))
                 ?? throw new ApiException($"No se encontró el producto con id: {idProducto}");

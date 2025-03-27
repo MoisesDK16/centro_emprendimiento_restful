@@ -11,10 +11,6 @@ namespace Application.Feautures.PromocionC.Commands
             RuleFor(x => x.TipoPromocion)
                 .IsInEnum().WithMessage("El tipo de promoción no es válido.");
 
-            // Validar FechaInicio: debe ser una fecha en el futuro
-            RuleFor(x => x.FechaInicio)
-                .GreaterThanOrEqualTo(DateTime.Now).WithMessage("La fecha de inicio debe ser posterior o igual a la fecha actual.");
-
             // Validar FechaFin: debe ser posterior a FechaInicio
             RuleFor(x => x.FechaFin)
                 .GreaterThan(x => x.FechaInicio).WithMessage("La fecha de fin debe ser posterior a la fecha de inicio.");

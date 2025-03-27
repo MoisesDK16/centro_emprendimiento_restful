@@ -11,19 +11,35 @@ namespace Application.Specifications
 {
     public class HistorialStockSpecification : Specification<Historial_Stock>
     {
-        public HistorialStockSpecification(long negocioId, DateOnly fechaInicio, bool begin)
+
+        public HistorialStockSpecification(long negocioId, DateOnly fechaInicio,DateOnly fechaFin, long categoriaId)
         {
-            var ultimoDiaDelMes = new DateOnly(
-                fechaInicio.Year,
-                fechaInicio.Month,
-                DateTime.DaysInMonth(fechaInicio.Year, fechaInicio.Month)
+            Query.Include(h => h.Producto);
+
+            Query
+                .Where(h =>
+                h.NegocioId == negocioId &&
+                h.FechaInicio == fechaInicio &&
+                h.FechaCorte == fechaFin
             );
 
+            if (categoriaId != 0)
+            {
+                Query.Where(h => h.Producto.CategoriaId == categoriaId);
+            }
+        }
+
+        public HistorialStockSpecification(long negocioId, DateOnly fechaInicio, long categoriaId)
+        {
             Query.Where(h =>
                 h.NegocioId == negocioId &&
-                h.FechaCorte >= fechaInicio &&
-                h.FechaCorte <= ultimoDiaDelMes
+                h.FechaInicio == fechaInicio
             );
+
+            if (categoriaId != 0)
+            {
+                Query.Where(h => h.Producto.CategoriaId == categoriaId);
+            }
         }
 
         public HistorialStockSpecification(long negocioId, DateOnly fechaInicio, DateOnly fechaFin)
@@ -35,9 +51,17 @@ namespace Application.Specifications
         }
 
 
-        public HistorialStockSpecification(long negocioId, DateOnly fechaFin)
+        public HistorialStockSpecification(long negocioId, DateOnly fechaFin, long categoriaId, bool isFin)
         {
-            Query.Where(h => h.NegocioId == negocioId && h.FechaCorte == fechaFin);
+            Query.Where(h =>
+                h.NegocioId == negocioId &&
+                h.FechaCorte == fechaFin
+            );
+
+            if (categoriaId != 0)
+            {
+                Query.Where(h => h.Producto.CategoriaId == categoriaId);
+            }
         }
 
         public HistorialStockSpecification(long negocioId)
