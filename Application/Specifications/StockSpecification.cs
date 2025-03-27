@@ -27,6 +27,17 @@ namespace Application.Specifications
             Query.Where(stock => stock.ProductoId == productoId && stock.Id == stockId);
         }
 
+        public StockSpecification(long negocioId, long categoriaId, bool byCategory)
+        {
+            Query.Include(s => s.Producto)
+                .ThenInclude(p => p.Categoria)
+                .Where(stock => stock.Producto.NegocioId == negocioId);
+
+            if (categoriaId > 0)
+                Query.Where(stock => stock.Producto.CategoriaId == categoriaId);
+        }
+
+
         public StockSpecification(long NegocioId, long ProductoId, long stockId)
         {
             Query.Include(s => s.Producto)
