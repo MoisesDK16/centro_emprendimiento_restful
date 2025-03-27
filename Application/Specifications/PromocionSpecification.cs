@@ -11,11 +11,11 @@ namespace Application.Specifications
 {
     public class PromocionSpecification : Specification<Promocion>
     {
-        public PromocionSpecification(int PageNumber,int PageSize, long negocioId)
+        public PromocionSpecification(long negocioId, bool isNegocio)
         {
-            Query.Where(p => p.NegocioId == negocioId);
-            Query.Skip((PageNumber - 1) * PageSize);
-            Query.Take(PageSize);
+            Query
+                .Where(p => p.NegocioId == negocioId)
+                .Include(p => p.Productos);
         }
 
         public PromocionSpecification(long productoId, long promocionId)

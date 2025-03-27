@@ -33,7 +33,7 @@ namespace Application.Feautures.PromocionC.Queries
                 await _repositoryNegocio.GetByIdAsync(request.NegocioId);
 
                 var promociones = await _repository.ListAsync(
-                        new PromocionSpecification(request.PageNumber, request.PageSize, request.NegocioId),
+                        new PromocionSpecification(request.NegocioId, true),
                         cancellationToken);
 
                 var promocionesDTO = promociones.Select(p => new GeneralPromocion
