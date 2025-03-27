@@ -52,11 +52,9 @@ namespace Application.Feautures.ClienteC.Commands
                 }
                 if(request.Identificacion != null)
                 {
-                    if (ValidacionIdentificacion.VerificaIdentificacion(request.Identificacion))
+                    if (!ValidacionIdentificacion.VerificaIdentificacion(request.Identificacion))
                         throw new ApiException("Identificacion no valida");
 
-                    if(_repositoryClienteReading.FirstOrDefaultAsync(new ClienteSpecification(request.Identificacion)) != null)
-                        throw new ApiException($"Cliente con Identificacion: {request.Identificacion} ya existe");
                 } 
 
                 var cliente = new Cliente
