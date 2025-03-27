@@ -40,6 +40,12 @@ namespace WebAPI.Controllers
                 }));
         }
 
+        [HttpGet("clienteById")]
+        public async Task<IActionResult> ClienteById([FromQuery] long id)
+        {
+            return Ok(await Mediator.Send(new ClienteById { Id = id }));
+        }
+
         [HttpGet("clienteByIdentificacion")]
         public async Task<IActionResult> ClienteByIdentificacion([FromQuery] string identificacion)
         {
