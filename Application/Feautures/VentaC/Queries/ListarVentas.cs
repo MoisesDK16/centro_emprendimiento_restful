@@ -53,9 +53,9 @@ namespace Application.Feautures.VentaC.Queries
                 });
 
                 var TotalPages = (int)Math.Ceiling((double)ventas.Count / request.PageSize);
-                ventasDto = ventasDto.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
+                var paged = ventasDto.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
 
-                return new PagedResponse<IEnumerable<GeneralVenta>>(ventasDto, request.PageNumber, request.PageSize, TotalPages, ventas.Count);
+                return new PagedResponse<IEnumerable<GeneralVenta>>(paged, request.PageNumber, request.PageSize, TotalPages, ventas.Count);
             }
         }
 

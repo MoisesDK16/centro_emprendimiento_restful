@@ -42,11 +42,11 @@ namespace Application.Feautures.ClienteC.Queries
 
             var totalRecords = clientes.Count;
             var totalPages = (int)Math.Ceiling((double)totalRecords / request.PageSize);
-            clientes.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
+            var paged =  clientes.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
 
             if (!clientes.Any()) throw new ApiException($"No se encontraron clientes");
 
-            return new PagedResponse<IEnumerable<Cliente>>(clientes, request.PageNumber, request.PageSize, totalPages, totalRecords);
+            return new PagedResponse<IEnumerable<Cliente>>(paged, request.PageNumber, request.PageSize, totalPages, totalRecords);
         }
     }
 }
