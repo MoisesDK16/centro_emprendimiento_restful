@@ -48,9 +48,9 @@ namespace Application.Feautures.PromocionC.Queries
                 });
 
                 var TotalPages = (int)Math.Ceiling((double)promociones.Count / request.PageSize);
-                promocionesDTO = promocionesDTO.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
+                var paged  = promocionesDTO.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
 
-                return new PagedResponse<IEnumerable<GeneralPromocion>>(promocionesDTO, request.PageNumber, request.PageSize, TotalPages, promociones.Count);
+                return new PagedResponse<IEnumerable<GeneralPromocion>>(paged, request.PageNumber, request.PageSize, TotalPages, promociones.Count);
 
             }
         }

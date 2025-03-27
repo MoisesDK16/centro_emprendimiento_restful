@@ -45,9 +45,9 @@ namespace Application.Feautures.StockC.Queries
 
                 var TotalElements = stockFiltered.Count;
                 var TotalPages = (int)Math.Ceiling((double)stockFiltered.Count / filter.PageSize);
-                stockFiltered.Skip((filter.PageNumber - 1) * filter.PageSize).Take(filter.PageSize);
+                var paged = stockFiltered.Skip((filter.PageNumber - 1) * filter.PageSize).Take(filter.PageSize);
 
-                return new PagedResponse<IEnumerable<Stock>>(stockFiltered, filter.PageNumber, filter.PageSize, TotalPages, TotalElements);
+                return new PagedResponse<IEnumerable<Stock>>(paged, filter.PageNumber, filter.PageSize, TotalPages, TotalElements);
             }
         }
     }
