@@ -75,9 +75,10 @@ namespace Application.Feautures.StatsC.Sock.ABC
             }).ToList();
 
             var totalPages = (int)Math.Ceiling((double)resultado.Count / request.PageSize);
+            var totalRecords = resultado.Count;
             resultado.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
 
-            return new PagedResponse<List<ClasificacionDTO>>(resultado, request.PageNumber, request.PageSize, totalPages, resultado.Count);
+            return new PagedResponse<List<ClasificacionDTO>>(resultado, request.PageNumber, request.PageSize, totalPages, totalRecords);
         }
 
     }

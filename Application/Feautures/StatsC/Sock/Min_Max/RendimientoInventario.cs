@@ -44,7 +44,7 @@ namespace Application.Feautures.StatsC.Sock.Min_Max
             Console.WriteLine("historial: " + historial.Count);
             var detalles = await _repositoryDetalle.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin));
 
-            var rendimmientos = historial.GroupBy(h => h.ProductoId).Select(g =>
+            var rendimientos = historial.GroupBy(h => h.ProductoId).Select(g =>
             {
                 var producto = productos.FirstOrDefault(p => p.Id == g.Key);
                 if (producto == null) return null; 
@@ -68,11 +68,12 @@ namespace Application.Feautures.StatsC.Sock.Min_Max
                 };
             }).Where(x => x != null).ToList();
 
-            var totalPages = (int)Math.Ceiling((double)rendimmientos.Count / request.PageSize);
-            rendimmientos.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize); 
+            var totalRecords = rendimientos.Count;
+            var totalPages = (int)Math.Ceiling((double)rendimientos.Count / request.PageSize);
+            rendimientos.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize); 
 
 
-            return new PagedResponse<List<RendimientoInventarioDTO>>(rendimmientos, request.PageNumber, request.PageSize, totalPages, rendimmientos.Count);
+            return new PagedResponse<List<RendimientoInventarioDTO>>(rendimientos, request.PageNumber, request.PageSize, totalPages, totalRecords);
         }
     }
 

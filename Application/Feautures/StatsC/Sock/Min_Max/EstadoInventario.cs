@@ -80,10 +80,11 @@ namespace Application.Feautures.StatsC.Sock.Min_Max
                 })
                 .ToList();
 
+            var TotalRecords = productos.Count;
             var totalPages = (int)Math.Ceiling((double)productos.Count / request.PageSize);
             productos.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
 
-            return new PagedResponse<List<StockInfoDTO>>(productos, request.PageNumber, request.PageSize, totalPages, productos.Count);
+            return new PagedResponse<List<StockInfoDTO>>(productos, request.PageNumber, request.PageSize, totalPages, TotalRecords);
         }
 
     }

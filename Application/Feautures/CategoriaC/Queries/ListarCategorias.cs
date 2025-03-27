@@ -30,11 +30,12 @@ namespace Application.Feautures.CategoriaC.Queries
                         cancellationToken 
                     ).ConfigureAwait(false);
 
+                var TotalRecords = categories.Count;
                 var TotalPages = (int)Math.Ceiling((double)categories.Count / request.PageSize);
                 categories.Skip(request.PageNumber - 1 * request.PageSize).Take(request.PageSize);
 
                 return new PagedResponse<IEnumerable<Domain.Entities.Categoria>>(categories, request.PageNumber,
-                    request.PageSize, TotalPages, categories.Count);
+                    request.PageSize, TotalPages, TotalRecords);
             }
         }
     }

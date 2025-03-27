@@ -36,18 +36,18 @@ namespace Application.Feautures.StockC.Queries
 
                 var stockFiltered = await _repository.ListAsync(
                     new StockSpecification(
-                        filter.PageNumber,
-                        filter.PageSize,
                         filter.NegocioId,
                         filter.ProductoId,
                         filter.Cantidad,
                         filter.FechaCaducidad
                     )
                 );
+
+                var TotalElements = stockFiltered.Count;
                 var TotalPages = (int)Math.Ceiling((double)stockFiltered.Count / filter.PageSize);
                 stockFiltered.Skip((filter.PageNumber - 1) * filter.PageSize).Take(filter.PageSize);
 
-                return new PagedResponse<IEnumerable<Stock>>(stockFiltered, filter.PageNumber, filter.PageSize, TotalPages, stockFiltered.Count);
+                return new PagedResponse<IEnumerable<Stock>>(stockFiltered, filter.PageNumber, filter.PageSize, TotalPages, TotalElements);
             }
         }
     }

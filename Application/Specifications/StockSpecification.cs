@@ -6,7 +6,7 @@ namespace Application.Specifications
 {
     public class StockSpecification : Specification<Stock>
     {
-        public StockSpecification(int pageNumber, int pageSize, long negocioId, long? productoId = null, int? cantidad = null, DateOnly? fechaCaducidad = null)
+        public StockSpecification(long negocioId, long? productoId = null, int? cantidad = null, DateOnly? fechaCaducidad = null)
         {
             Query.Include(s => s.Producto)
                  .ThenInclude(p => p.Negocio) 
@@ -20,9 +20,6 @@ namespace Application.Specifications
 
             if (fechaCaducidad.HasValue)
                 Query.Where(stock => stock.FechaCaducidad == fechaCaducidad.Value);
-
-            Query.Skip((pageNumber - 1) * pageSize)
-                 .Take(pageSize);
         }
 
         public StockSpecification(long productoId, long stockId)
