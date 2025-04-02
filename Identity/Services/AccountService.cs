@@ -31,6 +31,8 @@ namespace Identity.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly IReadOnlyRepositoryAsync<Negocio> _negocioReadingRepository;
         private readonly IRepositoryAsync<Negocio> _negocioRepository;
+        private readonly IRepositoryAsync<NegocioVendedores> _negocioVendedoresRepository;
+        private readonly IReadOnlyRepositoryAsync<NegocioVendedores> _negocioVendedoresReadingRepository;   
 
         public AccountService(
             UserManager<ApplicationUser> userManager,
@@ -40,7 +42,9 @@ namespace Identity.Services
             IDateTimeService dateTimeService,
             IUnitOfWork unitOfWork,
             IReadOnlyRepositoryAsync<Negocio> negocioReadingRepository,
-            IRepositoryAsync<Negocio> negocioRepository
+            IRepositoryAsync<Negocio> negocioRepository,
+            IRepositoryAsync<NegocioVendedores> negocioVendedoresRepository,
+            IReadOnlyRepositoryAsync<NegocioVendedores> negocioVendedoresReadingRepository
             )
         {
             _userManager = userManager;
@@ -51,6 +55,8 @@ namespace Identity.Services
             _unitOfWork = unitOfWork;
             _negocioReadingRepository = negocioReadingRepository;
             _negocioRepository = negocioRepository;
+            _negocioVendedoresRepository = negocioVendedoresRepository;
+            _negocioVendedoresReadingRepository = negocioVendedoresReadingRepository;
         }
 
         public async Task<Response<AuthenticationResponse>> logInByEmail(AuthenticationRequestEmail request, string ipAddress)
@@ -88,6 +94,7 @@ namespace Identity.Services
         public async Task<Response<AuthenticationResponse>> logInByUserName(AuthenticationRequestUserName request, string ipAddress)
         {
             var user = await _userManager.FindByNameAsync(request.UserName);
+            Console.WriteLine("USER: " + user);
             if (user == null) throw new ApiException($"No existe cuenta registrada con el nombre de usuario: {request.UserName}.");
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
@@ -95,27 +102,50 @@ namespace Identity.Services
 
             var refreshToken = GenerateRefreshToken(ipAddress);
             JwtSecurityToken jwtSecurityToken = await generateJwtToken(user);
+            var negociosEmprendedor = await _negocioReadingRepository.ListAsync(new NegocioSpecification(user.Id));
 
-            var negociosUser = await _negocioReadingRepository.ListAsync(new NegocioSpecification(user.Id));
+            if (negociosEmprendedor.Count != 0){
+                Console.WriteLine("NEGOCIOS DEL EMPREDEDOR: " + negociosEmprendedor.Count());
 
-            AuthenticationResponse authenticationResponse = new AuthenticationResponse
-            {
-                Id = user.Id,
-                JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-                UserName = user.UserName,
-                Email = user.Email,
-                Roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false),
-                isVerified = user.EmailConfirmed,
-                RefreshToken = refreshToken.Token,
-                Negocios = negociosUser.Any() ? negociosUser.Select(x => new SelectNegocioDTO
+                AuthenticationResponse authenticationResponse = new AuthenticationResponse
                 {
-                    Id = x.Id,
-                    Nombre = x.nombre
-                }).ToList() : null
-            };
+                    Id = user.Id,
+                    JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false),
+                    isVerified = user.EmailConfirmed,
+                    RefreshToken = refreshToken.Token,
+                    Negocios = negociosEmprendedor.Select(x => new SelectNegocioDTO
+                    {
+                        Id = x.Id,
+                        Nombre = x.nombre
+                    }).ToList()
 
-            return new Response<AuthenticationResponse>(authenticationResponse, $"Usuario Autenticado {user.UserName}");
+                };
 
+                return new Response<AuthenticationResponse>(authenticationResponse, $"Usuario Autenticado {user.UserName}");
+            }else{
+                var negociosVendedor = await _negocioVendedoresReadingRepository.ListAsync(new NegocioVendedorSpecification(user.Id));
+
+                AuthenticationResponse authenticationResponse = new AuthenticationResponse
+                {
+                    Id = user.Id,
+                    JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false),
+                    isVerified = user.EmailConfirmed,
+                    RefreshToken = refreshToken.Token,
+                    Negocios = negociosVendedor.Select(x => new SelectNegocioDTO
+                    {
+                        Id = x.NegocioId,
+                        Nombre = x.Negocio.nombre
+                    }).ToList()
+                };
+
+                return new Response<AuthenticationResponse>(authenticationResponse, $"Usuario Autenticado {user.UserName}");
+            }        
         }
 
         public async Task<Response<string>> RegisterAsync(RegistrarEmprendedor request, string origin)
@@ -177,10 +207,9 @@ namespace Identity.Services
                 await _negocioRepository.AddAsync(negocio);
                 await _negocioRepository.SaveChangesAsync();
 
-                // ✅ Confirmar la transacción luego de todas las operaciones exitosas
                 await _unitOfWork.CommitAsync();
 
-                return new Response<string>($"Usuario registrado exitosamente: {request.UserName}");
+                return new Response<string>($"Usuario de tipo Emprendedor ha sido registrado exitosamente: {request.UserName}");
             }
             catch (Exception ex)
             {
@@ -191,10 +220,9 @@ namespace Identity.Services
 
         }
 
-
-
         public async Task<Response<string>> RegisterVendedorAsync(RegistrarVendedor request, string origin)
         {
+            var negocio = await _negocioReadingRepository.GetByIdAsync(request.NegocioId) ?? throw new ApiException($"Negocio con {request.NegocioId} no encontrado");
 
             var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
             if (userWithSameUserName != null)
@@ -214,30 +242,53 @@ namespace Identity.Services
             if (request.UserName.Contains("@"))
                 throw new ApiException($"El nombre de usuario no puede contene @");
 
-            var user = new ApplicationUser
-            {
-                Email = request.Email,
-                UserName = request.UserName,
-                Nombre = request.Nombre,
-                Apellido = request.Apellido,
-                EmailConfirmed = true,
-                PhoneNumberConfirmed = true,
-                Identificacion = request.Identificacion ?? null,
-                Telefono = request.Telefono ?? null,
-                CiudadOrigen = request.CiudadOrigen,
-            };
+            await _unitOfWork.BeginTransactionAsync();
 
-            var result = await _userManager.CreateAsync(user, request.Password);
+            try{
+                var user = new ApplicationUser
+                {
+                    Email = request.Email,
+                    UserName = request.UserName,
+                    Nombre = request.Nombre,
+                    Apellido = request.Apellido,
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true,
+                    Identificacion = request.Identificacion ?? null,
+                    Telefono = request.Telefono ?? null,
+                    CiudadOrigen = request.CiudadOrigen,
+                };
 
-            if (result.Succeeded)
-            {
-                await _userManager.AddToRoleAsync(user, Roles.Vendedor.ToString());
-                return new Response<string>($"Usuario registrado exitosamente: {request.UserName}");
+                var result = await _userManager.CreateAsync(user, request.Password);
+
+                if (result.Succeeded)
+                {
+                    await _userManager.AddToRoleAsync(user, Roles.Vendedor.ToString());
+
+                    Console.WriteLine("user ejeke: " + user.Id);
+
+                    var negocioVendedor = new NegocioVendedores
+                    {
+                        NegocioId = negocio.Id,
+                        VendedorId = user.Id,
+                    };
+
+                    await _negocioVendedoresRepository.AddAsync(negocioVendedor);
+                    await _negocioReadingRepository.SaveChangesAsync();
+                    await _unitOfWork.CommitAsync();
+                    return new Response<string>($"Vendedor registrado exitosamente: {request.UserName}");
+                }
+                else
+                {
+                    var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                    throw new ApiException($"La cuenta de Usuario no se pudo crear. Errors: {errors}");
+                }
+
             }
-            else
+            catch(Exception ex)
             {
-                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-                throw new ApiException($"La cuenta de Usuario no se pudo crear. Errors: {errors}");
+                await _unitOfWork.RollbackAsync();
+                var inner = ex.InnerException?.Message ?? ex.Message;
+                throw new ApiException($"Error al registrar usuario y negocio: {inner}");
             }
         }
 

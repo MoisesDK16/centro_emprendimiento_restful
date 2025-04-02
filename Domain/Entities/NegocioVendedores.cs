@@ -14,7 +14,7 @@ namespace Domain.Entities
         public required string VendedorId { get; set; }  // Identity usa string como ID
 
         [ForeignKey("NegocioId")]
-        public virtual Negocio Negocio { get; set; } = null!;
+        public Negocio Negocio { get; set; }
 
     }
 }

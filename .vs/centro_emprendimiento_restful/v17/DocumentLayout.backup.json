@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|c:\\users\\user\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\webapi\\controllers\\gananciasstatscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\gananciasstatscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{2E17262C-A9C0-4FFE-ACCA-0D1E6A3C86FB}|Identity\\Identity.csproj|c:\\users\\user\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\identity\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2E17262C-A9C0-4FFE-ACCA-0D1E6A3C86FB}|Identity\\Identity.csproj|solutionrelative:identity\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|c:\\users\\user\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\webapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|c:\\users\\user\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\webapi\\controllers\\negociocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{501FEBE6-8D97-4C08-AFB1-BD652E6E41F4}|WebAPI\\WebAPI.csproj|solutionrelative:webapi\\controllers\\negociocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\user\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\interfaces\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\interfaces\\iaccountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\user\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\statsc\\sock\\min_max\\rendimientoinventario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -37,14 +49,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\user\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\statsc\\ganancias\\mejoresclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|solutionrelative:application\\feautures\\statsc\\ganancias\\mejoresclientes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F28EF7E0-9829-4126-9653-119C7C1CD732}|Domain\\Domain.csproj|c:\\users\\user\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\domain\\entities\\negocio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F28EF7E0-9829-4126-9653-119C7C1CD732}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\negocio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{2E17262C-A9C0-4FFE-ACCA-0D1E6A3C86FB}|Identity\\Identity.csproj|c:\\users\\user\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\identity\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{2E17262C-A9C0-4FFE-ACCA-0D1E6A3C86FB}|Identity\\Identity.csproj|solutionrelative:identity\\services\\accountservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1A6C4DA2-6913-48C2-9B7C-F4D03B693FCA}|Application\\Application.csproj|c:\\users\\user\\pictures\\6to\\pi\\backend\\centro_emprendimiento_restful\\application\\feautures\\authenticate\\commands\\registercommand\\registercommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -82,34 +86,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "AccountService.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\Services\\AccountService.cs",
-              "RelativeDocumentMoniker": "Identity\\Services\\AccountService.cs",
-              "ToolTip": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\Services\\AccountService.cs",
-              "RelativeToolTip": "Identity\\Services\\AccountService.cs",
-              "ViewState": "AgIAAKIAAAAAAAAAAAAawKUAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T19:39:03.033Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "GananciasStatsController.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\GananciasStatsController.cs",
-              "RelativeDocumentMoniker": "WebAPI\\Controllers\\GananciasStatsController.cs",
-              "ToolTip": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\GananciasStatsController.cs",
-              "RelativeToolTip": "WebAPI\\Controllers\\GananciasStatsController.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAIAwwDAAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T01:26:29.296Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
@@ -136,7 +114,59 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountService.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\Services\\AccountService.cs",
+              "RelativeDocumentMoniker": "Identity\\Services\\AccountService.cs",
+              "ToolTip": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\Services\\AccountService.cs",
+              "RelativeToolTip": "Identity\\Services\\AccountService.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAkwIwAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T03:38:04.949Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAIwEQAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T03:37:50.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NegocioController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\NegocioController.cs",
+              "RelativeDocumentMoniker": "WebAPI\\Controllers\\NegocioController.cs",
+              "ToolTip": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\WebAPI\\Controllers\\NegocioController.cs",
+              "RelativeToolTip": "WebAPI\\Controllers\\NegocioController.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA5wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T03:05:11.963Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "IAccountService.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Interfaces\\IAccountService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\IAccountService.cs",
+              "ToolTip": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Interfaces\\IAccountService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\IAccountService.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAawA4AAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T02:40:26.031Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "VentasMensuales.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\StatsC\\Ventas\\VentasMensuales.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\StatsC\\Ventas\\VentasMensuales.cs",
@@ -144,12 +174,11 @@
               "RelativeToolTip": "Application\\Feautures\\StatsC\\Ventas\\VentasMensuales.cs",
               "ViewState": "AgIAACAAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T01:15:15.119Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T01:15:15.119Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "RendimientoInventario.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\StatsC\\Sock\\Min_Max\\RendimientoInventario.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\StatsC\\Sock\\Min_Max\\RendimientoInventario.cs",
@@ -157,12 +186,11 @@
               "RelativeToolTip": "Application\\Feautures\\StatsC\\Sock\\Min_Max\\RendimientoInventario.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAwwCwAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T01:15:07.935Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T01:15:07.935Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 7,
               "Title": "InvInicialPorMes.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\StatsC\\Sock\\Min_Max\\InvInicialPorMes.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\StatsC\\Sock\\Min_Max\\InvInicialPorMes.cs",
@@ -170,12 +198,11 @@
               "RelativeToolTip": "Application\\Feautures\\StatsC\\Sock\\Min_Max\\InvInicialPorMes.cs",
               "ViewState": "AgIAACYAAAAAAAAAAAAuwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T01:15:04.464Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T01:15:04.464Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "EstadoInventario.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\StatsC\\Sock\\Min_Max\\EstadoInventario.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\StatsC\\Sock\\Min_Max\\EstadoInventario.cs",
@@ -183,12 +210,11 @@
               "RelativeToolTip": "Application\\Feautures\\StatsC\\Sock\\Min_Max\\EstadoInventario.cs",
               "ViewState": "AgIAAEMAAAAAAAAAAAAYwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T01:15:01.12Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T01:15:01.12Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "StockByProductos.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\StatsC\\Sock\\Existencia\\StockByProductos.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\StatsC\\Sock\\Existencia\\StockByProductos.cs",
@@ -196,12 +222,11 @@
               "RelativeToolTip": "Application\\Feautures\\StatsC\\Sock\\Existencia\\StockByProductos.cs",
               "ViewState": "AgIAACEAAAAAAAAAAIAwwC0AAAB4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T01:14:31.683Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T01:14:31.683Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "Indicadores.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\StatsC\\Sock\\Existencia\\Indicadores.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\StatsC\\Sock\\Existencia\\Indicadores.cs",
@@ -209,12 +234,11 @@
               "RelativeToolTip": "Application\\Feautures\\StatsC\\Sock\\Existencia\\Indicadores.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T01:14:31.146Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T01:14:31.146Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 11,
               "Title": "MejoresClientes.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\StatsC\\Ganancias\\MejoresClientes.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\StatsC\\Ganancias\\MejoresClientes.cs",
@@ -222,24 +246,11 @@
               "RelativeToolTip": "Application\\Feautures\\StatsC\\Ganancias\\MejoresClientes.cs",
               "ViewState": "AgIAABcAAAAAAAAAAAAIwC8AAAA0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-02T00:50:12.282Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-02T00:50:12.282Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Negocio.cs",
-              "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Domain\\Entities\\Negocio.cs",
-              "RelativeDocumentMoniker": "Domain\\Entities\\Negocio.cs",
-              "ToolTip": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Domain\\Entities\\Negocio.cs",
-              "RelativeToolTip": "Domain\\Entities\\Negocio.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABYAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-01T20:28:04.928Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "RegisterCommand.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\Authenticate\\Commands\\RegisterCommand\\RegisterCommand.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\Authenticate\\Commands\\RegisterCommand\\RegisterCommand.cs",
@@ -251,7 +262,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "CrearNegocioValidator.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\NegocioC\\Commands\\CrearNegocioValidator.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\NegocioC\\Commands\\CrearNegocioValidator.cs",
@@ -263,7 +274,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "ServiceExtensions.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Identity\\ServiceExtensions.cs",
               "RelativeDocumentMoniker": "Identity\\ServiceExtensions.cs",
@@ -275,7 +286,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Categoria.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Domain\\Entities\\Categoria.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\Categoria.cs",
@@ -287,7 +298,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "Cliente.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Domain\\Entities\\Cliente.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\Cliente.cs",
@@ -299,7 +310,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "CrearCliente.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\ClienteC\\Commands\\CrearCliente.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\ClienteC\\Commands\\CrearCliente.cs",
@@ -311,7 +322,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 10,
               "Title": "EntradaSalida.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\StatsC\\Sock\\Existencia\\EntradaSalida.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\StatsC\\Sock\\Existencia\\EntradaSalida.cs",
@@ -319,12 +330,11 @@
               "RelativeToolTip": "Application\\Feautures\\StatsC\\Sock\\Existencia\\EntradaSalida.cs",
               "ViewState": "AgIAACEAAAAAAAAAAAAqwDkAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T19:40:54.51Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-03-27T19:40:54.51Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "CrearPromocion.cs",
               "DocumentMoniker": "C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Feautures\\PromocionC\\Commands\\CrearPromocion.cs",
               "RelativeDocumentMoniker": "Application\\Feautures\\PromocionC\\Commands\\CrearPromocion.cs",

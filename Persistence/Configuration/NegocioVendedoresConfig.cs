@@ -20,10 +20,11 @@ namespace Persistence.Configuration
             builder.HasOne(nv => nv.Negocio)
                    .WithMany(n => n.NegocioVendedores)
                    .HasForeignKey(nv => nv.NegocioId);
-            builder.HasOne<ApplicationUser>()
+
+            /*builder.HasOne<ApplicationUser>()
                    .WithMany()
                    .HasForeignKey(nv => nv.VendedorId)
-                   .IsRequired(false);
+                   .IsRequired(false);*/
 
 
         }

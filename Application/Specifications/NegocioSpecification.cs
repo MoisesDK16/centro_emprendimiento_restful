@@ -28,7 +28,7 @@ namespace Application.Specifications
 
         public NegocioSpecification(string emprendedorId)
         {
-            Query.Search(n => n.EmprendedorId, emprendedorId);
+            Query.Search(n => n.EmprendedorId, "%"+emprendedorId+"%");
         }
     }
 }

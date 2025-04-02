@@ -9,6 +9,6 @@ namespace Application.DTOs.Negocios
   public class SelectNegocioDTO
     {
         public long Id { get; set; }
-        public required string Nombre { get; set; }
+        public string Nombre { get; set; }
     }
 }
