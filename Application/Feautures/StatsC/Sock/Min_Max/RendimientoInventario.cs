@@ -37,7 +37,7 @@ namespace Application.Feautures.StatsC.Sock.Min_Max
 
         public async Task<PagedResponse<List<RendimientoInventarioDTO>>> Handle(RendimientoInventario request, CancellationToken cancellationToken)
         {
-            var productos = await _productoRepository.ListAsync(new ProductoSpecification(request.NegocioId, request.CategoriaId));
+            var productos = await _productoRepository.ListAsync(new ProductoSpecification(request.NegocioId, request.CategoriaId, true));
             Console.WriteLine("productos: " + productos.Count);
 
             var historial = await _repostoryHistorical.ListAsync(new HistorialStockSpecification(request.NegocioId, request.FechaInicio, request.FechaFin));
@@ -71,10 +71,10 @@ namespace Application.Feautures.StatsC.Sock.Min_Max
 
             var totalRecords = rendimientos.Count;
             var totalPages = (int)Math.Ceiling((double)rendimientos.Count / request.PageSize);
-            rendimientos.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize); 
+            var paged = rendimientos.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToList(); 
 
 
-            return new PagedResponse<List<RendimientoInventarioDTO>>(rendimientos, request.PageNumber, request.PageSize, totalPages, totalRecords);
+            return new PagedResponse<List<RendimientoInventarioDTO>>(paged, request.PageNumber, request.PageSize, totalPages, totalRecords);
         }
     }
 

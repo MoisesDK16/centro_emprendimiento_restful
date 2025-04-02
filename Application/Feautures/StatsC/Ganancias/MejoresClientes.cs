@@ -44,7 +44,7 @@ namespace Application.Feautures.StatsC.Ganancias
                 PromedioCompraMensual = Math.Truncate((d.Sum(d => d.Total) / 12) * 100) / 100,
                 TotalGanancias = d.Sum(d => d.Total)
 
-            }).OrderByDescending(c => c.TotalGanancias).Take(3).ToList();
+            }).OrderByDescending(c => c.TotalGanancias).Take(10).ToList();
             var paged = clientesConCompras.ToList();
             return new Response<List<MejoresClientesDTO>>(paged);
         }

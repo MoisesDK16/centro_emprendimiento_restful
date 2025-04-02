@@ -1,10 +1,12 @@
 ﻿using Application.Behaviors;
+using Application.DTOs.Negocios;
 using Application.DTOs.Users;
 using Application.Enums;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Specifications;
 using Application.Wrappers;
-using Azure.Core;
+using Domain.Entities;
 using Domain.Settings;
 using Identity.Helpers;
 using Identity.Models;
@@ -13,7 +15,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -27,13 +28,19 @@ namespace Identity.Services
         private readonly Jwt _jwtSettings;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IDateTimeService _dateTimeService;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IReadOnlyRepositoryAsync<Negocio> _negocioReadingRepository;
+        private readonly IRepositoryAsync<Negocio> _negocioRepository;
 
         public AccountService(
             UserManager<ApplicationUser> userManager,
             RoleManager<IdentityRole> roleManager,
             IOptions<Jwt> jwtSettings,
             SignInManager<ApplicationUser> signInManager,
-            IDateTimeService dateTimeService
+            IDateTimeService dateTimeService,
+            IUnitOfWork unitOfWork,
+            IReadOnlyRepositoryAsync<Negocio> negocioReadingRepository,
+            IRepositoryAsync<Negocio> negocioRepository
             )
         {
             _userManager = userManager;
@@ -41,6 +48,9 @@ namespace Identity.Services
             _jwtSettings = jwtSettings.Value;
             _signInManager = signInManager;
             _dateTimeService = dateTimeService;
+            _unitOfWork = unitOfWork;
+            _negocioReadingRepository = negocioReadingRepository;
+            _negocioRepository = negocioRepository;
         }
 
         public async Task<Response<AuthenticationResponse>> logInByEmail(AuthenticationRequestEmail request, string ipAddress)
@@ -54,6 +64,8 @@ namespace Identity.Services
             var refreshToken = GenerateRefreshToken(ipAddress);
             JwtSecurityToken jwtSecurityToken = await generateJwtToken(user);
 
+            var negociosUser = await _negocioReadingRepository.ListAsync(new NegocioSpecification(user.Id));
+
             AuthenticationResponse authenticationResponse = new AuthenticationResponse
             {
                 Id = user.Id,
@@ -63,6 +75,11 @@ namespace Identity.Services
                 Roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false),
                 isVerified = user.EmailConfirmed,
                 RefreshToken = refreshToken.Token,
+                Negocios = negociosUser.Any()  ? negociosUser.Select(x => new SelectNegocioDTO
+                {
+                    Id = x.Id,
+                    Nombre = x.nombre
+                }).ToList(): null
             };
 
             return new Response<AuthenticationResponse>(authenticationResponse, $"Usuario Autenticado {user.UserName}");
@@ -79,6 +96,8 @@ namespace Identity.Services
             var refreshToken = GenerateRefreshToken(ipAddress);
             JwtSecurityToken jwtSecurityToken = await generateJwtToken(user);
 
+            var negociosUser = await _negocioReadingRepository.ListAsync(new NegocioSpecification(user.Id));
+
             AuthenticationResponse authenticationResponse = new AuthenticationResponse
             {
                 Id = user.Id,
@@ -88,65 +107,93 @@ namespace Identity.Services
                 Roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false),
                 isVerified = user.EmailConfirmed,
                 RefreshToken = refreshToken.Token,
+                Negocios = negociosUser.Any() ? negociosUser.Select(x => new SelectNegocioDTO
+                {
+                    Id = x.Id,
+                    Nombre = x.nombre
+                }).ToList() : null
             };
 
             return new Response<AuthenticationResponse>(authenticationResponse, $"Usuario Autenticado {user.UserName}");
 
         }
 
-        public async Task<Response<string>> RegisterAsync(RegisterRequest request, string origin)
+        public async Task<Response<string>> RegisterAsync(RegistrarEmprendedor request, string origin)
         {
+            if (request.UserName.Contains("@"))
+                throw new ApiException("El nombre de usuario no puede contener '@'.");
 
-            var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
-            if (userWithSameUserName != null)
-                throw new ApiException($"Usuario con este nombre: {request.UserName} ya existe.");
+            var validations = new List<(bool Condition, string Message)>
+    {
+        ((await _userManager.FindByNameAsync(request.UserName)) != null, $"Usuario con este nombre: {request.UserName} ya existe."),
+        ((await _userManager.FindByEmailAsync(request.Email)) != null, $"Usuario con este email: {request.Email} ya existe."),
+        (!string.IsNullOrWhiteSpace(request.Identificacion) && !ValidacionIdentificacion.VerificaIdentificacion(request.Identificacion), "Identificación no válida."),
+        ((await _userManager.Users.AnyAsync(x => x.Identificacion == request.Identificacion)), $"Usuario con esta identificación: {request.Identificacion} ya existe.")
+    };
 
-            var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
-            if (userWithSameEmail != null)
-                throw new ApiException($"User con este email: {request.Email} ya existe.");
-
-            if (request.Identificacion != null)
+            foreach (var (condition, message) in validations)
             {
-               if(!ValidacionIdentificacion.VerificaIdentificacion(request.Identificacion))
-                    throw new ApiException($"Identificacion no valida");
+                if (condition) throw new ApiException(message);
             }
 
-            var userWithSameIdentification = await _userManager.Users.FirstOrDefaultAsync(x => x.Identificacion == request.Identificacion);
+            await _unitOfWork.BeginTransactionAsync();
 
-            if (userWithSameIdentification != null)
-                throw new ApiException($"User con esta identificacion: {request.Identificacion} ya existe.");
-
-            if (request.UserName.Contains("@"))
-                throw new ApiException($"El nombre de usuario no puede contene @");
-
-            var user = new ApplicationUser
+            try
             {
-                Email = request.Email,
-                UserName = request.UserName,
-                Nombre = request.Nombre,
-                Apellido = request.Apellido,
-                EmailConfirmed = true,
-                PhoneNumberConfirmed = true,
-                Identificacion = request.Identificacion ?? null,
-                Telefono = request.Telefono ?? null,
-                CiudadOrigen = request.CiudadOrigen,
-            };
+                var user = new ApplicationUser
+                {
+                    Email = request.Email,
+                    UserName = request.UserName,
+                    Nombre = request.Nombre,
+                    Apellido = request.Apellido,
+                    EmailConfirmed = true,
+                    PhoneNumberConfirmed = true,
+                    Identificacion = request.Identificacion,
+                    Telefono = request.Telefono,
+                    CiudadOrigen = request.CiudadOrigen
+                };
 
-            var result = await _userManager.CreateAsync(user, request.Password);
+                var result = await _userManager.CreateAsync(user, request.Password);
 
-            if (result.Succeeded)
-            {
+                if (!result.Succeeded)
+                {
+                    var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                    throw new ApiException($"No se pudo crear la cuenta de usuario. Errores: {errors}");
+                }
+
                 await _userManager.AddToRoleAsync(user, Roles.Emprendedor.ToString());
+
+                var negocio = new Negocio
+                {
+                    nombre = request.NombreNegocio,
+                    descripcion = request.Descripcion,
+                    direccion = request.DireccionNegocio,
+                    estado = Domain.Enums.Negocio.Estado.Pendiente,
+                    telefono = request.TelefonoNegocio,
+                    CategoriaId = request.CategoriaNegocio,
+                    EmprendedorId = user.Id
+                };
+
+                await _negocioRepository.AddAsync(negocio);
+                await _negocioRepository.SaveChangesAsync();
+
+                // ✅ Confirmar la transacción luego de todas las operaciones exitosas
+                await _unitOfWork.CommitAsync();
+
                 return new Response<string>($"Usuario registrado exitosamente: {request.UserName}");
             }
-            else
+            catch (Exception ex)
             {
-                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-                throw new ApiException($"La cuenta de Usuario no se pudo crear. Errors: {errors}");
+                await _unitOfWork.RollbackAsync();
+                var inner = ex.InnerException?.Message ?? ex.Message;
+                throw new ApiException($"Error al registrar usuario y negocio: {inner}");
             }
+
         }
 
-        public async Task<Response<string>> RegisterVendedorAsync(RegisterRequest request, string origin)
+
+
+        public async Task<Response<string>> RegisterVendedorAsync(RegistrarVendedor request, string origin)
         {
 
             var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);

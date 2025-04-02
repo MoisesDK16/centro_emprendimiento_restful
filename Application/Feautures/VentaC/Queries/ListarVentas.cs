@@ -42,7 +42,12 @@ namespace Application.Feautures.VentaC.Queries
                     Subtotal = x.Subtotal,
                     Total = x.Total,
                     ClienteId = x.ClienteId,
-                    NegocioId = x.NegocioId
+                    ClienteNombres = x.Cliente.Nombres,
+                    ClientePrimerApellido = x.Cliente.PrimerApellido,
+                    ClienteSegundoApellido = x.Cliente.SegundoApellido,
+                    ClienteIdentificacion = x.Cliente.Identificacion,
+                    NegocioId = x.NegocioId,
+                    NegocioNombre = x.Negocio.nombre
                 });
 
                 var TotalPages = (int)Math.Ceiling((double)ventas.Count / request.PageSize);

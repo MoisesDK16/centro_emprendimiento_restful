@@ -16,6 +16,6 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Persistence
-build_property.ProjectDir = C:\Users\PC\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Persistence\
+build_property.ProjectDir = C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Persistence\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

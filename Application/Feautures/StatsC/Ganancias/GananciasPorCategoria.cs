@@ -16,7 +16,7 @@ namespace Application.Feautures.StatsC.Ganancias
         public DateOnly FechaInicio { get; set; }
         public DateOnly FechaFin { get; set; }
 
-        public long? CategoriaId { get; set; }
+        public long CategoriaId { get; set; }
     }
 
     public class GananciasPorCategoriaHandler : IRequestHandler<GananciasPorCategoria, PagedResponse<List<GananciasPorCategoriaDTO>>>
@@ -36,7 +36,7 @@ namespace Application.Feautures.StatsC.Ganancias
         {
             var detalles = await _repositoryDetalle.ListAsync(new DetalleSpecification(request.NegocioId, request.FechaInicio, request.FechaFin));
 
-            var productos = await _productoRepository.ListAsync(new ProductoSpecification(request.NegocioId, request.CategoriaId));   
+            var productos = await _productoRepository.ListAsync(new ProductoSpecification(request.NegocioId, request.CategoriaId, true));   
 
             var gananciasPorProducto = detalles.Where(d => productos.Any(p => p.Id == d.ProductoId))
                 .GroupBy(d => d.Producto.Categoria.Nombre).Select(d => new GananciasPorCategoriaDTO
@@ -50,9 +50,9 @@ namespace Application.Feautures.StatsC.Ganancias
 
             var TotalRecords = gananciasPorProducto.Count;
             var TotalPages = (int)Math.Ceiling(TotalRecords / (double)request.PageSize);
-            gananciasPorProducto.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToList();
+            var paged = gananciasPorProducto.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToList();
 
-            return new PagedResponse<List<GananciasPorCategoriaDTO>>(gananciasPorProducto, request.PageNumber, request.PageSize, TotalPages, TotalRecords);
+            return new PagedResponse<List<GananciasPorCategoriaDTO>>(paged, request.PageNumber, request.PageSize, TotalPages, TotalRecords);
         }
 
         public class GananciasPorCategoriaParameters : RequestParameter
@@ -61,7 +61,7 @@ namespace Application.Feautures.StatsC.Ganancias
             public DateOnly FechaInicio { get; set; }
             public DateOnly FechaFin { get; set; }
 
-            public long? CategoriaId { get; set; }
+            public long CategoriaId { get; set; }
         }
     }
 }

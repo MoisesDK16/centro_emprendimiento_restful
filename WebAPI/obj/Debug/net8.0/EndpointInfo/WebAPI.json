@@ -3077,6 +3077,11 @@
         "type": "string"
       },
       "GeneralVenta": {
+        "required": [
+          "clienteNombres",
+          "clientePrimerApellido",
+          "negocioNombre"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -3099,9 +3104,29 @@
             "type": "integer",
             "format": "int64"
           },
+          "clienteNombres": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientePrimerApellido": {
+            "type": "string",
+            "nullable": true
+          },
+          "clienteSegundoApellido": {
+            "type": "string",
+            "nullable": true
+          },
+          "clienteIdentificacion": {
+            "type": "string",
+            "nullable": true
+          },
           "negocioId": {
             "type": "integer",
             "format": "int64"
+          },
+          "negocioNombre": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3271,6 +3296,11 @@
         "additionalProperties": false
       },
       "VentaInfo": {
+        "required": [
+          "clienteNombres",
+          "clientePrimerApellido",
+          "negocioNombre"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -3293,9 +3323,29 @@
             "type": "integer",
             "format": "int64"
           },
+          "clienteNombres": {
+            "type": "string",
+            "nullable": true
+          },
+          "clientePrimerApellido": {
+            "type": "string",
+            "nullable": true
+          },
+          "clienteSegundoApellido": {
+            "type": "string",
+            "nullable": true
+          },
+          "clienteIdentificacion": {
+            "type": "string",
+            "nullable": true
+          },
           "negocioId": {
             "type": "integer",
             "format": "int64"
+          },
+          "negocioNombre": {
+            "type": "string",
+            "nullable": true
           },
           "detalles": {
             "type": "array",

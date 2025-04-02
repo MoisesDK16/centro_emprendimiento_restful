@@ -24,11 +24,7 @@ namespace Persistence
             services.AddTransient(typeof(IReadOnlyRepositoryAsync<>), typeof(MyRepositoryAsync<>));
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-
-            // ✅ Sustituimos `AddTransactionalBehavior<AppDbContext>()` por:
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(TransactionalBehavior<,>));
-
-
+           
             services.AddStackExchangeRedisCache(options =>
             {
                 options.Configuration = configuration.GetValue<string>("Caching:RedisConnection");

@@ -40,7 +40,7 @@ namespace WebAPI.Controllers
 
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequest request)
+        public async Task<IActionResult> RegisterAsync([FromBody] RegistrarEmprendedor request)
         {
             return Ok(await Mediator.Send(new RegisterCommand
             {
@@ -54,12 +54,17 @@ namespace WebAPI.Controllers
                 Telefono = request.Telefono,
                 CiudadOrigen = request.CiudadOrigen,
                 Origin = Request.Headers["origin"],
+                NombreNegocio = request.NombreNegocio,
+                Descripcion = request.Descripcion,
+                Direccion = request.DireccionNegocio,
+                TelefonoNegocio = request.TelefonoNegocio,
+                CategoriaNegocio = request.CategoriaNegocio
             }));
         }
 
         [Authorize(Roles = "Emprendedor")]
         [HttpPost("registerSeller")]
-        public async Task<IActionResult> RegisterSellerAsync([FromBody] RegisterRequest request)
+        public async Task<IActionResult> RegisterSellerAsync([FromBody] RegistrarVendedor request)
         {
             return Ok(await Mediator.Send(new RegisterSellerCommand
             {
@@ -73,6 +78,7 @@ namespace WebAPI.Controllers
                 Telefono = request.Telefono,
                 CiudadOrigen = request.CiudadOrigen,
                 Origin = Request.Headers["origin"],
+                NegocioId = request.NegocioId
             }));
         }
 

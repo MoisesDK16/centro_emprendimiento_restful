@@ -17,28 +17,19 @@ namespace Domain.Entities
 
         public required string telefono { get; set; }
 
-        public required Tipo tipo { get; set; }
-
         public required Estado estado { get; set; }
-        public required string descripcion { get; set; }
+        public string descripcion { get; set; }
 
-        public List<Categoria> categorias { get; set; } = new List<Categoria>();
+        public long CategoriaId { get; set; }
+        public Categoria Categoria { get; set; }
 
-        public List<Promocion> Promociones { get; set; } = new List<Promocion>();
+        public List<Promocion>? Promociones { get; set; } = new List<Promocion>();
 
-        public ICollection<NegocioCliente> NegocioClientes { get; set; }
+        public ICollection<NegocioCliente>? NegocioClientes { get; set; }
 
-        /*[ForeignKey("Emprendedor")]
         public required string EmprendedorId { get; set; }  // Identity usa string como ID
-        public virtual ApplicationUser Emprendedor { get; set; } = null!;
 
-        // Relación con Vendedores (Muchos a Muchos)
-        public virtual ICollection<ApplicationUser> Vendedores { get; set; } = new List<ApplicationUser>();*/
+        public ICollection<NegocioVendedores>? NegocioVendedores { get; set; } = new List<NegocioVendedores>();
 
-        /*[Column("categoria_id")]
-        public required long categoria_id;
-
-        [ForeignKey("categoria_id")]
-        public virtual Categoria categoria { get; set; } = null!;*/
     }
 }

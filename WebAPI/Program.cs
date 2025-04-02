@@ -2,6 +2,7 @@ using Application;
 using Application.Interfaces;
 using Application.Services;
 using Identity;
+using Identity.Services;
 using Persistence;
 using Shared.Services;
 using System.Text.Json.Serialization;
@@ -26,6 +27,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 });
 
 builder.Services.AddScoped<IAzureStorageService, AzureStorageService>();
+builder.Services.AddScoped<IUserService, UserServiceImplementation>();
 
 builder.Services.AddCors(options =>
 {   

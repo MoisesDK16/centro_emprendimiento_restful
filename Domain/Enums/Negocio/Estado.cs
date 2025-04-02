@@ -9,6 +9,7 @@ namespace Domain.Enums.Negocio
     public enum Estado
     {
         Activo,
-        Inactivo
+        Inactivo,
+        Pendiente
     }
 }

@@ -38,8 +38,8 @@ namespace WebAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Descripcion")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("datetime2");
@@ -60,7 +60,9 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NegocioId");
+                    b.HasIndex("NegocioId")
+                        .IsUnique()
+                        .HasFilter("[NegocioId] IS NOT NULL");
 
                     b.ToTable("categoria", (string)null);
                 });
@@ -181,7 +183,7 @@ namespace WebAPI.Migrations
                     b.Property<DateOnly>("FechaCorte")
                         .HasColumnType("date");
 
-                    b.Property<DateOnly?>("FechaInicio")
+                    b.Property<DateOnly>("FechaInicio")
                         .HasColumnType("date");
 
                     b.Property<long>("NegocioId")
@@ -207,6 +209,13 @@ namespace WebAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<long>("CategoriaId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("EmprendedorId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("descripcion")
                         .IsRequired()
                         .HasMaxLength(1024)
@@ -230,9 +239,6 @@ namespace WebAPI.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
-                    b.Property<int>("tipo")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.ToTable("negocio", (string)null);
@@ -253,6 +259,21 @@ namespace WebAPI.Migrations
                     b.ToTable("NegocioClientes");
                 });
 
+            modelBuilder.Entity("Domain.Entities.NegocioVendedores", b =>
+                {
+                    b.Property<long>("NegocioId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("VendedorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("NegocioId", "VendedorId");
+
+                    b.HasIndex("VendedorId");
+
+                    b.ToTable("negocio_vendedor", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.Producto", b =>
                 {
                     b.Property<long>("Id")
@@ -270,7 +291,6 @@ namespace WebAPI.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Descripcion")
-                        .IsRequired()
                         .HasMaxLength(1024)
                         .HasColumnType("nvarchar(1024)");
 
@@ -470,11 +490,81 @@ namespace WebAPI.Migrations
                     b.ToTable("venta", (string)null);
                 });
 
+            modelBuilder.Entity("Identity.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Apellido")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CiudadOrigen")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Identificacion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationUser");
+                });
+
             modelBuilder.Entity("Domain.Entities.Categoria", b =>
                 {
                     b.HasOne("Domain.Entities.Negocio", "Negocio")
-                        .WithMany("categorias")
-                        .HasForeignKey("NegocioId");
+                        .WithOne("Categoria")
+                        .HasForeignKey("Domain.Entities.Categoria", "NegocioId");
 
                     b.Navigation("Negocio");
                 });
@@ -547,6 +637,21 @@ namespace WebAPI.Migrations
                         .IsRequired();
 
                     b.Navigation("Cliente");
+
+                    b.Navigation("Negocio");
+                });
+
+            modelBuilder.Entity("Domain.Entities.NegocioVendedores", b =>
+                {
+                    b.HasOne("Domain.Entities.Negocio", "Negocio")
+                        .WithMany("NegocioVendedores")
+                        .HasForeignKey("NegocioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Identity.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("VendedorId");
 
                     b.Navigation("Negocio");
                 });
@@ -625,11 +730,14 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("Domain.Entities.Negocio", b =>
                 {
+                    b.Navigation("Categoria")
+                        .IsRequired();
+
                     b.Navigation("NegocioClientes");
 
-                    b.Navigation("Promociones");
+                    b.Navigation("NegocioVendedores");
 
-                    b.Navigation("categorias");
+                    b.Navigation("Promociones");
                 });
 
             modelBuilder.Entity("Domain.Entities.Producto", b =>

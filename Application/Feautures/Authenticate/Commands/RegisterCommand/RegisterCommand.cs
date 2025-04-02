@@ -18,8 +18,16 @@ namespace Application.Feautures.Authenticate.Commands.RegisterCommand
         public required string CiudadOrigen { get; set; }
         public required string Origin { get; set; }
 
+        //Negocio
+        public required string NombreNegocio { get; set; }
+        public string? Descripcion { get; set; }
+        public required string Direccion { get; set; }
+        public required string TelefonoNegocio { get; set; }
+
+        public long CategoriaNegocio { get; set; }
+
     }
-    
+
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, Response<string>>
     {
         public readonly IAccountService _accountService;
@@ -30,7 +38,7 @@ namespace Application.Feautures.Authenticate.Commands.RegisterCommand
         }
         public async Task<Response<string>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            return await _accountService.RegisterAsync(new RegisterRequest
+            return await _accountService.RegisterAsync(new RegistrarEmprendedor
             {
                 Nombre = request.Nombre,
                 Apellido = request.Apellido,
@@ -40,7 +48,12 @@ namespace Application.Feautures.Authenticate.Commands.RegisterCommand
                 ConfirmPassword = request.ConfirmPassword,
                 Identificacion = request.Identificacion,
                 Telefono = request.Telefono,
-                CiudadOrigen = request.CiudadOrigen
+                CiudadOrigen = request.CiudadOrigen,
+                NombreNegocio = request.NombreNegocio,
+                Descripcion = request.Descripcion,
+                DireccionNegocio = request.Direccion,
+                TelefonoNegocio = request.TelefonoNegocio,
+                CategoriaNegocio = request.CategoriaNegocio
 
             }, request.Origin);
         }

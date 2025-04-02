@@ -19,7 +19,7 @@ namespace Application.Specifications
                 .Where(p => p.Id == productoId);
         }
 
-        public ProductoSpecification(long NegocioId, long? CategoriaId)
+        public ProductoSpecification(long NegocioId, long CategoriaId, bool isGeneral)
         {
             Query.Include(p => p.Categoria)
                  .Include(p => p.Negocio);

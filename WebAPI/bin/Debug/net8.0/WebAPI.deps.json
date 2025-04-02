@@ -2720,6 +2720,7 @@
       "Persistence/1.0.0": {
         "dependencies": {
           "Application": "1.0.0",
+          "Identity": "1.0.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "8.0.13",
           "Microsoft.Extensions.Caching.StackExchangeRedis": "9.0.2"
         },

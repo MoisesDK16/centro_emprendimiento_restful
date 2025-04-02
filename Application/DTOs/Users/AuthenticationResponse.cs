@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Application.DTOs.Negocios;
+using System.Text.Json.Serialization;
 
 namespace Application.DTOs.Users
 {
@@ -8,6 +9,9 @@ namespace Application.DTOs.Users
         public required string UserName { get; set; }
         public required string Email { get; set; }
         public IList<string> Roles { get; set; }
+
+        public List<SelectNegocioDTO>? Negocios { get; set; }
+
         public bool isVerified { get; set; }
         public string JWToken { get; set; }
         [JsonIgnore]

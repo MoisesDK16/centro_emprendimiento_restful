@@ -57,7 +57,7 @@ namespace Application.Feautures.StatsC.Sock.Existencia
                 var stocks = await _stockRepository.ListAsync(new StockSpecification(request.NegocioId, inicioMes, finMes, request.CategoriaId));
                 int totalEntradas = stocks.Sum(s => s.Cantidad);
 
-                result[mes] = new int[] { totalEntradas, totalSalidas };
+                result[mes] = [totalEntradas, totalSalidas];
             }
 
             return result;

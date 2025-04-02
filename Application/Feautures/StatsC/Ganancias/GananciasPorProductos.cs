@@ -48,10 +48,9 @@ namespace Application.Feautures.StatsC.Ganancias
                 .ToList();
 
             var totalPages = (int)Math.Ceiling((double)gananciasPorProducto.Count / request.PageSize);
+            var paged = gananciasPorProducto.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToList();
 
-            gananciasPorProducto.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
-
-            return new PagedResponse<List<GananciasPorProductoDTO>>(gananciasPorProducto, request.PageNumber,
+            return new PagedResponse<List<GananciasPorProductoDTO>>(paged, request.PageNumber,
                 request.PageSize, totalPages, gananciasPorProducto.Count);
         }
     }

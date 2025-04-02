@@ -36,7 +36,12 @@ namespace Application.Feautures.VentaC.Queries
                 Fecha = venta.Fecha,
                 Total = venta.Total,
                 ClienteId = venta.ClienteId,
+                ClienteNombres = venta.Cliente.Nombres,
+                ClientePrimerApellido = venta.Cliente.PrimerApellido,
+                ClienteSegundoApellido = venta.Cliente.SegundoApellido,
+                ClienteIdentificacion = venta.Cliente.Identificacion,
                 NegocioId = venta.NegocioId,
+                NegocioNombre = venta.Negocio.nombre,
                 Detalles = venta.Detalles.Select(d => new DetalleInfo
                 {
                     Id = d.Id,

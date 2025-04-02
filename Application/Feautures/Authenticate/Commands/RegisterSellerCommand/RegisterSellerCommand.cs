@@ -22,8 +22,8 @@ namespace Application.Feautures.Authenticate.Commands.RegisterSellerCommand
         public required string Telefono { get; set; }
         public required string CiudadOrigen { get; set; }
         public required string Origin { get; set; }
+        public required long NegocioId { get; set; }
 
-    }
 
     public class RegisterSellerHandler : IRequestHandler<RegisterSellerCommand, Response<string>>
     {
@@ -35,7 +35,7 @@ namespace Application.Feautures.Authenticate.Commands.RegisterSellerCommand
         }
         public async Task<Response<string>> Handle(RegisterSellerCommand request, CancellationToken cancellationToken)
         {
-            return await _accountService.RegisterVendedorAsync(new RegisterRequest
+            return await _accountService.RegisterVendedorAsync(new RegistrarVendedor
             {
                 Nombre = request.Nombre,
                 Apellido = request.Apellido,
@@ -45,9 +45,11 @@ namespace Application.Feautures.Authenticate.Commands.RegisterSellerCommand
                 ConfirmPassword = request.ConfirmPassword,
                 Identificacion = request.Identificacion,
                 Telefono = request.Telefono,
-                CiudadOrigen = request.CiudadOrigen
+                CiudadOrigen = request.CiudadOrigen,
+                NegocioId = request.NegocioId,
 
             }, request.Origin);
         }
+    }
     }
 }

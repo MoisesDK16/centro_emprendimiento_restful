@@ -1,5 +1,4 @@
-﻿using Application.Feautures.Negocio.Queries;
-using Ardalis.Specification;
+﻿using Ardalis.Specification;
 using Domain.Entities;
 
 namespace Application.Specifications
