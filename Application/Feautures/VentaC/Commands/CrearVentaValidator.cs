@@ -34,11 +34,6 @@ namespace Application.Feautures.VentaC.Commands
                 detalle.RuleFor(d => d.Precio)
                     .GreaterThan(0).WithMessage("El precio debe ser mayor a 0.");
 
-                detalle.RuleFor(d => d.Total)
-                    .GreaterThan(0).WithMessage("El total debe ser mayor a 0.")
-                    .Must((detalle, total) => total == detalle.Precio * detalle.Cantidad)
-                    .WithMessage("El total debe ser igual al precio multiplicado por la cantidad.");
-
                 detalle.RuleFor(d => d.PromocionId)
                     .GreaterThanOrEqualTo(0).WithMessage("El ID de promoción no puede ser negativo.");
             });

@@ -1,5 +1,6 @@
 ﻿using Application.Exceptions;
 using Application.Interfaces;
+using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
 using Domain.Enums.Producto;
@@ -35,16 +36,27 @@ namespace Application.Feautures.ProductoC.Commands
             private readonly IRepositoryAsync<Producto> _repository;
             private readonly IRepositoryAsync<Stock> _stockRepository;
             private readonly IRepositoryAsync<Domain.Entities.Categoria> _categoriaRepository;
-            private readonly IRepositoryAsync<Domain.Entities.Negocio> _negocioRepository;
+            private readonly IRepositoryAsync<Negocio> _negocioRepository;
             private readonly IAzureStorageService _azureStorageService;
+            private readonly IReadOnlyRepositoryAsync<Parametros> _parametrosReadingRespoitory;
+            private readonly IUnitOfWork _unitOfWork;
 
-            public CrearProductoHandler(IRepositoryAsync<Producto> repository, IRepositoryAsync<Stock> stockRepository, IRepositoryAsync<Domain.Entities.Categoria> categoriaRepository, IRepositoryAsync<Domain.Entities.Negocio> negocioRepository, IAzureStorageService azureStorageService)
+            public CrearProductoHandler(
+                IRepositoryAsync<Producto> repository,
+                IRepositoryAsync<Stock> stockRepository,
+                IRepositoryAsync<Domain.Entities.Categoria> categoriaRepository,
+                IRepositoryAsync<Negocio> negocioRepository,
+                IAzureStorageService azureStorageService,
+                IUnitOfWork unitOfWork,
+                IReadOnlyRepositoryAsync<Parametros> parametrosReadingRespoitory)
             {
                 _repository = repository;
                 _stockRepository = stockRepository;
                 _categoriaRepository = categoriaRepository;
                 _negocioRepository = negocioRepository;
                 _azureStorageService = azureStorageService;
+                _unitOfWork = unitOfWork;
+                _parametrosReadingRespoitory = parametrosReadingRespoitory;
             }
 
             public async Task<Response<long>> Handle(CrearProducto request, CancellationToken cancellationToken)
@@ -56,6 +68,12 @@ namespace Application.Feautures.ProductoC.Commands
 
                 if (request.Imagen != null)
                     path = await _azureStorageService.UploadAsync(request.Imagen, Enums.ContainerEnum.IMAGES);
+
+                if(request.Iva != 0){
+                    var ivaFound = await _parametrosReadingRespoitory.FirstOrDefaultAsync(new ParametrosSpecification("Iva"));
+                    if(ivaFound.Valor != request.Iva)
+                        throw new ApiException($"El IVA ingresado no coincide con el IVA registrado en administracion, este debe ser del {Math.Round(ivaFound.Valor)}%");
+                }
 
                 var producto = new Producto 
                 {

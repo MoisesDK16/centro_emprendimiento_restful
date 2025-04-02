@@ -27,7 +27,7 @@ namespace Application.Services.StockS
             await _stockRepository.UpdateAsync(stock);
        }
 
-        public async Task VerificarPrecioAsync(long idProducto, long stockId, decimal detallePrecio)
+        public async Task VerificarPrecioAsync(long idProducto, long stockId, decimal detallePrecio, int detalleCantidad, decimal detalleTotal)
         {
             var stock = await _stockRepository.FirstOrDefaultAsync(new StockSpecification(idProducto, stockId))
                 ?? throw new ApiException($"No se encontró el stock del producto {idProducto}");
@@ -36,6 +36,11 @@ namespace Application.Services.StockS
             {
                 throw new ApiException("El precio del producto no coincide con el precio receptado desde backend");
             }
+
+            var TotalDetalleEvaluar = detallePrecio * detalleCantidad;
+
+            if (TotalDetalleEvaluar != detalleTotal)
+                throw new ApiException("El total del detalle esta mal calculado");
         }
 
         public async Task<decimal> AplicarIva(long idProducto, long NegocioId, decimal detallePrecio)
@@ -52,10 +57,12 @@ namespace Application.Services.StockS
             return detallePrecio;
         }
 
-        public async Task VerificarPrecioConPromocionDescuentoAsync(long negocioId, long productoId, long stockId, decimal detallePrecio)
+        public async Task VerificarPrecioConPromocionDescuentoAsync(long negocioId, long productoId, long stockId, decimal detallePrecio, int detalleCantidad, decimal detalleTotal)
         {
             var stock = await ObtenerStockAsync(negocioId, productoId, stockId);
-            var promocion = stock.Producto?.Promocion;
+            var promocion = stock.Producto.Promocion;
+
+            Console.WriteLine("Promocion ejejej: " + promocion.Id);
 
             if (promocion == null || promocion.TipoPromocion != TipoPromocion.DESCUENTO)
             {
@@ -63,22 +70,44 @@ namespace Application.Services.StockS
             }
 
             decimal precioPromocion = stock.PrecioVenta - (stock.PrecioVenta * (decimal)promocion.Descuento / 100);
+            precioPromocion = Math.Truncate(precioPromocion * 100) / 100;
+
+            Console.WriteLine("Precion con promocion: "+precioPromocion);
 
             if (detallePrecio != precioPromocion)
             {
                 throw new ApiException($"El precio del producto {stock.Producto.Nombre} no coincide con el precio receptado desde backend");
             }
+
+            if(detalleTotal != precioPromocion * detalleCantidad)
+                throw new ApiException("El total del detalle esta mal calculado");
         }
 
-        public async Task VerificarPrecioConPromocionRegaloAsync(long negocioId, long productoId, long stockId)
+        public async Task VerificarPrecioConPromocionRegaloAsync(long negocioId, DetalleDTO detalle)
         {
-            var stock = await ObtenerStockAsync(negocioId, productoId, stockId);
+            var stock = await ObtenerStockAsync(negocioId, detalle.ProductoId, detalle.StockId);
             var promocion = stock.Producto?.Promocion;
 
             if (promocion == null || promocion.TipoPromocion != TipoPromocion.REGALO)
             {
                 throw new ApiException($"El producto {stock.Producto.Nombre} no tiene una promoción de regalo activa");
             }
+
+            if(detalle.Cantidad < promocion.CantidadCompra)
+                throw new ApiException($"La cantidad de compra del producto {stock.Producto.Nombre} no supera las {promocion.CantidadCompra} " +
+                    $"unidades, por lo cual no se puede aplicar el tipo de promocion {promocion.TipoPromocion}");
+
+            var cantidadMasRegalo = (detalle.Cantidad / promocion.CantidadCompra) * promocion.CantidadGratis;
+
+            int cantidadPagada = (int)(detalle.Cantidad - cantidadMasRegalo);
+            decimal totalEsperado = cantidadPagada * detalle.Precio;
+
+            Console.WriteLine("Total esperado: "+totalEsperado);
+            if (detalle.Total != totalEsperado)
+            {
+               throw new ApiException($"El total proporcionado ({detalle.Total:C}) no coincide con el total esperado ({totalEsperado:C}) basado en la cantidad pagada ({cantidadPagada} unidades a {detalle.Precio:C} cada una).");
+            }
+            detalle.Cantidad += (int)cantidadMasRegalo;
         }
 
         public async Task VerificarCasosPromocionAsync(DetalleDTO detalle, Promocion? promocion, Venta venta)
@@ -86,11 +115,11 @@ namespace Application.Services.StockS
              switch (promocion.TipoPromocion)
              {
                  case TipoPromocion.DESCUENTO:
-                    await VerificarPrecioConPromocionDescuentoAsync(venta.NegocioId, detalle.ProductoId, detalle.StockId, detalle.Precio);
+                    await VerificarPrecioConPromocionDescuentoAsync(venta.NegocioId, detalle.ProductoId, detalle.StockId, detalle.Precio, detalle.Cantidad, detalle.Total);
                  break;
 
                  case TipoPromocion.REGALO:
-                    await VerificarPrecioConPromocionRegaloAsync(venta.NegocioId, detalle.ProductoId, detalle.StockId);
+                    await VerificarPrecioConPromocionRegaloAsync(venta.NegocioId, detalle);
                   break;
 
                  default:

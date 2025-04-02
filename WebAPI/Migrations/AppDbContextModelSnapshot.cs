@@ -272,6 +272,27 @@ namespace WebAPI.Migrations
                     b.ToTable("negocio_vendedor", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Parametros", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Valor")
+                        .HasPrecision(10, 2)
+                        .HasColumnType("decimal(10,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("parametros", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.Producto", b =>
                 {
                     b.Property<long>("Id")

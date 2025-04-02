@@ -80,12 +80,13 @@ namespace Application.Feautures.VentaC.Commands
 
                         if (detalle.PromocionId != 0)
                         {
-                            promocion = await _promocionRepostoryReading.FirstOrDefaultAsync(new PromocionSpecification(detalle.ProductoId, detalle.PromocionId), cancellationToken);
+                            promocion = await _promocionRepostoryReading.FirstOrDefaultAsync
+                                (new PromocionSpecification(detalle.ProductoId, detalle.PromocionId), cancellationToken) ?? throw new ApiException("Promocion no encontrada para el producto con Id: "+detalle.ProductoId);
 
-                            if (promocion != null) await _stockService.VerificarCasosPromocionAsync(detalle, promocion, venta);
+                            await _stockService.VerificarCasosPromocionAsync(detalle, promocion, venta);
 
                         }
-                        else await _stockService.VerificarPrecioAsync(detalle.ProductoId, detalle.StockId, detalle.Precio);
+                        else await _stockService.VerificarPrecioAsync(detalle.ProductoId, detalle.StockId, detalle.Precio, detalle.Cantidad, detalle.Total);
 
                         var precioConIva = await _stockService.AplicarIva(detalle.ProductoId, request.NegocioId, detalle.Precio);
 

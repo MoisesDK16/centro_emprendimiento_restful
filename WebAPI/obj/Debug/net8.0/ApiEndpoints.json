@@ -987,6 +987,43 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "WebAPI.Controllers.ParametrosController",
+    "Method": "ActualizarParametro",
+    "RelativePath": "api/v{version}/Parametros",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Application.Feautures.ParametrosC.Commands.ActualizarParametro",
+        "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.ParametrosController",
+    "Method": "ListarParametros",
+    "RelativePath": "api/v{version}/Parametros",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "WebAPI.Controllers.ProductoController",
     "Method": "ActualizarProducto",
     "RelativePath": "api/v{version}/Producto/actualizar",
