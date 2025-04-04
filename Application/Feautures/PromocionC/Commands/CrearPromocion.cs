@@ -1,6 +1,7 @@
 ﻿using Application.Exceptions;
 using Application.Feautures.PromocionC.Queries;
 using Application.Interfaces;
+using Application.Services.PermissionS;
 using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
@@ -19,29 +20,36 @@ namespace Application.Feautures.PromocionC.Commands
         public DateTime FechaFin { get; set; }
         public long NegocioId { get; set; }
         public List<long> IdProductos { get; set; } = new List<long>();
-
+        public required string UserId { get; set; }
 
         public class CrearPromocionHandler : IRequestHandler<CrearPromocion, Response<long>>
         {
             private readonly IRepositoryAsync<Promocion> _repository;
             private readonly IRepositoryAsync<Producto> _productoRepository;
             private readonly IReadOnlyRepositoryAsync<Producto> _productoyReading;
-            private readonly IRepositoryAsync<Domain.Entities.Negocio> _negocioRepository;
-            private readonly IReadOnlyRepositoryAsync<Domain.Entities.Negocio> _negocioRepositoryReading;
+            private readonly IRepositoryAsync<Negocio> _negocioRepository;
+            private readonly IReadOnlyRepositoryAsync<Negocio> _negocioRepositoryReading;
+            private readonly IPermissionService _permissionService;
+
             public CrearPromocionHandler(
                 IRepositoryAsync<Promocion> repository,
                 IRepositoryAsync<Producto> productoRepository,
                 IReadOnlyRepositoryAsync<Producto> productoyReading,
-                IReadOnlyRepositoryAsync<Domain.Entities.Negocio> negocioRepositoryReading)
+                IReadOnlyRepositoryAsync<Negocio> negocioRepositoryReading,
+                IPermissionService permissionService
+                )
             {
                 _repository = repository;
                 _productoRepository = productoRepository;
                 _productoyReading = productoyReading;
                 _negocioRepositoryReading = negocioRepositoryReading;
+                _permissionService = permissionService;
             }
 
             public async Task<Response<long>> Handle(CrearPromocion request, CancellationToken cancellationToken)
             {
+                _permissionService.ValidateNegocioPermission(request.NegocioId, request.UserId).Wait(cancellationToken);
+
                 var negocioFound = await _negocioRepositoryReading.GetByIdAsync(request.NegocioId, cancellationToken);
                 if (negocioFound == null)
                     throw new ApiException($"Negocio con Id {request.NegocioId} no encontrado");

@@ -11,5 +11,6 @@ namespace Application.Interfaces
     {
         Task<bool> UserExistsAsync(string userId);
         Task<UserInfo> GetUserInfoAsync(string userId);
+        Task<List<UserInfo>> GetEmprendedoresAsync();
     }
 }

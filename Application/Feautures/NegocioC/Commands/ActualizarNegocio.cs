@@ -24,7 +24,7 @@ namespace Application.Feautures.NegocioC.Commands
         public string Telefono { get; set; }
         public Tipo Tipo { get; set; }
         public Estado Estado { get; set; }
-        public long Categorias { get; set; }
+        public long CategoriaId { get; set; }
         public class ActualizarNegocioHandler : IRequestHandler<ActualizarNegocio, Response<long>>
         {
             private readonly IRepositoryAsync<Negocio> _repository;
@@ -70,10 +70,10 @@ namespace Application.Feautures.NegocioC.Commands
                 }
                 negocio.estado = request.Estado;
 
-                if (request.Categorias != 0)
+                if (request.CategoriaId != 0)
                 {
-                    validateCategory(request.Categorias);
-                    negocio.CategoriaId = request.Categorias;
+                    validateCategory(request.CategoriaId);
+                    negocio.CategoriaId = request.CategoriaId;
                 }
 
                 await _repository.UpdateAsync(negocio);

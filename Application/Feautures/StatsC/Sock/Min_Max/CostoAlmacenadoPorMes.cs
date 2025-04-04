@@ -36,6 +36,8 @@ namespace Application.Feautures.StatsC.Sock.Min_Max
                 var stock = await _historialRepository.ListAsync(
                     new HistorialStockSpecification(request.NegocioId, finMes, request.CategoriaId, true));
 
+                Console.WriteLine($"Fecha: {fecha}, Cantidad: {stock.Count}");
+
                 mesesConDatos[fecha.Month] = stock.Sum(s => s.CostoTotal);
             }
 

@@ -2,6 +2,8 @@
 using Application.Feautures.Authenticate.Commands.AuthenticateCommand;
 using Application.Feautures.Authenticate.Commands.RegisterCommand;
 using Application.Feautures.Authenticate.Commands.RegisterSellerCommand;
+using Application.Interfaces;
+using Application.Wrappers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -12,8 +14,10 @@ namespace WebAPI.Controllers
     [ApiVersion("1.0")]
     public class AccountController : BaseApiController
     {
-        public AccountController(IMediator mediator) : base(mediator)
+        private readonly IUserService _userService;
+        public AccountController(IMediator mediator, IUserService userService) : base(mediator)
         {
+            _userService = userService;
         }
 
         [HttpPost("authenticateByEmail")]
@@ -82,6 +86,12 @@ namespace WebAPI.Controllers
             }));
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet("AllEmprendedores")]
+        public async Task<IActionResult> GetAllEmprendedores()
+        {
+            return Ok(new Response<List<UserInfo>>(await _userService.GetEmprendedoresAsync()));
+        }
 
         private string generateIpAddress()
         {

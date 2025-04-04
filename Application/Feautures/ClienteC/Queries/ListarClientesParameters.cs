@@ -9,6 +9,7 @@ namespace Application.Feautures.ClienteC.Queries
 {
     public class ListarClientesParameters : RequestParameter
     {
+        public long NegocioId { get; set; }
         public string? Identificacion { get; set; }
         public string? Nombres { get; set; }
         public string? PrimerApellido { get; set; }

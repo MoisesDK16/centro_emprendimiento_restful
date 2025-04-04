@@ -10,14 +10,14 @@ namespace Application.Feautures.NegocioC.Commands
 {
      public class CrearNegocio : IRequest<Response<long>>
     {
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public string Direccion { get; set; }
-        public string Telefono { get; set; }
+        public required string Nombre { get; set; }
+        public string? Descripcion { get; set; }
+        public required string Direccion { get; set; }
+        public required string Telefono { get; set; }
 
         public Estado Estado { get; set; }
-        public long Categoria { get; set; }
-        public string EmprendedorId { get; set; }
+        public long CategoriaId { get; set; }
+        public required string EmprendedorId { get; set; }
 
         public class CrearNegocioCommandHandler : IRequestHandler<CrearNegocio, Response<long>>
         {
@@ -56,11 +56,11 @@ namespace Application.Feautures.NegocioC.Commands
                     throw new ApiException($"Negocio con telefono {request.Telefono} ya existe");
 
 
-                if (request.Categoria != 0)
+                if (request.CategoriaId != 0)
                 {
-                    var categoriaExists = await _repositoryCategoria.GetByIdAsync(request.Categoria);
+                    var categoriaExists = await _repositoryCategoria.GetByIdAsync(request.CategoriaId);
                     if (categoriaExists == null)
-                        throw new ApiException($"Categoria con id {request.Categoria} no encontrada");
+                        throw new ApiException($"Categoria con id {request.CategoriaId} no encontrada");
                 }
 
                 // Create Negocio entity
@@ -71,7 +71,7 @@ namespace Application.Feautures.NegocioC.Commands
                     telefono = request.Telefono,
                     estado = request.Estado,
                     descripcion = request.Descripcion,
-                    CategoriaId = request.Categoria,
+                    CategoriaId = request.CategoriaId,
                     EmprendedorId = request.EmprendedorId
                 };
 

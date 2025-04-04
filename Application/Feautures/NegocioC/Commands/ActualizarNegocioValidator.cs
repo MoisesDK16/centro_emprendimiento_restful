@@ -19,7 +19,7 @@ namespace Application.Feautures.NegocioC.Commands
                 .MaximumLength(15).WithMessage("{PropertyName} no debe exceder de 15 caracteres.");
             RuleFor(p => p.Descripcion)
                 .MaximumLength(1024).WithMessage("{PropertyName} no debe exceder de 1024 caracteres.");
-            RuleFor(p => p.Categorias)
+            RuleFor(p => p.CategoriaId)
                 .NotEmpty().WithMessage("{PropertyName} es requerido.");
         }
     }

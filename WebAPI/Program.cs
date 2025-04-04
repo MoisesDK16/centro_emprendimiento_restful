@@ -1,6 +1,7 @@
 using Application;
 using Application.Interfaces;
 using Application.Services;
+using Application.Services.PermissionS;
 using Identity;
 using Identity.Services;
 using Persistence;
@@ -28,6 +29,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 builder.Services.AddScoped<IAzureStorageService, AzureStorageService>();
 builder.Services.AddScoped<IUserService, UserServiceImplementation>();
+builder.Services.AddScoped<IPermissionService, PermissionService>();
 
 builder.Services.AddCors(options =>
 {   

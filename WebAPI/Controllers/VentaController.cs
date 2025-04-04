@@ -3,6 +3,7 @@ using Application.Feautures.VentaC.Commands;
 using Application.Feautures.VentaC.Queries;
 using Application.Wrappers;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

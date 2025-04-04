@@ -53,6 +53,8 @@ namespace Application.Specifications
 
         public HistorialStockSpecification(long negocioId, DateOnly fechaFin, long categoriaId, bool isFin)
         {
+            Query.Include(h => h.Producto); 
+
             Query.Where(h =>
                 h.NegocioId == negocioId &&
                 h.FechaCorte == fechaFin

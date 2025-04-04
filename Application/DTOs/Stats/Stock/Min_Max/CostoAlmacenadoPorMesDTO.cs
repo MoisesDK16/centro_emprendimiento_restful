@@ -11,6 +11,6 @@ namespace Application.DTOs.Stats.Stock.Min_Max
     public class CostoAlmacenadoPorMesDTO
     {
         public int Mes { get; set; }
-        public decimal Costo { get; set; }
+        public decimal? Costo { get; set; }
     }
 }

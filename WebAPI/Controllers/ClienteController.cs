@@ -33,6 +33,7 @@ namespace WebAPI.Controllers
                 new ListarClientes { 
                     PageNumber = filter.PageNumber,
                     PageSize = filter.PageSize,
+                    NegocioId = filter.NegocioId,
                     Identificacion = filter.Identificacion,
                     Nombres = filter.Nombres,
                     PrimerApellido = filter.PrimerApellido,

@@ -30,5 +30,47 @@ namespace Application.Specifications
         {
             Query.Search(n => n.EmprendedorId, "%"+emprendedorId+"%");
         }
+
+        public NegocioSpecification(long negocioId, string userId)
+        {
+            Query.Where(n => n.Id == negocioId && n.EmprendedorId == userId);
+            
+        }
+
+        public NegocioSpecification(long negocioId, string userId, bool incluirVendedor = false)
+        {
+            if (incluirVendedor)
+            {
+                Query
+                    .Include(n => n.NegocioVendedores)
+                    .Where(n => n.Id == negocioId &&
+                        n.NegocioVendedores.Any(v => v.VendedorId == userId));
+            }
+            else
+            {
+                Query.Where(n => n.Id == negocioId && n.EmprendedorId == userId);
+            }
+        }
+
+        public NegocioSpecification(long negocioId, string userId, bool incluirVendedor = false, bool incluirAdmin = false)
+        {
+            if (incluirAdmin)
+            {
+                Query.Where(n => n.Id == negocioId);
+            }
+            else if (incluirVendedor)
+            {
+                Query
+                    .Include(n => n.NegocioVendedores)
+                    .Where(n =>
+                        n.Id == negocioId &&
+                        (n.EmprendedorId == userId || n.NegocioVendedores.Any(v => v.VendedorId == userId)));
+            }
+            else
+            {
+                Query.Where(n => n.Id == negocioId && n.EmprendedorId == userId);
+            }
+        }
+
     }
 }

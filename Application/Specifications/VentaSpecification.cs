@@ -8,6 +8,7 @@ namespace Application.Specifications
         public VentaSpecification(long NegocioId, string? IdentificacionCliente, DateOnly FechaInicio, DateOnly FechaFin)
         {
             Query
+                .Include(x => x.Negocio)
                 .Include(x => x.Cliente)
                 .Where(x => x.NegocioId == NegocioId);
 

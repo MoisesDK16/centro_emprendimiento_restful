@@ -10,8 +10,11 @@ namespace Application.Specifications
 {
     public class ClienteSpecification : Specification<Cliente>
     {
-        public ClienteSpecification(string? identificacion, string? nombres, string? primerApellido, string? ciudad)
+        public ClienteSpecification(long negocioId, string? identificacion, string? nombres, string? primerApellido, string? ciudad)
         {
+            Query.Include(c => c.NegocioClientes)
+                .Where(c => c.NegocioClientes.Any(nc => nc.NegocioId == negocioId));
+
             //Filtros dinámicos
             if (!string.IsNullOrEmpty(identificacion))
                 Query.Where(c => c.Identificacion != null && c.Identificacion.Contains(identificacion));

@@ -1,9 +1,9 @@
 ﻿using Application;
 using Application.Interfaces;
+using Application.Services.PermissionS;
 using Application.Services.StockS;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
 namespace Shared.Services
 {
     public static class ServiceExtensions

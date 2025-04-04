@@ -41,5 +41,22 @@ namespace Identity.Services
                 Telefono = user.Telefono
             };
         }
+        public async Task<List<UserInfo>> GetEmprendedoresAsync()
+        {
+            var usuarios = await _userManager.GetUsersInRoleAsync("Emprendedor");
+
+            var emprendedores = usuarios.Select(u => new UserInfo
+            {
+                Id = u.Id,
+                Nombre = u.Nombre,
+                Apellido = u.Apellido,
+                Identificacion = u.Identificacion,
+                CiudadOrigen = u.CiudadOrigen,
+                Telefono = u.Telefono
+            }).ToList();
+
+            return emprendedores;
+        }
+
     }
 }

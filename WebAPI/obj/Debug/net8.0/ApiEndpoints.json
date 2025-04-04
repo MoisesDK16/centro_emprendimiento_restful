@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "WebAPI.Controllers.AccountController",
+    "Method": "GetAllEmprendedores",
+    "RelativePath": "api/v{version}/Account/AllEmprendedores",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AccountController",
     "Method": "AuthenticateAsync",
     "RelativePath": "api/v{version}/Account/authenticateByEmail",
     "HttpMethod": "POST",
@@ -279,6 +295,11 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "NegocioId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
       {
         "Name": "Identificacion",
         "Type": "System.String",
@@ -1314,6 +1335,11 @@
     "Parameters": [
       {
         "Name": "Id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "NegocioId",
         "Type": "System.Int64",
         "IsRequired": false
       },

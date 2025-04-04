@@ -1,5 +1,7 @@
 ﻿using Application.DTOs.Promociones;
+using Application.Exceptions;
 using Application.Interfaces;
+using Application.Services.PermissionS;
 using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
@@ -17,19 +19,29 @@ namespace Application.Feautures.PromocionC.Queries
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public required long NegocioId { get; set; }
+        public required string UserId { get; set; }
 
         public class ListarPromocionesHandler : IRequestHandler<ListarPromociones, PagedResponse<IEnumerable<GeneralPromocion>>>
         {
             private readonly IReadOnlyRepositoryAsync<Promocion> _repository;
 
-            private readonly IRepositoryAsync<Domain.Entities.Negocio> _repositoryNegocio;
-            public ListarPromocionesHandler(IReadOnlyRepositoryAsync<Promocion> repository, IRepositoryAsync<Domain.Entities.Negocio> repositoryNegocio)
+            private readonly IRepositoryAsync<Negocio> _repositoryNegocio;
+
+            private readonly IPermissionService _permissionService;
+
+            public ListarPromocionesHandler(
+                IReadOnlyRepositoryAsync<Promocion> repository,
+                IRepositoryAsync<Negocio> repositoryNegocio,
+                IPermissionService permissionService)
             {
                 _repository = repository;
                 _repositoryNegocio = repositoryNegocio;
+                _permissionService = permissionService;
             }
             public async Task<PagedResponse<IEnumerable<GeneralPromocion>>> Handle(ListarPromociones request, CancellationToken cancellationToken)
             {
+                _permissionService.ValidateNegocioPermission(request.NegocioId, request.UserId).Wait(cancellationToken);
+
                 await _repositoryNegocio.GetByIdAsync(request.NegocioId);
 
                 var promociones = await _repository.ListAsync(

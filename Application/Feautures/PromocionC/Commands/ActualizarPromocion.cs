@@ -1,6 +1,7 @@
 ﻿using Application.Exceptions;
 using Application.Feautures.PromocionC.Queries;
 using Application.Interfaces;
+using Application.Services.PermissionS;
 using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
@@ -19,6 +20,8 @@ namespace Application.Feautures.PromocionC.Commands
         public DateTime FechaInicio { get; set; }
         public DateTime FechaFin { get; set; }
         public List<long> IdProductos { get; set; } = [];
+        public required long NegocioId { get; set; }
+        public required string UserId { get; set; }
 
 
         public class ActualizarPromocionHandler : IRequestHandler<ActualizarPromocion, Response<long>>
@@ -27,20 +30,27 @@ namespace Application.Feautures.PromocionC.Commands
             private readonly IRepositoryAsync<Producto> _productoRepository;
             private readonly IReadOnlyRepositoryAsync<Producto> _productoyReading;
             private readonly IReadOnlyRepositoryAsync<Promocion> _promocionRepositoryReading;
-            public ActualizarPromocionHandler(IRepositoryAsync<Promocion> repository, IRepositoryAsync<Producto> productoRepository, IReadOnlyRepositoryAsync<Producto> productoyReading, IReadOnlyRepositoryAsync<Promocion> promocionRepositoryReading)
+            private readonly IPermissionService _permissionService;
+            public ActualizarPromocionHandler(
+                IRepositoryAsync<Promocion> repository,
+                IRepositoryAsync<Producto> productoRepository,
+                IReadOnlyRepositoryAsync<Producto> productoyReading,
+                IReadOnlyRepositoryAsync<Promocion> promocionRepositoryReading,
+                IPermissionService permissionService)
             {
                 _repository = repository;
                 _productoRepository = productoRepository;
                 _productoyReading = productoyReading;
                 _promocionRepositoryReading = promocionRepositoryReading;
+                _permissionService = permissionService;
             }
 
             public async Task<Response<long>> Handle(ActualizarPromocion request, CancellationToken cancellationToken)
             {
+                _permissionService.ValidateNegocioPermission(request.NegocioId, request.UserId).Wait(cancellationToken);
 
                 var productosFound = new List<Producto>();
 
-                // Obtener los productos con el mismo contexto (_productoRepository)
                 foreach (var id in request.IdProductos)
                 {
                     var producto = await _productoRepository.GetByIdAsync(id);
@@ -50,7 +60,6 @@ namespace Application.Feautures.PromocionC.Commands
                     }
                 }
 
-                // Validar productos no encontrados
                 var idsNoEncontrados = request.IdProductos.Except(productosFound.Select(p => p.Id)).ToList();
 
                 if (idsNoEncontrados.Any())

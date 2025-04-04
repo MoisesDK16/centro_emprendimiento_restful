@@ -61,92 +61,164 @@ namespace Identity.Services
 
         public async Task<Response<AuthenticationResponse>> logInByEmail(AuthenticationRequestEmail request, string ipAddress)
         {
-            var user = await _userManager.FindByEmailAsync(request.Email);
-            if (user == null) throw new ApiException($"No existe cuenta registrada con el email de: {request.Email}.");
-
-            var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
-            if (!result.Succeeded) throw new ApiException("Credenciales Invalidas");
-
-            var refreshToken = GenerateRefreshToken(ipAddress);
-            JwtSecurityToken jwtSecurityToken = await generateJwtToken(user);
-
-            var negociosUser = await _negocioReadingRepository.ListAsync(new NegocioSpecification(user.Id));
-
-            AuthenticationResponse authenticationResponse = new AuthenticationResponse
+            try
             {
-                Id = user.Id,
-                JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-                UserName = user.UserName,
-                Email = user.Email,
-                Roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false),
-                isVerified = user.EmailConfirmed,
-                RefreshToken = refreshToken.Token,
-                Negocios = negociosUser.Any()  ? negociosUser.Select(x => new SelectNegocioDTO
-                {
-                    Id = x.Id,
-                    Nombre = x.nombre
-                }).ToList(): null
-            };
+                var user = await _userManager.FindByEmailAsync(request.Email);
+                if (user == null)
+                    throw new ApiException($"No existe cuenta registrada con el email: {request.Email}.");
 
-            return new Response<AuthenticationResponse>(authenticationResponse, $"Usuario Autenticado {user.UserName}");
+                var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+                if (!result.Succeeded)
+                    throw new ApiException("Credenciales inválidas");
+
+                var refreshToken = GenerateRefreshToken(ipAddress);
+                JwtSecurityToken jwtSecurityToken = await generateJwtToken(user);
+                var roles = await _userManager.GetRolesAsync(user);
+
+                var authenticationResponse = new AuthenticationResponse
+                {
+                    Id = user.Id,
+                    JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    Roles = roles,
+                    isVerified = user.EmailConfirmed,
+                    RefreshToken = refreshToken.Token,
+                    Negocios = new List<SelectNegocioDTO>() // Inicial vacío
+                };
+
+                // 1. Negocios como Emprendedor
+                var negociosEmprendedor = await _negocioReadingRepository.ListAsync(new NegocioSpecification(user.Id));
+
+                if (negociosEmprendedor?.Any() == true)
+                {
+                    authenticationResponse.Negocios = negociosEmprendedor
+                        .Where(n => !string.IsNullOrEmpty(n?.nombre))
+                        .Select(n => new SelectNegocioDTO
+                        {
+                            Id = n.Id,
+                            Nombre = n.nombre
+                        }).ToList();
+                }
+                else
+                {
+                    // 2. Negocios como Vendedor
+                    var negociosVendedor = await _negocioVendedoresReadingRepository.ListAsync(new NegocioVendedorSpecification(user.Id));
+
+                    if (negociosVendedor?.Any() == true)
+                    {
+                        authenticationResponse.Negocios = negociosVendedor
+                            .Where(nv => nv?.Negocio != null && !string.IsNullOrEmpty(nv.Negocio.nombre))
+                            .Select(nv => new SelectNegocioDTO
+                            {
+                                Id = nv.NegocioId,
+                                Nombre = nv.Negocio.nombre
+                            }).ToList();
+                    }
+                    else if (roles.Contains("ADMIN"))
+                    {
+                        Console.WriteLine("USUARIO ADMIN SIN NEGOCIOS");
+                    }
+                }
+
+                return new Response<AuthenticationResponse>(authenticationResponse, $"Usuario autenticado: {user.UserName}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR EN LOGIN POR EMAIL: " + ex.Message);
+                return new Response<AuthenticationResponse>
+                {
+                    Succeeded = false,
+                    Message = "Error durante el inicio de sesión.",
+                    Data = null,
+                    Errors = new List<string> { ex.Message }
+                };
+            }
         }
+
 
         public async Task<Response<AuthenticationResponse>> logInByUserName(AuthenticationRequestUserName request, string ipAddress)
         {
-            var user = await _userManager.FindByNameAsync(request.UserName);
-            Console.WriteLine("USER: " + user);
-            if (user == null) throw new ApiException($"No existe cuenta registrada con el nombre de usuario: {request.UserName}.");
+            try
+            {
+                var user = await _userManager.FindByNameAsync(request.UserName);
+                Console.WriteLine("USER: " + user);
+                if (user == null)
+                    throw new ApiException($"No existe cuenta registrada con el nombre de usuario: {request.UserName}.");
 
-            var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
-            if (!result.Succeeded) throw new ApiException("Credenciales Invalidas");
+                var result = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+                if (!result.Succeeded)
+                    throw new ApiException("Credenciales inválidas");
 
-            var refreshToken = GenerateRefreshToken(ipAddress);
-            JwtSecurityToken jwtSecurityToken = await generateJwtToken(user);
-            var negociosEmprendedor = await _negocioReadingRepository.ListAsync(new NegocioSpecification(user.Id));
+                var refreshToken = GenerateRefreshToken(ipAddress);
+                var jwtSecurityToken = await generateJwtToken(user);
+                var roles = await _userManager.GetRolesAsync(user);
 
-            if (negociosEmprendedor.Count != 0){
-                Console.WriteLine("NEGOCIOS DEL EMPREDEDOR: " + negociosEmprendedor.Count());
-
-                AuthenticationResponse authenticationResponse = new AuthenticationResponse
+                var authenticationResponse = new AuthenticationResponse
                 {
                     Id = user.Id,
                     JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                     UserName = user.UserName,
                     Email = user.Email,
-                    Roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false),
+                    Roles = roles,
                     isVerified = user.EmailConfirmed,
                     RefreshToken = refreshToken.Token,
-                    Negocios = negociosEmprendedor.Select(x => new SelectNegocioDTO
-                    {
-                        Id = x.Id,
-                        Nombre = x.nombre
-                    }).ToList()
-
+                    Negocios = new List<SelectNegocioDTO>() // Inicializamos vacío
                 };
 
-                return new Response<AuthenticationResponse>(authenticationResponse, $"Usuario Autenticado {user.UserName}");
-            }else{
-                var negociosVendedor = await _negocioVendedoresReadingRepository.ListAsync(new NegocioVendedorSpecification(user.Id));
+                // 1. Negocios como Emprendedor
+                var negociosEmprendedor = await _negocioReadingRepository.ListAsync(new NegocioSpecification(user.Id));
 
-                AuthenticationResponse authenticationResponse = new AuthenticationResponse
+                if (negociosEmprendedor?.Any() == true)
                 {
-                    Id = user.Id,
-                    JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
-                    UserName = user.UserName,
-                    Email = user.Email,
-                    Roles = await _userManager.GetRolesAsync(user).ConfigureAwait(false),
-                    isVerified = user.EmailConfirmed,
-                    RefreshToken = refreshToken.Token,
-                    Negocios = negociosVendedor.Select(x => new SelectNegocioDTO
-                    {
-                        Id = x.NegocioId,
-                        Nombre = x.Negocio.nombre
-                    }).ToList()
-                };
+                    Console.WriteLine("NEGOCIOS DEL EMPRENDEDOR: " + negociosEmprendedor.Count);
+                    authenticationResponse.Negocios = negociosEmprendedor
+                        .Where(n => !string.IsNullOrEmpty(n?.nombre))
+                        .Select(n => new SelectNegocioDTO
+                        {
+                            Id = n.Id,
+                            Nombre = n.nombre
+                        }).ToList();
+                }
+                else
+                {
+                    // 2. Negocios como Vendedor
+                    var negociosVendedor = await _negocioVendedoresReadingRepository.ListAsync(new NegocioVendedorSpecification(user.Id));
 
-                return new Response<AuthenticationResponse>(authenticationResponse, $"Usuario Autenticado {user.UserName}");
-            }        
+                    if (negociosVendedor?.Any() == true)
+                    {
+                        authenticationResponse.Negocios = negociosVendedor
+                            .Where(nv => nv?.Negocio != null && !string.IsNullOrEmpty(nv.Negocio.nombre))
+                            .Select(nv => new SelectNegocioDTO
+                            {
+                                Id = nv.NegocioId,
+                                Nombre = nv.Negocio.nombre
+                            }).ToList();
+                    }
+                    else if (roles.Contains("ADMIN"))
+                    {
+                        Console.WriteLine("USUARIO ADMIN SIN NEGOCIOS");
+                    }
+
+                }
+
+                return new Response<AuthenticationResponse>(authenticationResponse, $"Usuario autenticado: {user.UserName}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("ERROR EN LOGIN: " + ex.Message);
+                Console.WriteLine("STACK TRACE: " + ex.StackTrace);
+
+                return new Response<AuthenticationResponse>
+                {
+                    Succeeded = false,
+                    Message = "Error durante el inicio de sesión.",
+                    Data = null,
+                    Errors = new List<string> { ex.Message }
+                };
+            }
         }
+
 
         public async Task<Response<string>> RegisterAsync(RegistrarEmprendedor request, string origin)
         {

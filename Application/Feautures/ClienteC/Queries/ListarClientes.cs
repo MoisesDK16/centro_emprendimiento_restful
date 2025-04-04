@@ -16,6 +16,7 @@ namespace Application.Feautures.ClienteC.Queries
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
+        public required long NegocioId { get; set; }
         public string? Identificacion { get; set; }
         public string? Nombres { get; set; }
         public string? PrimerApellido { get; set; }
@@ -34,6 +35,7 @@ namespace Application.Feautures.ClienteC.Queries
         public async Task<PagedResponse<IEnumerable<Cliente>>> Handle(ListarClientes request, CancellationToken cancellationToken)
         {
             var clientes = await _repository.ListAsync(new ClienteSpecification(
+                request.NegocioId,
                 request.Identificacion,
                 request.Nombres,
                 request.PrimerApellido,
@@ -43,8 +45,6 @@ namespace Application.Feautures.ClienteC.Queries
             var totalRecords = clientes.Count;
             var totalPages = (int)Math.Ceiling((double)totalRecords / request.PageSize);
             var paged =  clientes.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize);
-
-            if (!clientes.Any()) throw new ApiException($"No se encontraron clientes");
 
             return new PagedResponse<IEnumerable<Cliente>>(paged, request.PageNumber, request.PageSize, totalPages, totalRecords);
         }
