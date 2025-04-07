@@ -8,11 +8,13 @@ namespace Application.DTOs.Users
 {
     public class UserInfo
     {
-        public string Id { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
+        public required string Id { get; set; }
+        public required string Nombre { get; set; }
+        public required string Apellido { get; set; }
         public string? Identificacion { get; set; }
-        public string CiudadOrigen { get; set; }
+        public required string CiudadOrigen { get; set; }
+        public required string UserName { get; set; }
+        public required string Email { get; set; }
         public string? Telefono { get; set; }
     }
 }

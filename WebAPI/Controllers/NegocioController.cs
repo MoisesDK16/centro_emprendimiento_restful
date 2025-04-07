@@ -63,6 +63,12 @@ namespace WebAPI.Controllers
             return Ok(await Mediator.Send(selectNegocios));
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet("selectNegociosAdmin")]
+        public async Task<IActionResult> SelectNegociosAdmin([FromQuery] SelectNegociosAdmin selectNegocios)
+        {
+            return Ok(await Mediator.Send(selectNegocios));
+        }
 
         [HttpGet("aprobar")]
         [AllowAnonymous]

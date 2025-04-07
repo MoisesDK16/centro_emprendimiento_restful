@@ -1,7 +1,6 @@
 ﻿using Application.Feautures.ParametrosC.Commands;
 using Application.Feautures.ParametrosC.Queries;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers

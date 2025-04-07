@@ -1,5 +1,8 @@
-﻿using Application.DTOs.Users;
+﻿using Application.DTOs.Negocios;
+using Application.DTOs.Users;
 using Application.Interfaces;
+using Application.Specifications;
+using Domain.Entities;
 using Identity.Models;
 using Microsoft.AspNetCore.Identity;
 using NuGet.Common;
@@ -14,10 +17,12 @@ namespace Identity.Services
     public class UserServiceImplementation : IUserService
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IReadOnlyRepositoryAsync<Negocio> _negocioReadingRepository;
 
-        public UserServiceImplementation(UserManager<ApplicationUser> userManager)
+        public UserServiceImplementation(UserManager<ApplicationUser> userManager, IReadOnlyRepositoryAsync<Negocio> negocioReadingRepository)
         {
             _userManager = userManager;
+            _negocioReadingRepository = negocioReadingRepository;
         }
 
         public async Task<bool> UserExistsAsync(string userId)
@@ -26,38 +31,41 @@ namespace Identity.Services
             return user != null;
         }
 
-        public async Task<UserInfo> GetUserInfoAsync(string userId)
+        public async Task<UserEmprendedor> GetEmprendedorInfoAsync(string userId)
         {
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-                return null;
+            var user = await _userManager.FindByIdAsync(userId)
+                       ?? throw new Exception("El usuario no fue encontrado");
 
-            return new UserInfo
+            var roles = await _userManager.GetRolesAsync(user);
+            if (!roles.Contains("Emprendedor"))
+                throw new Exception("El usuario no es un emprendedor");
+
+            // Obtener negocios del emprendedor antes de retornar
+            var negocios = await _negocioReadingRepository.ListAsync(new NegocioSpecification(user.Id));
+
+            var negociosInfo = negocios.Select(n => new NegocioInfoDTO
+            {
+                Id = n.Id,
+                Nombre = n.nombre,
+                Telefono = n.telefono,
+                Direccion = n.direccion,
+                Estado = n.estado
+            }).ToList();
+
+            return new UserEmprendedor
             {
                 Id = user.Id,
                 Nombre = user.Nombre,
                 Apellido = user.Apellido,
                 Identificacion = user.Identificacion,
                 CiudadOrigen = user.CiudadOrigen,
-                Telefono = user.Telefono
+                Telefono = user.Telefono,
+                Email = user.Email,
+                UserName = user.UserName,
+                NegociosInfo = negociosInfo
             };
         }
-        public async Task<List<UserInfo>> GetEmprendedoresAsync()
-        {
-            var usuarios = await _userManager.GetUsersInRoleAsync("Emprendedor");
 
-            var emprendedores = usuarios.Select(u => new UserInfo
-            {
-                Id = u.Id,
-                Nombre = u.Nombre,
-                Apellido = u.Apellido,
-                Identificacion = u.Identificacion,
-                CiudadOrigen = u.CiudadOrigen,
-                Telefono = u.Telefono
-            }).ToList();
-
-            return emprendedores;
-        }
 
         public async Task<bool> Confirmar(string userId, string token)
         {
@@ -67,6 +75,56 @@ namespace Identity.Services
             var result = await _userManager.ConfirmEmailAsync(user, token);
             Console.WriteLine("RESULT: " + result.Succeeded);
             return result.Succeeded;
+        }
+
+        public async Task<bool> ActualizarUsuario(UserInfo userInfo)
+        {
+            var user = await _userManager.FindByIdAsync(userInfo.Id);
+            if (user == null) throw new Exception("Usuario no encontrado");
+            user.Nombre = userInfo.Nombre;
+            user.Apellido = userInfo.Apellido;
+            user.CiudadOrigen = userInfo.CiudadOrigen;
+            user.Telefono = userInfo.Telefono;
+            user.UserName = userInfo.UserName;
+            user.Email = userInfo.Email;
+            return _userManager.UpdateAsync(user).Result.Succeeded;
+        }
+
+        public async Task<List<UserEmprendedor>> ListarEmprendedores()
+        {
+            var emprendedores = await _userManager.GetUsersInRoleAsync("Emprendedor");
+            List<UserEmprendedor> userEmprendedores = new List<UserEmprendedor>();
+
+            foreach (var user in emprendedores)
+            {
+                //Negocios del emprendedor
+                var negocios = await _negocioReadingRepository.ListAsync(new NegocioSpecification(user.Id));
+
+                var userInfo = new UserEmprendedor
+                {
+                    Id = user.Id,
+                    Nombre = user.Nombre,
+                    Apellido = user.Apellido,
+                    Identificacion = user.Identificacion,
+                    CiudadOrigen = user.CiudadOrigen,
+                    Telefono = user.Telefono,
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    NegociosInfo = negocios.Select(n => new NegocioInfoDTO
+                    {
+                        Id = n.Id,
+                        Nombre = n.nombre,
+                        Telefono = n.telefono,
+                        Direccion = n.direccion,
+                        Estado = n.estado
+                    }).ToList()
+
+                };
+
+                userEmprendedores.Add(userInfo);
+            }
+
+            return userEmprendedores;
         }
     }
 }

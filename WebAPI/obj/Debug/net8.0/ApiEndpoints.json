@@ -1,12 +1,58 @@
 [
   {
     "ContainingType": "WebAPI.Controllers.AccountController",
+    "Method": "ActualizarUsuario",
+    "RelativePath": "api/v{version}/Account/actualizarUsuario",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "command",
+        "Type": "Application.Feautures.UsuarioC.Commands.ActualizarUsuario",
+        "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AccountController",
     "Method": "GetAllEmprendedores",
     "RelativePath": "api/v{version}/Account/AllEmprendedores",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Identificacion",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
       {
         "Name": "version",
         "Type": "",
@@ -72,6 +118,27 @@
       },
       {
         "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AccountController",
+    "Method": "GetEmprendedorById",
+    "RelativePath": "api/v{version}/Account/emprendedorById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "emprendedorId",
         "Type": "System.String",
         "IsRequired": false
       },
@@ -1091,6 +1158,27 @@
       {
         "Name": "EmprendedorId",
         "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.NegocioController",
+    "Method": "SelectNegociosAdmin",
+    "RelativePath": "api/v{version}/Negocio/selectNegociosAdmin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "selectNegocios",
+        "Type": "Application.Feautures.NegocioC.Queries.SelectNegociosAdmin",
         "IsRequired": false
       },
       {

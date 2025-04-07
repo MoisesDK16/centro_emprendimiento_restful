@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.Enums.Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,8 @@ namespace Application.DTOs.Negocios
 
         public required string Telefono { get; set; }
         public string? Descripcion { get; set; }
+
+        public Estado? Estado { get; set; }
     }
 
     public class EmprendedorInfoDTO

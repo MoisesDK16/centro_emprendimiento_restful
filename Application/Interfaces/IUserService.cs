@@ -1,4 +1,5 @@
-﻿using Application.DTOs.Users;
+﻿using Application.DTOs.Negocios;
+using Application.DTOs.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,9 @@ namespace Application.Interfaces
     public interface IUserService
     {
         Task<bool> UserExistsAsync(string userId);
-        Task<UserInfo> GetUserInfoAsync(string userId);
-        Task<List<UserInfo>> GetEmprendedoresAsync();
+        Task<UserEmprendedor> GetEmprendedorInfoAsync(string userId);
         Task<bool> Confirmar(string token, string userId);
+        Task<bool> ActualizarUsuario(UserInfo userInfo);
+        Task<List<UserEmprendedor>> ListarEmprendedores();
     }
 }

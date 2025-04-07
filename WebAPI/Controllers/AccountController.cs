@@ -3,14 +3,13 @@ using Application.DTOs.Users;
 using Application.Feautures.Authenticate.Commands.AuthenticateCommand;
 using Application.Feautures.Authenticate.Commands.RegisterCommand;
 using Application.Feautures.Authenticate.Commands.RegisterSellerCommand;
+using Application.Feautures.UsuarioC.Commands;
+using Application.Feautures.UsuarioC.Queries;
 using Application.Interfaces;
-using Application.Services.ExternalS;
 using Application.Wrappers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
 
 namespace WebAPI.Controllers
 {
@@ -102,9 +101,32 @@ namespace WebAPI.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpGet("AllEmprendedores")]
-        public async Task<IActionResult> GetAllEmprendedores()
+        public async Task<IActionResult> GetAllEmprendedores([FromQuery] ListarEmprendedoresParameters filter)
         {
-            return Ok(new Response<List<UserInfo>>(await _userService.GetEmprendedoresAsync()));
+            var emprendedores = await Mediator.Send(new ListarEmprendedores
+            {
+                PageNumber = filter.PageNumber,
+                PageSize = filter.PageSize,
+                Email = filter.Email,
+                UserName = filter.UserName,
+                Identificacion = filter.Identificacion
+            });
+            return Ok(emprendedores);
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("emprendedorById")]
+        public async Task<IActionResult> GetEmprendedorById([FromQuery] string emprendedorId)
+        {
+            return Ok(await Mediator.Send(new EmprendedorById { Id = emprendedorId }));
+        }
+
+
+        [HttpPost("actualizarUsuario")]
+        public async Task<IActionResult> ActualizarUsuario([FromBody] ActualizarUsuario command)
+        {
+            return Ok(await Mediator.Send(command));
+
         }
 
         [HttpGet("confirmar")]
@@ -138,9 +160,8 @@ namespace WebAPI.Controllers
         }
 
 
-        [Authorize(Roles = "Admin")]
         [HttpPost("EnviarInformacionAEmprendedores")]
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EnviarInformacionAEmprendedores([FromBody] EnvioInformacionDTO request)
         {
             if (request.EnvioInformacion == null || string.IsNullOrWhiteSpace(request.EnvioInformacion.Asunto) || string.IsNullOrWhiteSpace(request.EnvioInformacion.Contenido))
