@@ -59,6 +59,74 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.AccountController",
+    "Method": "Confirmar",
+    "RelativePath": "api/v{version}/Account/confirmar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "token",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AccountController",
+    "Method": "EnviarInformacionAEmprendedores",
+    "RelativePath": "api/v{version}/Account/EnviarInformacionAEmprendedores",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Application.DTOs.Correos.EnvioInformacionDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AccountController",
+    "Method": "ReenviarConfirmacion",
+    "RelativePath": "api/v{version}/Account/reenviarConfirmacion",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AccountController",
     "Method": "RegisterAsync",
     "RelativePath": "api/v{version}/Account/register",
     "HttpMethod": "POST",
@@ -863,6 +931,32 @@
         "Name": "commando",
         "Type": "Application.Feautures.NegocioC.Commands.ActualizarNegocio",
         "IsRequired": true
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.NegocioController",
+    "Method": "AprobarORechazarNegocio",
+    "RelativePath": "api/v{version}/Negocio/aprobar",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "negocioId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "aprobado",
+        "Type": "System.Boolean",
+        "IsRequired": false
       },
       {
         "Name": "version",

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Enums.Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,5 +11,7 @@ namespace Application.DTOs.Negocios
     {
         public long Id { get; set; }
         public required string Nombre { get; set; }
+
+        public required Estado Estado { get; set; }
     }
 }

@@ -43,8 +43,6 @@ namespace Application.Feautures.NegocioC.Queries
             var totalPages = (int)Math.Ceiling((double)totalRecords / request.PageSize);
             var pagedNegocios = negocios.Skip((request.PageNumber - 1) * request.PageSize).Take(request.PageSize).ToList();
 
-            if (!pagedNegocios.Any()) throw new ApiException($"No se encontraron negocios");
-
             return new PagedResponse<IEnumerable<Negocio>>(pagedNegocios, request.PageNumber, request.PageSize, totalPages, totalRecords);
         }
     }

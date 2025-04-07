@@ -1,5 +1,7 @@
 ﻿using Application;
 using Application.Interfaces;
+using Application.Services.ExternalS;
+using Application.Services.NegocioS;
 using Application.Services.PermissionS;
 using Application.Services.StockS;
 using Microsoft.Extensions.Configuration;
@@ -12,6 +14,8 @@ namespace Shared.Services
         {
             services.AddTransient<IDateTimeService, DateTimeService>();
             services.AddScoped<StockService>();
+            services.AddScoped<CorreoServicio>();
+            services.AddScoped<NegocioService>();
 
         }
     }

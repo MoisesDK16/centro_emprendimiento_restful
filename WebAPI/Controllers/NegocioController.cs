@@ -2,14 +2,19 @@
 using Microsoft.AspNetCore.Mvc;
 using Application.Feautures.NegocioC.Commands;
 using Application.Feautures.NegocioC.Queries;
+using Microsoft.AspNetCore.Authorization;
+using Application.Services.NegocioS;
+using System.Text;
 
 namespace WebAPI.Controllers
 {
     [ApiVersion("1.0")]
     public class NegocioController : BaseApiController
     {
-        public NegocioController(IMediator mediator) : base(mediator)
+        private readonly NegocioService _negocioService;
+        public NegocioController(IMediator mediator, NegocioService negocioService) : base(mediator)
         {
+            _negocioService = negocioService;
         }
 
         [HttpPost("crear")]
@@ -57,5 +62,16 @@ namespace WebAPI.Controllers
         {
             return Ok(await Mediator.Send(selectNegocios));
         }
+
+
+        [HttpGet("aprobar")]
+        [AllowAnonymous]
+        public async Task<IActionResult> AprobarORechazarNegocio([FromQuery] long negocioId, [FromQuery] bool aprobado)
+        {
+            var mensaje = await _negocioService.DeterminarNegocio(negocioId, aprobado);
+            return Content(mensaje, "text/html", Encoding.UTF8);
+        }
+
+
     }
 }

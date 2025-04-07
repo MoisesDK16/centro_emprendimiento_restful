@@ -31,7 +31,8 @@ namespace Application.Feautures.NegocioC.Queries
                     .Select(n => new SelectNegocioDTO
                     {
                         Id = n.Id,
-                        Nombre = n.nombre
+                        Nombre = n.nombre,
+                        Estado = n.estado,
                     })
                     .ToList();
                 return new Response<IEnumerable<SelectNegocioDTO>>(negocioSelectDTOs);

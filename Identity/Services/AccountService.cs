@@ -1,20 +1,25 @@
 ﻿using Application.Behaviors;
+using Application.DTOs.Correos;
 using Application.DTOs.Negocios;
 using Application.DTOs.Users;
 using Application.Enums;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Services.ExternalS;
 using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
+using Domain.Enums.Negocio;
 using Domain.Settings;
 using Identity.Helpers;
 using Identity.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
@@ -32,7 +37,8 @@ namespace Identity.Services
         private readonly IReadOnlyRepositoryAsync<Negocio> _negocioReadingRepository;
         private readonly IRepositoryAsync<Negocio> _negocioRepository;
         private readonly IRepositoryAsync<NegocioVendedores> _negocioVendedoresRepository;
-        private readonly IReadOnlyRepositoryAsync<NegocioVendedores> _negocioVendedoresReadingRepository;   
+        private readonly IReadOnlyRepositoryAsync<NegocioVendedores> _negocioVendedoresReadingRepository;
+        private readonly IWebHostEnvironment _env;
 
         public AccountService(
             UserManager<ApplicationUser> userManager,
@@ -44,7 +50,8 @@ namespace Identity.Services
             IReadOnlyRepositoryAsync<Negocio> negocioReadingRepository,
             IRepositoryAsync<Negocio> negocioRepository,
             IRepositoryAsync<NegocioVendedores> negocioVendedoresRepository,
-            IReadOnlyRepositoryAsync<NegocioVendedores> negocioVendedoresReadingRepository
+            IReadOnlyRepositoryAsync<NegocioVendedores> negocioVendedoresReadingRepository,
+            IWebHostEnvironment env
             )
         {
             _userManager = userManager;
@@ -57,10 +64,21 @@ namespace Identity.Services
             _negocioRepository = negocioRepository;
             _negocioVendedoresRepository = negocioVendedoresRepository;
             _negocioVendedoresReadingRepository = negocioVendedoresReadingRepository;
+            _env = env;
         }
 
         public async Task<Response<AuthenticationResponse>> logInByEmail(AuthenticationRequestEmail request, string ipAddress)
         {
+
+            var userToLog = _userManager.Users.FirstOrDefault(x => x.Email == request.Email);
+
+            if (userToLog != null)
+            {
+                if (userToLog.EmailConfirmed == false)
+                    throw new ApiException($"Tu usuario con nombre {userToLog.UserName} y correo {userToLog.Email} no tiene confirmacion de correo electrónico. " +
+                        $"Por favor, verifica tu bandeja de entrada o carpeta de spam para confirmar su correo electrónico.");
+            }
+
             try
             {
                 var user = await _userManager.FindByEmailAsync(request.Email);
@@ -97,7 +115,8 @@ namespace Identity.Services
                         .Select(n => new SelectNegocioDTO
                         {
                             Id = n.Id,
-                            Nombre = n.nombre
+                            Nombre = n.nombre,
+                            Estado = n.estado
                         }).ToList();
                 }
                 else
@@ -112,7 +131,8 @@ namespace Identity.Services
                             .Select(nv => new SelectNegocioDTO
                             {
                                 Id = nv.NegocioId,
-                                Nombre = nv.Negocio.nombre
+                                Nombre = nv.Negocio.nombre,
+                                Estado = nv.Negocio.estado
                             }).ToList();
                     }
                     else if (roles.Contains("ADMIN"))
@@ -136,9 +156,17 @@ namespace Identity.Services
             }
         }
 
-
         public async Task<Response<AuthenticationResponse>> logInByUserName(AuthenticationRequestUserName request, string ipAddress)
         {
+            var userToLog = _userManager.Users.FirstOrDefault(x => x.UserName == request.UserName);
+
+            if (userToLog != null)
+            {
+                if(userToLog.EmailConfirmed == false)
+                    throw new ApiException($"Tu usuario con nombre {userToLog.UserName} y correo {userToLog.Email} no tiene confirmacion de correo electrónico. " +
+                        $"Por favor, verifica tu bandeja de entrada o carpeta de spam para confirmar su correo electrónico.");
+            }
+
             try
             {
                 var user = await _userManager.FindByNameAsync(request.UserName);
@@ -163,7 +191,7 @@ namespace Identity.Services
                     Roles = roles,
                     isVerified = user.EmailConfirmed,
                     RefreshToken = refreshToken.Token,
-                    Negocios = new List<SelectNegocioDTO>() // Inicializamos vacío
+                    Negocios = new List<SelectNegocioDTO>() 
                 };
 
                 // 1. Negocios como Emprendedor
@@ -177,7 +205,8 @@ namespace Identity.Services
                         .Select(n => new SelectNegocioDTO
                         {
                             Id = n.Id,
-                            Nombre = n.nombre
+                            Nombre = n.nombre,
+                            Estado = n.estado
                         }).ToList();
                 }
                 else
@@ -192,7 +221,8 @@ namespace Identity.Services
                             .Select(nv => new SelectNegocioDTO
                             {
                                 Id = nv.NegocioId,
-                                Nombre = nv.Negocio.nombre
+                                Nombre = nv.Negocio.nombre,
+                                Estado = nv.Negocio.estado
                             }).ToList();
                     }
                     else if (roles.Contains("ADMIN"))
@@ -219,7 +249,6 @@ namespace Identity.Services
             }
         }
 
-
         public async Task<Response<string>> RegisterAsync(RegistrarEmprendedor request, string origin)
         {
             if (request.UserName.Contains("@"))
@@ -238,25 +267,26 @@ namespace Identity.Services
                 if (condition) throw new ApiException(message);
             }
 
-            await _unitOfWork.BeginTransactionAsync();
+            ApplicationUser user = null;
+            Negocio negocio = null;
 
             try
             {
-                var user = new ApplicationUser
+                // Crear usuario
+                user = new ApplicationUser
                 {
                     Email = request.Email,
                     UserName = request.UserName,
                     Nombre = request.Nombre,
                     Apellido = request.Apellido,
-                    EmailConfirmed = true,
-                    PhoneNumberConfirmed = true,
+                    EmailConfirmed = false, //importante: aún no confirmado
+                    PhoneNumberConfirmed = false,
                     Identificacion = request.Identificacion,
                     Telefono = request.Telefono,
-                    CiudadOrigen = request.CiudadOrigen
+                    CiudadOrigen = request.CiudadOrigen,
                 };
 
                 var result = await _userManager.CreateAsync(user, request.Password);
-
                 if (!result.Succeeded)
                 {
                     var errors = string.Join(", ", result.Errors.Select(e => e.Description));
@@ -265,12 +295,13 @@ namespace Identity.Services
 
                 await _userManager.AddToRoleAsync(user, Roles.Emprendedor.ToString());
 
-                var negocio = new Negocio
+                // Crear negocio
+                negocio = new Negocio
                 {
                     nombre = request.NombreNegocio,
                     descripcion = request.Descripcion,
                     direccion = request.DireccionNegocio,
-                    estado = Domain.Enums.Negocio.Estado.Pendiente,
+                    estado = Estado.Pendiente,
                     telefono = request.TelefonoNegocio,
                     CategoriaId = request.CategoriaNegocio,
                     EmprendedorId = user.Id
@@ -279,90 +310,299 @@ namespace Identity.Services
                 await _negocioRepository.AddAsync(negocio);
                 await _negocioRepository.SaveChangesAsync();
 
-                await _unitOfWork.CommitAsync();
+                // Generar token
+                var rawToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var token = WebUtility.UrlEncode(rawToken);
 
-                return new Response<string>($"Usuario de tipo Emprendedor ha sido registrado exitosamente: {request.UserName}");
+                // Cargar plantilla para confirmar el correo
+                string path = Path.Combine(_env.ContentRootPath, "Templates", "Confirmar.html");
+                string content = File.ReadAllText(path);
+
+                string url = $"https://localhost:7050/api/v1/Account/confirmar?token={token}&userId={user.Id}";
+                string htmlBody = string.Format(content, user.UserName, url);
+
+                Console.WriteLine("URL de confirmación: " + url);
+
+                // Enviar correo
+                var correo = new CorreoDTO
+                {
+                    Para = user.Email,
+                    Asunto = "Confirmación de cuenta",
+                    Contenido = htmlBody
+                };
+
+                var enviado = CorreoServicio.Enviar(correo);
+
+                if (!enviado)
+                    throw new Exception("No se pudo enviar el correo de confirmación, tenga en cuenta que su correo debe ser un correo de gmail y que realmente exista");
+                
+                NegocioInfoDTO negocioInfo = new()
+                {
+                    Id = negocio.Id,
+                    Nombre = negocio.nombre,
+                    Direccion = negocio.direccion,
+                    Telefono = negocio.telefono,
+                    Descripcion = negocio.descripcion
+                };
+
+                EmprendedorInfoDTO emprendedor = new()
+                {
+                    Nombre = user.Nombre,
+                    Apellido = user.Apellido,
+                    Telefono = user.Telefono,
+                    CiudadOrigen = user.CiudadOrigen,
+                    Identificacion = user.Identificacion
+                };
+
+                Console.WriteLine("EMPRENDEDOR: " + user.Nombre + " " + user.Apellido);
+                Console.WriteLine("NEGOCIO: " + negocio.nombre);
+
+                // Cargar plantilla de aprobación de negocio
+                string pathNegocio = Path.Combine(_env.ContentRootPath, "Templates", "SolicitudAprobacionNegocio.html");
+                string contentNegocio = File.ReadAllText(pathNegocio);
+
+                string aprobarUrl = $"https://localhost:7050/api/v1/Negocio/aprobar?negocioId={negocio.Id}&aprobado=true";
+                string rechazarUrl = $"https://localhost:7050/api/v1/Negocio/aprobar?negocioId={negocio.Id}&aprobado=false";
+
+                Console.WriteLine("URL de aprobación 1: " + aprobarUrl);
+                Console.WriteLine("User: " + user.UserName);    
+                Console.WriteLine("Negocio: " + negocio.nombre);
+
+                // Reemplazo en plantilla
+                string cuerpoHtml = contentNegocio
+                    .Replace("{{NombreNegocio}}", negocioInfo.Nombre)
+                    .Replace("{{Direccion}}", negocioInfo.Direccion)
+                    .Replace("{{Telefono}}", negocioInfo.Telefono)
+                    .Replace("{{Descripcion}}", negocioInfo.Descripcion ?? "Sin descripción")
+                    .Replace("{{NombreEmprendedor}}", emprendedor.Nombre)
+                    .Replace("{{ApellidoEmprendedor}}", emprendedor.Apellido)
+                    .Replace("{{TelefonoEmprendedor}}", emprendedor.Telefono)
+                    .Replace("{{CiudadOrigen}}", emprendedor.CiudadOrigen)
+                    .Replace("{{Identificacion}}", emprendedor.Identificacion)
+                    .Replace("{{AprobarUrl}}", aprobarUrl)
+                    .Replace("{{RechazarUrl}}", rechazarUrl);
+
+
+                Console.WriteLine("URL de aprobación 2: " + aprobarUrl);
+                // Enviar correo
+                var solicitud = new CorreoDTO
+                {
+                    Para = "moisesloor122@gmail.com",
+                    Asunto = "Solicitud de aprobación de negocio",
+                    Contenido = cuerpoHtml
+                };
+
+                bool solicitudEnviada = CorreoServicio.Enviar(solicitud);
+
+                if (!solicitudEnviada)
+                    throw new Exception("No se pudo enviar la solicitud de aprobación del negocio.");
+
+
+                return new Response<string>("Se ha enviado un enlace de confirmación a tu correo electrónico.");
             }
             catch (Exception ex)
             {
-                await _unitOfWork.RollbackAsync();
+                // Limpieza manual si algo falla
+                if (negocio != null)
+                {
+                    await _negocioRepository.DeleteAsync(negocio);
+                    await _negocioRepository.SaveChangesAsync();
+                }
+
+                if (user != null)
+                {
+                    await _userManager.DeleteAsync(user);
+                }
+
                 var inner = ex.InnerException?.Message ?? ex.Message;
                 throw new ApiException($"Error al registrar usuario y negocio: {inner}");
             }
-
         }
+
+
 
         public async Task<Response<string>> RegisterVendedorAsync(RegistrarVendedor request, string origin)
         {
-            var negocio = await _negocioReadingRepository.GetByIdAsync(request.NegocioId) ?? throw new ApiException($"Negocio con {request.NegocioId} no encontrado");
+            // Validaciones iniciales
+            var negocio = await _negocioReadingRepository.GetByIdAsync(request.NegocioId)
+                ?? throw new ApiException($"Negocio con ID {request.NegocioId} no encontrado");
 
-            var userWithSameUserName = await _userManager.FindByNameAsync(request.UserName);
-            if (userWithSameUserName != null)
-                throw new ApiException($"User con este Nombre Usuario: {request.UserName} ya existe.");
+            if (await _userManager.FindByNameAsync(request.UserName) != null)
+                throw new ApiException($"Ya existe un usuario con nombre: {request.UserName}");
 
-            var userWithSameEmail = await _userManager.FindByEmailAsync(request.Email);
-            if (userWithSameEmail != null)
-                throw new ApiException($"User con este email: {request.Email} ya existe.");
+            if (await _userManager.FindByEmailAsync(request.Email) != null)
+                throw new ApiException($"Ya existe un usuario con email: {request.Email}");
 
-
-            if (request.Identificacion != null)
-            {
-                if (!ValidacionIdentificacion.VerificaIdentificacion(request.Identificacion))
-                    throw new ApiException($"Identificacion no valida");
-            }
+            if (!string.IsNullOrWhiteSpace(request.Identificacion) &&
+                !ValidacionIdentificacion.VerificaIdentificacion(request.Identificacion))
+                throw new ApiException("Identificación no válida");
 
             if (request.UserName.Contains("@"))
-                throw new ApiException($"El nombre de usuario no puede contene @");
+                throw new ApiException("El nombre de usuario no puede contener '@'.");
 
-            await _unitOfWork.BeginTransactionAsync();
+            ApplicationUser user = null;
+            NegocioVendedores negocioVendedor = null;
 
-            try{
-                var user = new ApplicationUser
+            try
+            {
+                // Crear usuario
+                user = new ApplicationUser
                 {
                     Email = request.Email,
                     UserName = request.UserName,
                     Nombre = request.Nombre,
                     Apellido = request.Apellido,
-                    EmailConfirmed = true,
-                    PhoneNumberConfirmed = true,
-                    Identificacion = request.Identificacion ?? null,
-                    Telefono = request.Telefono ?? null,
+                    EmailConfirmed = false, // Espera confirmación
+                    PhoneNumberConfirmed = false,
+                    Identificacion = request.Identificacion,
+                    Telefono = request.Telefono,
                     CiudadOrigen = request.CiudadOrigen,
                 };
 
                 var result = await _userManager.CreateAsync(user, request.Password);
-
-                if (result.Succeeded)
-                {
-                    await _userManager.AddToRoleAsync(user, Roles.Vendedor.ToString());
-
-                    Console.WriteLine("user ejeke: " + user.Id);
-
-                    var negocioVendedor = new NegocioVendedores
-                    {
-                        NegocioId = negocio.Id,
-                        VendedorId = user.Id,
-                    };
-
-                    await _negocioVendedoresRepository.AddAsync(negocioVendedor);
-                    await _negocioReadingRepository.SaveChangesAsync();
-                    await _unitOfWork.CommitAsync();
-                    return new Response<string>($"Vendedor registrado exitosamente: {request.UserName}");
-                }
-                else
+                if (!result.Succeeded)
                 {
                     var errors = string.Join(", ", result.Errors.Select(e => e.Description));
-                    throw new ApiException($"La cuenta de Usuario no se pudo crear. Errors: {errors}");
+                    throw new ApiException($"No se pudo crear la cuenta de usuario. Errores: {errors}");
                 }
 
+                await _userManager.AddToRoleAsync(user, Roles.Vendedor.ToString());
+
+                // Relación con negocio
+                negocioVendedor = new NegocioVendedores
+                {
+                    NegocioId = negocio.Id,
+                    VendedorId = user.Id
+                };
+
+                await _negocioVendedoresRepository.AddAsync(negocioVendedor);
+                await _negocioReadingRepository.SaveChangesAsync();
+
+                // Generar token
+                var rawToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var token = WebUtility.UrlEncode(rawToken);
+
+                // Preparar correo
+                string path = Path.Combine(_env.ContentRootPath, "Templates", "Confirmar.html");
+                string content = File.ReadAllText(path);
+
+                string url = $"https://localhost:7050/api/v1/Account/confirmar?token={token}&userId={user.Id}";
+                string htmlBody = string.Format(content, user.UserName, url);
+
+                var correo = new CorreoDTO
+                {
+                    Para = user.Email,
+                    Asunto = "Confirmación de cuenta (Vendedor)",
+                    Contenido = htmlBody
+                };
+
+                var enviado = CorreoServicio.Enviar(correo);
+                if (!enviado)
+                    throw new Exception("No se pudo enviar el correo de confirmación. Asegúrate de usar un correo válido y real (ej. Gmail).");
+
+                return new Response<string>("Se ha enviado un enlace de confirmación a tu correo electrónico.");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                await _unitOfWork.RollbackAsync();
+                // Rollback manual
+                if (negocioVendedor != null)
+                {
+                    await _negocioVendedoresRepository.DeleteAsync(negocioVendedor);
+                    await _negocioReadingRepository.SaveChangesAsync();
+                }
+
+                if (user != null)
+                {
+                    await _userManager.DeleteAsync(user);
+                }
+
                 var inner = ex.InnerException?.Message ?? ex.Message;
-                throw new ApiException($"Error al registrar usuario y negocio: {inner}");
+                throw new ApiException($"Error al registrar vendedor: {inner}");
             }
         }
+
+        public async Task<bool> ReenviarConfirmacion(string correo)
+        {
+            if (string.IsNullOrEmpty(correo))
+                throw new ApiException("El correo no puede estar vacío.");
+
+            var user = await _userManager.FindByEmailAsync(correo);
+            if (user == null)
+                throw new ApiException("No se encontró un usuario con ese correo.");
+
+            // Generar token de confirmación
+            var rawToken = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var token = WebUtility.UrlEncode(rawToken);
+
+            // Cargar plantilla HTML
+            string path = Path.Combine(_env.ContentRootPath, "Templates", "Confirmar.html");
+            if (!File.Exists(path))
+                throw new ApiException("No se encontró la plantilla de correo.");
+
+            string content = File.ReadAllText(path);
+
+            string url = $"https://localhost:7050/api/v1/Account/confirmar?token={token}&userId={user.Id}";
+            string htmlBody = string.Format(content, user.UserName, url);
+
+            Console.WriteLine("URL de confirmación: " + url);
+
+            var correoDTO = new CorreoDTO
+            {
+                Para = user.Email,
+                Asunto = "Confirmación de cuenta",
+                Contenido = htmlBody
+            };
+
+            var enviado = CorreoServicio.Enviar(correoDTO);
+            if (!enviado)
+                throw new ApiException("No se pudo enviar el correo de confirmación. Asegúrese de que el correo exista y sea válido.");
+
+            return enviado;
+        }
+
+        public Task<Response<string>> EnviarInformacionAEmprendedores(CorreoDTO correo, List<string> correos)
+        {
+            if (correos == null || !correos.Any())
+                throw new ApiException("Debe enviar al menos un destinatario.");
+
+            try
+            {
+                string path = Path.Combine(_env.ContentRootPath, "Templates", "InformacionParaEmprendedores.html");
+
+                if (!File.Exists(path))
+                    throw new ApiException("La plantilla HTML no fue encontrada.");
+
+                string content = File.ReadAllText(path);
+                string cuerpoHtml = content.Replace("{{contenido}}", correo.Contenido);
+
+                foreach (var destinatario in correos)
+                {
+                    var correoEnviar = new CorreoDTO
+                    {
+                        Para = destinatario,
+                        Asunto = correo.Asunto,
+                        Contenido = cuerpoHtml
+                    };
+
+                    var enviado = CorreoServicio.Enviar(correoEnviar);
+
+                    Console.WriteLine($"Enviando a {destinatario}... ¿Enviado?: {enviado}");
+
+                    if (!enviado)
+                    {
+                        Console.WriteLine($"❌ No se pudo enviar a: {destinatario}");
+                    }
+                }
+
+                return Task.FromResult(new Response<string>("Correos enviados correctamente."));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("❌ Error al enviar correos: " + ex.Message);
+                throw new ApiException("Error al enviar correos: " + ex.Message);
+            }
+        }
+
 
         private async Task<JwtSecurityToken> generateJwtToken(ApplicationUser user)
         {

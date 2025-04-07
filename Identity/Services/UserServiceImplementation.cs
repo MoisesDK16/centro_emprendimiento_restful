@@ -2,6 +2,7 @@
 using Application.Interfaces;
 using Identity.Models;
 using Microsoft.AspNetCore.Identity;
+using NuGet.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,5 +59,14 @@ namespace Identity.Services
             return emprendedores;
         }
 
+        public async Task<bool> Confirmar(string userId, string token)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) throw new Exception("Usuario no encontrado");
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+            Console.WriteLine("RESULT: " + result.Succeeded);
+            return result.Succeeded;
+        }
     }
 }

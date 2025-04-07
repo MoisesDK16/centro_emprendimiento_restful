@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Solicitud de Aprobación de Negocio</title>
+    <style>
+        .contenedor {
+            width: 600px;
+            padding: 20px;
+            border: 1px solid #DBDBDB;
+            border-radius: 12px;
+            font-family: Sans-serif;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #C76F61;
+            text-align: center;
+        }
+
+        .seccion {
+            margin-bottom: 20px;
+        }
+
+        .label {
+            font-weight: bold;
+        }
+
+        .boton {
+            padding: 12px 20px;
+            border-radius: 12px;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        .aprobar {
+            background-color: #4CAF50;
+        }
+
+        .rechazar {
+            background-color: #C76F61;
+        }
+
+        .acciones {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Solicitud de Aprobación de Negocio</h1>
+
+        <p style="text-align:justify; margin-bottom: 25px;">
+            Hemos recibido una nueva solicitud de registro de negocio en la plataforma. A continuación encontrarás los detalles del negocio y del emprendedor que lo ha registrado.
+            Por favor, revisa cuidadosamente la información y toma una decisión para aprobar o rechazar la solicitud.
+        </p>
+
+        <div class="seccion">
+            <h3>Información del Negocio</h3>
+            <p><span class="label">Nombre:</span> {{NombreNegocio}}</p>
+            <p><span class="label">Dirección:</span> {{Direccion}}</p>
+            <p><span class="label">Teléfono:</span> {{Telefono}}</p>
+            <p><span class="label">Descripción:</span> {{Descripcion}}</p>
+        </div>
+
+        <div class="seccion">
+            <h3>Información del Emprendedor</h3>
+            <p><span class="label">Nombre completo:</span> {{NombreEmprendedor}} {{ApellidoEmprendedor}}</p>
+            <p><span class="label">Teléfono:</span> {{TelefonoEmprendedor}}</p>
+            <p><span class="label">Ciudad de origen:</span> {{CiudadOrigen}}</p>
+            <p><span class="label">Identificación:</span> {{Identificacion}}</p>
+        </div>
+
+        <div class="acciones">
+            <a href="{{AprobarUrl}}" class="boton aprobar" target="_blank">Aprobar negocio</a>
+            <a href="{{RechazarUrl}}" class="boton rechazar" target="_blank">Rechazar negocio</a>
+        </div>
+
+        <p style="text-align:center; margin-top:25px;">Gracias por revisar esta solicitud.</p>
+    </div>
+</body>
+</html>
+
+</html>
+

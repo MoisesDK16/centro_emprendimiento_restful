@@ -1,4 +1,5 @@
-﻿using Application.DTOs.Users;
+﻿using Application.DTOs.Correos;
+using Application.DTOs.Users;
 using Application.Wrappers;
 using System;
 using System.Collections.Generic;
@@ -17,5 +18,9 @@ namespace Application.Interfaces
         Task<Response<string>> RegisterAsync(RegistrarEmprendedor request, string origin);
 
         Task<Response<string>> RegisterVendedorAsync(RegistrarVendedor request, string origin);
+
+        Task<bool> ReenviarConfirmacion(string correo);
+
+        Task<Response<string>> EnviarInformacionAEmprendedores(CorreoDTO correo, List<string> correos);
     }
 }
