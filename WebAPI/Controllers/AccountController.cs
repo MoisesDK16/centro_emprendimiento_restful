@@ -147,7 +147,7 @@ namespace WebAPI.Controllers
             return BadRequest("No se pudo confirmar el correo. Verifique el enlace.");
         }
 
-        [HttpGet("reenviarConfirmacion")]
+        [HttpPost("reenviarConfirmacion")]
         [AllowAnonymous]
         public async Task<IActionResult> ReenviarConfirmacion([FromQuery] string email)
         {

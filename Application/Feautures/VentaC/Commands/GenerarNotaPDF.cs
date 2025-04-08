@@ -112,6 +112,8 @@ namespace Application.Feautures.VentaC.Commands
                                 columns.RelativeColumn();
                                 columns.RelativeColumn();
                                 columns.RelativeColumn();
+                                columns.RelativeColumn(0.9f);
+                                columns.RelativeColumn();
                             });
 
                             tabla.Header(header =>
@@ -119,17 +121,20 @@ namespace Application.Feautures.VentaC.Commands
                                 header.Cell().Background("#0059b3").Padding(2).Text("Producto").FontColor("#ffffff");
                                 header.Cell().Background("#0059b3").Padding(2).Text("Precio Unit").FontColor("#ffffff");
                                 header.Cell().Background("#0059b3").Padding(2).Text("Cantidad").FontColor("#ffffff");
+                                header.Cell().Background("#0059b3").Padding(2).Text("Subtotal").FontColor("#ffffff");
+                                header.Cell().Background("#0059b3").Padding(2).Text("Iva").FontColor("#ffffff");
                                 header.Cell().Background("#0059b3").Padding(2).Text("Total").FontColor("#ffffff");
                             });
 
                             foreach (var item in venta.Detalles)
                             {
-                                var total = item.Cantidad * item.Precio;
-
+    
                                 tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(item.Producto.Nombre).FontSize(10);
                                 tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text($"$ {item.Precio:F2}").FontSize(10);
                                 tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).Text(item.Cantidad.ToString()).FontSize(10);
-                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignRight().Text($"$ {total:F2}").FontSize(10);
+                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignRight().Text($"$ {item.Total:F2}").FontSize(10);
+                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignRight().Text($"$ {item.TotalConIva-item.Total:F2}").FontSize(10);
+                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignRight().Text($"$ {item.TotalConIva:F2}").FontSize(10);
                             }
                         });
 

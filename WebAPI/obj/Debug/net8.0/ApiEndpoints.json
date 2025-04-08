@@ -175,7 +175,7 @@
     "ContainingType": "WebAPI.Controllers.AccountController",
     "Method": "ReenviarConfirmacion",
     "RelativePath": "api/v{version}/Account/reenviarConfirmacion",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [

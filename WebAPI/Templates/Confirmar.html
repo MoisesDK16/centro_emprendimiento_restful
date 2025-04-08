@@ -2,37 +2,81 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Confirmación de correo</title>
+    <title>Verifica tu cuenta</title>
     <style>
-        .boton {{
-            display: inline-block;
-            padding: 12px 20px;
-            border-radius: 12px;
-            background-color: #6181C7;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-        }}
+        body {
+            background-color: #f4f6f8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-        .boton:hover {{
-            background-color: #4CAF50;
-        }}
+        .container {
+            max-width: 500px;
+            margin: 60px auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .icon {
+            background-color: #4e7edb;
+            border-radius: 80%;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .icon img {
+                width: 57px;
+                height: 50px;
+            }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 24px;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #4e7edb;
+            color: black;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+            .button:hover {
+                background-color: #3a6ec2;
+            }
     </style>
 </head>
 <body>
-    <div style="width:600px;padding:20px;border:1px solid #DBDBDB;border-radius:12px;font-family:Sans-serif;">
-        <h1 style="color:#C76F61;">Confirmar correo electrónico</h1>
-        <p style="margin-bottom:25px;">Estimado/a <strong>{0}</strong>:</p>
-        <p style="margin-bottom:25px;">
-            Gracias por abrir una cuenta con nosotros. Para utilizar su cuenta, primero deberá confirmar su correo electrónico haciendo clic en el botón a continuación.
+    <div class="container">
+        <div class="icon">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/user.png">
+        </div>
+        <h1>Verifica tu cuenta</h1>
+        <p>Hola <strong>{{userName}}</strong>,</p>
+        <p>
+            Gracias por abrir una cuenta con nosotros. Para utilizar su cuenta, primero deberá confirmar su correo electrónico haciendo clic en el botón de a continuación:
         </p>
-
-        <a href="{1}" class="boton" target="_blank">
-            Confirmar correo electrónico
-        </a>
-
-        <p style="margin-top:25px;">Gracias.</p>
+        <a href="{{url}}" class="button" target="_blank"><strong style="color:black">Verificar mi correo</strong></a>
     </div>
 </body>
 </html>

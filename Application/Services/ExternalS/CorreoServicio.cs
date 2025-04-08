@@ -16,7 +16,7 @@ namespace Application.Services.ExternalS
         private static string _Host = "smtp.gmail.com";
         private static int _Puerto = 587;
 
-        private static string _NombreEnvia = "Codigo Emprendimiento";
+        private static string _NombreEnvia = "Ciemi Uniandes";
         private static string _Correo = "moisesloor122@gmail.com";
         private static string _Clave = "yrdv pxtz xqqh skze";
 

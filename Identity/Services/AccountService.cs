@@ -23,6 +23,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Uno.Extensions;
 
 namespace Identity.Services
 {
@@ -77,6 +78,11 @@ namespace Identity.Services
                 if (userToLog.EmailConfirmed == false)
                     throw new ApiException($"Tu usuario con nombre {userToLog.UserName} y correo {userToLog.Email} no tiene confirmacion de correo electrónico. " +
                         $"Por favor, verifica tu bandeja de entrada o carpeta de spam para confirmar su correo electrónico.");
+                
+                var negociosEmprendedor = await _negocioReadingRepository.ListAsync(new NegocioSpecification(userToLog.Id));
+                if (negociosEmprendedor.All(n => n.estado != Estado.Activo))
+                    throw new ApiException($"Tu usuario con nombre {userToLog.UserName} no tiene negocios activos. ");
+
             }
 
             try
@@ -165,6 +171,10 @@ namespace Identity.Services
                 if(userToLog.EmailConfirmed == false)
                     throw new ApiException($"Tu usuario con nombre {userToLog.UserName} y correo {userToLog.Email} no tiene confirmacion de correo electrónico. " +
                         $"Por favor, verifica tu bandeja de entrada o carpeta de spam para confirmar su correo electrónico.");
+            
+                var negociosEmprendedor = await _negocioReadingRepository.ListAsync(new NegocioSpecification(userToLog.Id));
+                if (negociosEmprendedor.All(n => n.estado != Estado.Activo))
+                    throw new ApiException($"Tu usuario con nombre {userToLog.UserName} no tiene negocios activos. ");
             }
 
             try
@@ -279,7 +289,7 @@ namespace Identity.Services
                     UserName = request.UserName,
                     Nombre = request.Nombre,
                     Apellido = request.Apellido,
-                    EmailConfirmed = false, //importante: aún no confirmado
+                    EmailConfirmed = false, 
                     PhoneNumberConfirmed = false,
                     Identificacion = request.Identificacion,
                     Telefono = request.Telefono,
@@ -319,7 +329,10 @@ namespace Identity.Services
                 string content = File.ReadAllText(path);
 
                 string url = $"https://localhost:7050/api/v1/Account/confirmar?token={token}&userId={user.Id}";
-                string htmlBody = string.Format(content, user.UserName, url);
+
+                string htmlBody = content
+                    .Replace("{{userName}}", user.UserName)
+                    .Replace("{{url}}", url);
 
                 Console.WriteLine("URL de confirmación: " + url);
 
@@ -334,7 +347,7 @@ namespace Identity.Services
                 var enviado = CorreoServicio.Enviar(correo);
 
                 if (!enviado)
-                    throw new Exception("No se pudo enviar el correo de confirmación, tenga en cuenta que su correo debe ser un correo de gmail y que realmente exista");
+                    throw new ApiException("No se pudo enviar el correo de confirmación, tenga en cuenta que su correo debe ser un correo de gmail y que realmente exista");
                 
                 NegocioInfoDTO negocioInfo = new()
                 {
@@ -395,7 +408,7 @@ namespace Identity.Services
                 bool solicitudEnviada = CorreoServicio.Enviar(solicitud);
 
                 if (!solicitudEnviada)
-                    throw new Exception("No se pudo enviar la solicitud de aprobación del negocio.");
+                    throw new ApiException("No se pudo enviar la solicitud de aprobación del negocio.");
 
 
                 return new Response<string>("Se ha enviado un enlace de confirmación a tu correo electrónico.");
@@ -542,7 +555,9 @@ namespace Identity.Services
             string content = File.ReadAllText(path);
 
             string url = $"https://localhost:7050/api/v1/Account/confirmar?token={token}&userId={user.Id}";
-            string htmlBody = string.Format(content, user.UserName, url);
+            string htmlBody = content
+                .Replace("{{userName}}", user.UserName)
+                .Replace("{{url}}", url);
 
             Console.WriteLine("URL de confirmación: " + url);
 

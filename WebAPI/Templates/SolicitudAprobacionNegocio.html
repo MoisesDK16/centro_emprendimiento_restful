@@ -4,49 +4,95 @@
     <meta charset="UTF-8">
     <title>Solicitud de Aprobación de Negocio</title>
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f8;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #2c3e50;
+        }
+
         .contenedor {
-            width: 600px;
-            padding: 20px;
-            border: 1px solid #DBDBDB;
-            border-radius: 12px;
-            font-family: Sans-serif;
-            margin: 0 auto;
-            background-color: #f9f9f9;
+            max-width: 650px;
+            margin: 15px auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
-            color: #C76F61;
             text-align: center;
-        }
-
-        .seccion {
+            color: #0a2540;
+            font-size: 26px;
             margin-bottom: 20px;
         }
 
+        .seccion {
+            margin-bottom: 30px;
+        }
+
+            .seccion h3 {
+                color: #0a2540;
+                border-bottom: 2px solid #e0e6ed;
+                padding-bottom: 5px;
+                margin-bottom: 15px;
+                font-size: 18px;
+            }
+
         .label {
-            font-weight: bold;
+            font-weight: 600;
+            color: #1a1a1a;
         }
 
-        .boton {
-            padding: 12px 20px;
-            border-radius: 12px;
-            color: #ffffff;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 10px;
-            display: inline-block;
+        .valor {
+            color: #555;
         }
 
-        .aprobar {
-            background-color: #4CAF50;
-        }
-
-        .rechazar {
-            background-color: #C76F61;
+        p {
+            margin: 8px 0;
+            font-size: 15px;
         }
 
         .acciones {
             text-align: center;
+            margin-top: 30px;
+        }
+
+        .boton {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .aprobar {
+            background-color: #0a2540;
+            color: white;
+        }
+
+            .aprobar:hover {
+                background-color: #071d31;
+            }
+
+        .rechazar {
+            background-color: #e63946;
+            color: white;
+        }
+
+            .rechazar:hover {
+                background-color: #c62839;
+            }
+
+        .footer {
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            margin-top: 40px;
         }
     </style>
 </head>
@@ -61,29 +107,28 @@
 
         <div class="seccion">
             <h3>Información del Negocio</h3>
-            <p><span class="label">Nombre:</span> {{NombreNegocio}}</p>
-            <p><span class="label">Dirección:</span> {{Direccion}}</p>
-            <p><span class="label">Teléfono:</span> {{Telefono}}</p>
-            <p><span class="label">Descripción:</span> {{Descripcion}}</p>
+            <p><span class="label">Nombre:</span> <span class="valor">{{NombreNegocio}}</span></p>
+            <p><span class="label">Dirección:</span> <span class="valor">{{Direccion}}</span></p>
+            <p><span class="label">Teléfono:</span> <span class="valor">{{Telefono}}</span></p>
+            <p><span class="label">Descripción:</span> <span class="valor">{{Descripcion}}</span></p>
         </div>
 
         <div class="seccion">
             <h3>Información del Emprendedor</h3>
-            <p><span class="label">Nombre completo:</span> {{NombreEmprendedor}} {{ApellidoEmprendedor}}</p>
-            <p><span class="label">Teléfono:</span> {{TelefonoEmprendedor}}</p>
-            <p><span class="label">Ciudad de origen:</span> {{CiudadOrigen}}</p>
-            <p><span class="label">Identificación:</span> {{Identificacion}}</p>
+            <p><span class="label">Nombre completo:</span> <span class="valor">{{NombreEmprendedor}} {{ApellidoEmprendedor}}</span></p>
+            <p><span class="label">Teléfono:</span> <span class="valor">{{TelefonoEmprendedor}}</span></p>
+            <p><span class="label">Ciudad de origen:</span> <span class="valor">{{CiudadOrigen}}</span></p>
+            <p><span class="label">Identificación:</span> <span class="valor">{{Identificacion}}</span></p>
         </div>
 
         <div class="acciones">
-            <a href="{{AprobarUrl}}" class="boton aprobar" target="_blank">Aprobar negocio</a>
-            <a href="{{RechazarUrl}}" class="boton rechazar" target="_blank">Rechazar negocio</a>
+            <a href="{{AprobarUrl}}" class="boton aprobar" target="_blank"><strong style="color:whitesmoke">Aprobar negocio</strong></a>
+            <a href="{{RechazarUrl}}" class="boton rechazar" target="_blank"><strong style="color:whitesmoke">Rechazar negocio</strong></a>
         </div>
 
-        <p style="text-align:center; margin-top:25px;">Gracias por revisar esta solicitud.</p>
+        <div class="footer">
+            Gracias por revisar esta solicitud.
+        </div>
     </div>
 </body>
 </html>
-
-</html>
-
