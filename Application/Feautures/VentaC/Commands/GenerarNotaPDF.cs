@@ -151,7 +151,7 @@ namespace Application.Feautures.VentaC.Commands
 
                                 totals.Item().Row(row =>
                                 {
-                                    row.RelativeItem().AlignRight().Text("IVA (12%):").Bold().FontSize(12);
+                                    row.RelativeItem().AlignRight().Text("IVA :").Bold().FontSize(12);
                                     row.ConstantItem(80).AlignRight().Text($"$ {venta.Detalles.Sum(d => d.TotalConIva - d.Total):F2}").FontSize(12);
                                 });
 
