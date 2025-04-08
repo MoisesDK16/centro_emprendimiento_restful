@@ -5,6 +5,7 @@ using Application.Services.StockS;
 using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
+using Domain.Enums.Promocion;
 using MediatR;
 
 namespace Application.Feautures.VentaC.Commands
@@ -77,6 +78,8 @@ namespace Application.Feautures.VentaC.Commands
                     foreach (var detalle in request.Detalles)
                     {     
                         Promocion? promocion = null;
+                        Detalle detalleToSve = null;
+                        var cantidadBeforeRegalo = detalle.Cantidad;
 
                         if (detalle.PromocionId != 0)
                         {
@@ -93,26 +96,58 @@ namespace Application.Feautures.VentaC.Commands
                         decimal precioFinal = precioConIva;
                         int cantidadFinal = detalle.Cantidad;
 
-                        var nuevoDetalle = new Detalle
+                        if(promocion != null && promocion.TipoPromocion == TipoPromocion.REGALO)
                         {
-                            Precio = detalle.Precio,
-                            Cantidad = cantidadFinal,
-                            Total = detalle.Total,
-                            TotalConIva = precioConIva * cantidadFinal,
-                            ProductoId = detalle.ProductoId,
-                            VentaId = venta.Id,
-                            StockId = detalle.StockId,
-                            PromocionId = promocion == null ? null : promocion.Id
-                        };
+                            detalleToSve = new Detalle
+                            {
+                                Precio = precioFinal,
+                                Cantidad = cantidadFinal,
+                                Total = detalle.Total,
+                                TotalConIva = precioConIva * cantidadBeforeRegalo,
+                                ProductoId = detalle.ProductoId,
+                                VentaId = venta.Id,
+                                StockId = detalle.StockId,
+                                PromocionId = promocion == null ? null : promocion.Id
+                            };
+                        }else if(promocion != null && promocion.TipoPromocion == TipoPromocion.DESCUENTO)
+                        {
+                            detalleToSve = new Detalle
+                            {
+                                Precio = precioFinal,
+                                Cantidad = detalle.Cantidad,
+                                Total = detalle.Total,
+                                TotalConIva = precioConIva * detalle.Cantidad,
+                                ProductoId = detalle.ProductoId,
+                                VentaId = venta.Id,
+                                StockId = detalle.StockId,
+                                PromocionId = promocion == null ? null : promocion.Id
+                            };
+                        }
+                        else
+                        {
+                            detalleToSve = new Detalle
+                            {
+                                Precio = detalle.Precio,
+                                Cantidad = cantidadFinal,
+                                Total = detalle.Total,
+                                TotalConIva = precioConIva * cantidadFinal,
+                                ProductoId = detalle.ProductoId,
+                                VentaId = venta.Id,
+                                StockId = detalle.StockId,
+                                PromocionId = promocion == null ? null : promocion.Id
+                            };
 
-                        subtotalCalculado += nuevoDetalle.Total;
-                        totalCalculado += (decimal) nuevoDetalle.TotalConIva;
+                        }
+                       
+                        await _repositoryDetalle.AddAsync(detalleToSve);
+                        await _repositoryDetalle.SaveChangesAsync();
 
-                        await _repositoryDetalle.AddAsync(nuevoDetalle);
+                        subtotalCalculado += detalleToSve.Total;
+                        totalCalculado += (decimal)detalleToSve.TotalConIva;
 
                         await _stockService.RestarStock(
-                            nuevoDetalle.Cantidad,
-                            nuevoDetalle.ProductoId,
+                            detalleToSve.Cantidad,
+                            detalleToSve.ProductoId,
                             detalle.StockId);
                     }
 

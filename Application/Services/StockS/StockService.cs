@@ -32,6 +32,9 @@ namespace Application.Services.StockS
             var stock = await _stockRepository.FirstOrDefaultAsync(new StockSpecification(idProducto, stockId))
                 ?? throw new ApiException($"No se encontró el stock del producto {idProducto}");
 
+            Console.WriteLine("Precio stock: " + stock.PrecioVenta);  
+            Console.WriteLine("Precio detalle: " + detallePrecio);
+
             if (stock.PrecioVenta != detallePrecio)
             {
                 throw new ApiException("El precio del producto no coincide con el precio receptado desde backend");
@@ -97,17 +100,11 @@ namespace Application.Services.StockS
                 throw new ApiException($"La cantidad de compra del producto {stock.Producto.Nombre} no supera las {promocion.CantidadCompra} " +
                     $"unidades, por lo cual no se puede aplicar el tipo de promocion {promocion.TipoPromocion}");
 
-            var cantidadMasRegalo = (detalle.Cantidad / promocion.CantidadCompra) * promocion.CantidadGratis;
-
-            int cantidadPagada = (int)(detalle.Cantidad - cantidadMasRegalo);
-            decimal totalEsperado = cantidadPagada * detalle.Precio;
-
-            Console.WriteLine("Total esperado: "+totalEsperado);
-            if (detalle.Total != totalEsperado)
-            {
-               throw new ApiException($"El total proporcionado ({detalle.Total:C}) no coincide con el total esperado ({totalEsperado:C}) basado en la cantidad pagada ({cantidadPagada} unidades a {detalle.Precio:C} cada una).");
-            }
-            detalle.Cantidad += (int)cantidadMasRegalo;
+            int cantidadRegalo = (int)((int)(detalle.Cantidad / promocion.CantidadCompra) * promocion.CantidadGratis);
+            Console.WriteLine("Cantidad: " + detalle.Cantidad);
+            Console.WriteLine("Cantidad mas regalo: " + cantidadRegalo);
+       
+            detalle.Cantidad = detalle.Cantidad+cantidadRegalo;
         }
 
         public async Task VerificarCasosPromocionAsync(DetalleDTO detalle, Promocion? promocion, Venta venta)

@@ -49,8 +49,8 @@ namespace Application.Feautures.VentaC.Commands
                     {
                         headerCol.Item().Row(row =>
                         {
-                            byte[] logoBytes = File.ReadAllBytes("C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Imagenes\\Escudo_Uniandes.png");
-                            byte[] logoCiemi = File.ReadAllBytes("C:\\Users\\PC\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Imagenes\\Ciemi.png");
+                            byte[] logoBytes = File.ReadAllBytes("C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Imagenes\\Escudo_Uniandes.png");
+                            byte[] logoCiemi = File.ReadAllBytes("C:\\Users\\User\\Pictures\\6TO\\PI\\BACKEND\\centro_emprendimiento_restful\\Application\\Imagenes\\Ciemi.png");
 
                             row.ConstantItem(130).Height(60).Image(logoCiemi);
 
