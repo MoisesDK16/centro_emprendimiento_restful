@@ -648,6 +648,60 @@ namespace Identity.Services
 
             return BitConverter.ToString(randomBytes).Replace("-", "");
         }
+
+        public async Task<Response<string>> ResetPassword(ResetPassword request)
+        {
+            var user = _userManager.Users.FirstOrDefault(x => x.Email == request.Email)
+                       ?? throw new ApiException($"No existe cuenta registrada con el email: {request.Email}.");
+
+            var result = await _userManager.ResetPasswordAsync(user, request.Token, request.Password);
+
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                throw new ApiException($"No se pudo restablecer la contraseña. Errores: {errors}");
+            }
+
+            return new Response<string>($"Contraseña actualizada correctamente para el usuario: {user.UserName}");
+        }
+
+        public async Task<bool> ForgotPassword(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null)
+                throw new ApiException("No existe una cuenta registrada con ese correo electrónico.");
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var encodedToken = WebUtility.UrlEncode(token);
+
+            // Ruta del HTML
+            string path = Path.Combine(_env.ContentRootPath, "Templates", "forgotPassword.html");
+            if (!File.Exists(path))
+                throw new ApiException("Plantilla de correo no encontrada.");
+
+            string content = await File.ReadAllTextAsync(path);
+
+            string resetUrlForm = $"https://localhost:7050/api/v1/Account/ResetPasswordForm?email={email}&token={encodedToken}";
+
+            string cuerpoHtml = content
+                .Replace("{{userName}}", user.UserName)
+                .Replace("{{resetUrl}}", resetUrlForm);
+
+            var correo = new CorreoDTO
+            {
+                Para = user.Email,
+                Asunto = "Restablecer contraseña",
+                Contenido = cuerpoHtml
+            };
+
+            bool enviado = CorreoServicio.Enviar(correo);
+
+            if (!enviado)
+                throw new ApiException("No se pudo enviar el correo de restablecimiento de contraseña.");
+
+            return true;
+        }
+
     }
 }
  

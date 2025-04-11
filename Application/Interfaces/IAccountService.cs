@@ -25,5 +25,9 @@ namespace Application.Interfaces
         Task<Response<string>> EnviarInformacionAEmprendedores(CorreoDTO correo, List<string> correos);
         Task EnviarCorreoConfirmacionAsync(string userId);
         Task EnviarSolicitudAprobacionNegocioAsync(string userId, Negocio negocio);
+
+        Task<Response<string>> ResetPassword(ResetPassword request);
+
+        Task<bool> ForgotPassword(string email);
     }
 }

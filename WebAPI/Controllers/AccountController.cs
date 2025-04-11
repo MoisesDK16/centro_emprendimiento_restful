@@ -10,6 +10,7 @@ using Application.Wrappers;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace WebAPI.Controllers
 {
@@ -53,6 +54,42 @@ namespace WebAPI.Controllers
             });
 
             return Ok(respuesta);
+        }
+
+        [HttpPost("forgotPassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword([FromQuery] string correo)
+        {
+            return Ok(await _accountService.ForgotPassword(correo));
+        }
+
+
+        [HttpPost("ResetPassword")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword([FromForm] ResetPassword request, [FromForm] string confirmPassword)
+        {
+            if (request.Password != confirmPassword)
+                return BadRequest("Las contraseñas no coinciden.");
+
+            return Ok(await _accountService.ResetPassword(request));
+        }
+
+        [HttpGet("ResetPasswordForm")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPasswordForm([FromQuery] string email, [FromQuery] string token)
+        {
+            string path = Path.Combine(_env.ContentRootPath, "Templates", "ResetPasswordForm.html");
+
+            if (!System.IO.File.Exists(path))
+                return NotFound("Plantilla no encontrada.");
+
+            string htmlContent = await System.IO.File.ReadAllTextAsync(path);
+
+            htmlContent = htmlContent
+                .Replace("{{email}}", email)
+                .Replace("{{token}}", token);
+
+            return Content(htmlContent, "text/html");
         }
 
 
