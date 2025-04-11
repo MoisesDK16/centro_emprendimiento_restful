@@ -5,6 +5,7 @@ using Application.Feautures.NegocioC.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Application.Services.NegocioS;
 using System.Text;
+using static Application.Feautures.NegocioC.Commands.CrearNegocio;
 
 namespace WebAPI.Controllers
 {
@@ -17,10 +18,21 @@ namespace WebAPI.Controllers
             _negocioService = negocioService;
         }
 
+        [Authorize(Roles = "Admin, Emprendedor")]
         [HttpPost("crear")]
-        public async Task<IActionResult> CrearNegocio([FromBody] CrearNegocio commando)
+        public async Task<IActionResult> CrearNegocio([FromBody] CrearNegocioParameters commando)
         {
-            return Ok(await Mediator.Send(commando));
+            return Ok(await Mediator.Send(
+                new CrearNegocio
+                {
+                    Nombre = commando.Nombre,
+                    Telefono = commando.Telefono,
+                    Direccion = commando.Direccion,
+                    Descripcion = commando.Descripcion,
+                    CategoriaId = commando.CategoriaId,
+                    EmprendedorId = commando.EmprendedorId,
+                    UserId = User.FindFirst("Id")?.Value
+                }));
         }
 
         [HttpPut("actualizar")]

@@ -18,6 +18,7 @@ namespace Identity.Services
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly IReadOnlyRepositoryAsync<Negocio> _negocioReadingRepository;
+        private readonly IReadOnlyRepositoryAsync<NegocioVendedores> _negocioReadingVendedoresRepository;
 
         public UserServiceImplementation(UserManager<ApplicationUser> userManager, IReadOnlyRepositoryAsync<Negocio> negocioReadingRepository)
         {
@@ -125,6 +126,68 @@ namespace Identity.Services
             }
 
             return userEmprendedores;
+        }
+
+        public async Task<List<UserVendedor>> ListarVendedores()
+        {
+            var vendedores = await _userManager.GetUsersInRoleAsync("Vendedor");
+            Console.WriteLine("Vendedores: " + vendedores.Count);
+            List<UserVendedor> userVendedores = new List<UserVendedor>();
+            foreach (var user in vendedores)
+            {
+                Console.WriteLine("Vendedor: " + user.Id);
+                //Negocios del vendedor
+                var negocios = await _negocioReadingVendedoresRepository.ListAsync(new NegocioVendedorSpecification(user.Id));
+                Console.WriteLine("Negocios: " + negocios.Count);
+                var userInfo = new UserVendedor
+                {
+                    Id = user.Id,
+                    Nombre = user.Nombre,
+                    Apellido = user.Apellido,
+                    Identificacion = user.Identificacion,
+                    CiudadOrigen = user.CiudadOrigen,
+                    Telefono = user.Telefono,
+                    Email = user.Email,
+                    UserName = user.UserName,
+                    NegociosInfo = negocios.Select(n => new NegocioInfoDTO
+                    {
+                        Id = n.Negocio.Id,
+                        Nombre = n.Negocio.nombre,
+                        Telefono = n.Negocio.telefono,
+                        Direccion = n.Negocio.direccion,
+                        Estado = n.Negocio.estado
+                    }).ToList()
+                };
+                userVendedores.Add(userInfo);
+            }
+            return userVendedores;
+        }
+
+        public async Task<bool> IsAdmin(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) throw new Exception("Usuario no encontrado");
+
+            var roles = await _userManager.GetRolesAsync(user);
+            return roles.Contains("Admin");
+        }
+
+        public async Task<bool> IsEmprendedor(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) throw new Exception("Usuario no encontrado");
+
+            var roles = await _userManager.GetRolesAsync(user);
+            return roles.Contains("Emprendedor");
+        }
+
+        public async Task<bool> IsVendedor(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null) throw new Exception("Usuario no encontrado");
+
+            var roles = await _userManager.GetRolesAsync(user);
+            return roles.Contains("Vendedor");
         }
     }
 }

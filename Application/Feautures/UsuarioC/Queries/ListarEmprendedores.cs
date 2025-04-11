@@ -28,17 +28,17 @@ namespace Application.Feautures.UsuarioC.Queries
             var usuarios = await _userService.ListarEmprendedores();
 
             // Aplicar filtros dinámicos
-            if (!string.IsNullOrWhiteSpace(request.Email))
+            if (!string.IsNullOrEmpty(request.Email))
             {
                 usuarios = usuarios.Where(u => u.Email.Contains(request.Email, StringComparison.OrdinalIgnoreCase)).ToList();
             }
 
-            if (!string.IsNullOrWhiteSpace(request.UserName))
+            if (!string.IsNullOrEmpty(request.UserName))
             {
                 usuarios = usuarios.Where(u => u.UserName.Contains(request.UserName, StringComparison.OrdinalIgnoreCase)).ToList();
             }
 
-            if (!string.IsNullOrWhiteSpace(request.Identificacion))
+            if (!string.IsNullOrEmpty(request.Identificacion))
             {
                 usuarios = usuarios.Where(u => u.Identificacion.Contains(request.Identificacion, StringComparison.OrdinalIgnoreCase)).ToList();
             }

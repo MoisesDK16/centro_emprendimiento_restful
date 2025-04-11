@@ -15,5 +15,10 @@ namespace Application.Interfaces
         Task<bool> Confirmar(string token, string userId);
         Task<bool> ActualizarUsuario(UserInfo userInfo);
         Task<List<UserEmprendedor>> ListarEmprendedores();
+
+        Task<List<UserVendedor>> ListarVendedores();
+        Task<bool> IsAdmin(string userId);
+        Task<bool> IsEmprendedor(string userId);
+        Task<bool> IsVendedor(string userId);
     }
 }

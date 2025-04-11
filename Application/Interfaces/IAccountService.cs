@@ -1,6 +1,7 @@
 ﻿using Application.DTOs.Correos;
 using Application.DTOs.Users;
 using Application.Wrappers;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,5 +23,7 @@ namespace Application.Interfaces
         Task<bool> ReenviarConfirmacion(string correo);
 
         Task<Response<string>> EnviarInformacionAEmprendedores(CorreoDTO correo, List<string> correos);
+        Task EnviarCorreoConfirmacionAsync(string userId);
+        Task EnviarSolicitudAprobacionNegocioAsync(string userId, Negocio negocio);
     }
 }

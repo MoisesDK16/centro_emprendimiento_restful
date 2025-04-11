@@ -114,6 +114,23 @@ namespace WebAPI.Controllers
             return Ok(emprendedores);
         }
 
+        [Authorize(Roles = "Admin,Emprendedor")]
+        [HttpGet("listarVendedores")]
+        public async Task<IActionResult> ListarVendedores([FromQuery] ListarVendedoresParameters filter)
+        {
+            var vendedores = await Mediator.Send(new ListarVendedores
+            {
+                PageNumber = filter.PageNumber,
+                PageSize = filter.PageSize,
+                NegocioId = filter.NegocioId,
+                Email = filter.Email,
+                UserName = filter.UserName,
+                Identificacion = filter.Identificacion
+            });
+            return Ok(vendedores);
+        }
+
+
         [Authorize(Roles = "Admin")]
         [HttpGet("emprendedorById")]
         public async Task<IActionResult> GetEmprendedorById([FromQuery] string emprendedorId)

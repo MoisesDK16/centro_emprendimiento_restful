@@ -173,6 +173,52 @@
   },
   {
     "ContainingType": "WebAPI.Controllers.AccountController",
+    "Method": "ListarVendedores",
+    "RelativePath": "api/v{version}/Account/listarVendedores",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "NegocioId",
+        "Type": "System.Int64",
+        "IsRequired": false
+      },
+      {
+        "Name": "Email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "UserName",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "Identificacion",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "PageSize",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "version",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "WebAPI.Controllers.AccountController",
     "Method": "ReenviarConfirmacion",
     "RelativePath": "api/v{version}/Account/reenviarConfirmacion",
     "HttpMethod": "POST",
@@ -1043,7 +1089,7 @@
     "Parameters": [
       {
         "Name": "commando",
-        "Type": "Application.Feautures.NegocioC.Commands.CrearNegocio",
+        "Type": "Application.Feautures.NegocioC.Commands.CrearNegocio\u002BCrearNegocioParameters",
         "IsRequired": true
       },
       {
