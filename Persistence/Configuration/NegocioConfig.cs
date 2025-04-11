@@ -23,7 +23,6 @@ namespace Persistence.Configuration
 
             builder.Property(x => x.descripcion)
                 .HasMaxLength(1024);
-
         }
     }
 }

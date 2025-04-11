@@ -31,6 +31,13 @@ namespace Application.Specifications
             Query.Search(n => n.EmprendedorId, "%"+emprendedorId+"%");
         }
 
+        public NegocioSpecification(string vendedorId, bool IsVendedor)
+        {
+            Query
+             .Include(n => n.NegocioVendedores)
+             .Where(n => n.NegocioVendedores.Any(v => v.VendedorId == vendedorId));
+        }
+
         public NegocioSpecification(long negocioId, string userId)
         {
             Query.Where(n => n.Id == negocioId && n.EmprendedorId == userId);

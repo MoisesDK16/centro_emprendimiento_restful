@@ -137,7 +137,7 @@ namespace Identity.Services
             {
                 Console.WriteLine("Vendedor: " + user.Id);
                 //Negocios del vendedor
-                var negocios = await _negocioReadingVendedoresRepository.ListAsync(new NegocioVendedorSpecification(user.Id));
+                var negocios = await _negocioReadingRepository.ListAsync(new NegocioSpecification(user.Id, true));
                 Console.WriteLine("Negocios: " + negocios.Count);
                 var userInfo = new UserVendedor
                 {
@@ -151,11 +151,11 @@ namespace Identity.Services
                     UserName = user.UserName,
                     NegociosInfo = negocios.Select(n => new NegocioInfoDTO
                     {
-                        Id = n.Negocio.Id,
-                        Nombre = n.Negocio.nombre,
-                        Telefono = n.Negocio.telefono,
-                        Direccion = n.Negocio.direccion,
-                        Estado = n.Negocio.estado
+                        Id = n.Id,
+                        Nombre = n.nombre,
+                        Telefono = n.telefono,
+                        Direccion = n.direccion,
+                        Estado = n.estado
                     }).ToList()
                 };
                 userVendedores.Add(userInfo);

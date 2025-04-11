@@ -13,7 +13,7 @@ namespace Application.Specifications
         public NegocioVendedorSpecification(string vendedorId)
         {
             Query.Include(x => x.Negocio);
-            Query.Where(x => x.VendedorId == vendedorId);
+            Query.Search(x => x.VendedorId, vendedorId);
         }
     }
 }
