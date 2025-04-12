@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Productos;
 using Application.Interfaces;
+using Application.Services.PermissionS;
 using Application.Specifications;
 using Application.Wrappers;
 using MediatR;
@@ -13,17 +14,26 @@ namespace Application.Feautures.ProductoC.Queries
         public long NegocioId { get; set; }
         public string? NombreProducto { get; set; }
 
+        public required string UserId { get; set; }
+
         public class ListarProductosHandler : IRequestHandler<ListarProductos, PagedResponse<IEnumerable<ProductoDTO>>>
         {
             private readonly IReadOnlyRepositoryAsync<Domain.Entities.Producto> _repository;
+            private readonly IPermissionService _permissionService; 
 
-            public ListarProductosHandler(IReadOnlyRepositoryAsync<Domain.Entities.Producto> repository)
+            public ListarProductosHandler(
+                IReadOnlyRepositoryAsync<Domain.Entities.Producto> repository,
+                IPermissionService permissionService
+                )
             {
                 _repository = repository;
+                _permissionService = permissionService;
             }
 
             public async Task<PagedResponse<IEnumerable<ProductoDTO>>> Handle(ListarProductos filter, CancellationToken cancellationToken)
             {
+                _permissionService.ValidateNegocioPermission(filter.NegocioId, filter.UserId).Wait(cancellationToken);
+
                 var products = await _repository.ListAsync(
                         new ProductoSpecification(filter.NegocioId, filter.CategoriaId, filter.NombreProducto)
                     );

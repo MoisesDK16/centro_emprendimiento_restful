@@ -11,6 +11,7 @@ namespace Application.Feautures.ProductoC.Queries
     public class SelectProductos : IRequest<Response<IEnumerable<ProductoSelectDTO>>>
     {
         public long NegocioId { get; set; }
+        public required string UserId { get; set; }
 
         public class SelectProductosHandler : IRequestHandler<SelectProductos, Response<IEnumerable<ProductoSelectDTO>>>
         {
@@ -37,5 +38,10 @@ namespace Application.Feautures.ProductoC.Queries
             }
 
         }
+    }
+
+    public class SelectProductosParameters
+    {
+        public long NegocioId { get; set; }
     }
 }

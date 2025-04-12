@@ -1,6 +1,7 @@
 ﻿using Application.Feautures.StockC.Commands;
 using Application.Feautures.StockC.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -12,6 +13,7 @@ namespace WebAPI.Controllers
         {
         }
 
+        [Authorize(Roles = "Emprendedor, Vendedor")]
         [HttpPost("crear")]
         public async Task<IActionResult> Create([FromBody] CrearStock command)
         {
@@ -19,6 +21,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Emprendedor, Vendedor")]
         [HttpPut("actualizar")]
         public async Task<IActionResult> Update([FromBody] ActualizarStock command)
         {
@@ -26,6 +29,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Emprendedor, Vendedor")]
         [HttpGet("listar")]
         public async Task<IActionResult> List([FromQuery] ListarStockParameters filter)
         {
@@ -41,6 +45,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Emprendedor, Vendedor")]
         [HttpGet("stockById")]
         public async Task<IActionResult> StockById([FromQuery] StockById request)
         {

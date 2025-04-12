@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Application.Services.NegocioS;
 using System.Text;
 using static Application.Feautures.NegocioC.Commands.CrearNegocio;
+using static Application.Feautures.NegocioC.Commands.ActualizarNegocio;
 
 namespace WebAPI.Controllers
 {
@@ -35,12 +36,25 @@ namespace WebAPI.Controllers
                 }));
         }
 
+        [Authorize(Roles = "Admin, Emprendedor")]
         [HttpPut("actualizar")]
-        public async Task<IActionResult> ActualizarNegocio([FromBody] ActualizarNegocio commando)
+        public async Task<IActionResult> ActualizarNegocio([FromBody] ActualizarNegocioParameters commando)
         {
-            return Ok(await Mediator.Send(commando));
+            return Ok(await Mediator.Send(
+                new ActualizarNegocio
+                {
+                    Id = commando.Id,
+                    Nombre = commando.Nombre,
+                    Telefono = commando.Telefono,
+                    Direccion = commando.Direccion,
+                    Descripcion = commando.Descripcion,
+                    Estado = commando.Estado,
+                    CategoriaId = commando.CategoriaId,
+                    UserId = User.FindFirst("Id")?.Value
+                }));
         }
 
+        [Authorize(Roles = "Admin, Emprendedor")]
         [HttpGet("listar")]
         public async Task<IActionResult> ListarNegocios([FromQuery] ListarNegociosParameter filter)
         {
@@ -57,18 +71,21 @@ namespace WebAPI.Controllers
                 }));
         }
 
+        [Authorize(Roles = "Admin, Emprendedor")]
         [HttpGet("negocioById")]
         public async Task<IActionResult> NegocioById([FromQuery] long id)
         {
             return Ok(await Mediator.Send(new NegocioById { Id = id }));
         }
 
+        [Authorize(Roles = "Admin, Emprendedor")]
         [HttpGet("negocioByTelefono")]
         public async Task<IActionResult> NegocioByTelefono([FromQuery] string telefono)
         {
             return Ok(await Mediator.Send(new NegocioByTelefono { telefono = telefono }));
         }
 
+        [Authorize(Roles = "Emprendedor")]
         [HttpGet("selectNegocios")]
         public async Task<IActionResult> SelectNegocios([FromQuery] SelectNegocios selectNegocios)
         {

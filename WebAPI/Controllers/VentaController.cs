@@ -15,12 +15,14 @@ namespace WebAPI.Controllers
         {
         }
 
+        [Authorize(Roles = "Emprendedor, Vendedor")]
         [HttpPost("crear")]
         public async Task<ActionResult<Response<long>>> CrearVenta(CrearVenta command)
         {
             return await Mediator.Send(command);
         }
 
+        [Authorize(Roles = "Emprendedor, Vendedor")]
         [HttpGet("listar")]
         public async Task<ActionResult<PagedResponse<IEnumerable<GeneralVenta>>>> ListarVentas([FromQuery] ListarVentasParameters filter)
         {
@@ -35,6 +37,7 @@ namespace WebAPI.Controllers
             });
         }
 
+        [Authorize(Roles = "Emprendedor, Vendedor")]
         [HttpGet("ventaInfoById")]
         public async Task<ActionResult<Response<VentaInfo>>> VentaById([FromQuery] VentaInfoById request)
         {
@@ -42,6 +45,7 @@ namespace WebAPI.Controllers
         }
 
 
+        [Authorize(Roles = "Emprendedor, Vendedor")]
         [HttpGet("GenerarNotaPDF")]
         public async Task<IActionResult> GenerarNotaPDF([FromQuery] GenerarNotaPDF request)
         {

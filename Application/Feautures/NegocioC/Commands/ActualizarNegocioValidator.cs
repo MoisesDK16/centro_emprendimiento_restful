@@ -11,16 +11,23 @@ namespace Application.Feautures.NegocioC.Commands
     {
         public ActualizarNegocioValidator()
         {
-            RuleFor(p => p.Nombre)
+            RuleFor(p => p.Nombre).NotEmpty().NotNull()
+                .WithMessage("{PropertyName} es requerido.")
                 .MaximumLength(50).WithMessage("{PropertyName} no debe exceder de 50 caracteres.");
-            RuleFor(p => p.Direccion)
+     
+            RuleFor(p => p.Direccion).NotEmpty().NotNull()
+                .WithMessage("{PropertyName} es requerido.")
                 .MaximumLength(100).WithMessage("{PropertyName} no debe exceder de 100 caracteres.");
-            RuleFor(p => p.Telefono)
+
+            RuleFor(p => p.Telefono).NotEmpty().NotNull()
+                .WithMessage("{PropertyName} es requerido.")
                 .MaximumLength(15).WithMessage("{PropertyName} no debe exceder de 15 caracteres.");
+
             RuleFor(p => p.Descripcion)
                 .MaximumLength(1024).WithMessage("{PropertyName} no debe exceder de 1024 caracteres.");
-            RuleFor(p => p.CategoriaId)
-                .NotEmpty().WithMessage("{PropertyName} es requerido.");
+
+            RuleFor(p => p.CategoriaId).NotEmpty().WithMessage("{PropertyName} es requerido.").NotNull()
+                .WithMessage("{PropertyName} es requerido.");
         }
     }
 }

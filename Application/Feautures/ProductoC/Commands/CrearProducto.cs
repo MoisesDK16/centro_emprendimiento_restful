@@ -1,5 +1,6 @@
 ﻿using Application.Exceptions;
 using Application.Interfaces;
+using Application.Services.PermissionS;
 using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
@@ -11,9 +12,9 @@ namespace Application.Feautures.ProductoC.Commands
 {
     public class CrearProducto : IRequest<Response<long>>
     {
-        public string Codigo { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
+        public string? Codigo { get; set; }
+        public required string Nombre { get; set; }
+        public string? Descripcion { get; set; }
         public Estado Estado { get; set; }
         public decimal Iva { get; set; }
         public IFormFile? Imagen { get; set; }
@@ -31,6 +32,9 @@ namespace Application.Feautures.ProductoC.Commands
         public DateOnly FechaCaducidad { get; set; }
         public DateTime FechaIngreso { get; set; }
 
+        //userId
+        public required string UserId { get; set; }
+
         public class CrearProductoHandler: IRequestHandler<CrearProducto, Response<long>>
         {
             private readonly IRepositoryAsync<Producto> _repository;
@@ -40,6 +44,7 @@ namespace Application.Feautures.ProductoC.Commands
             private readonly IAzureStorageService _azureStorageService;
             private readonly IReadOnlyRepositoryAsync<Parametros> _parametrosReadingRespoitory;
             private readonly IUnitOfWork _unitOfWork;
+            private readonly IPermissionService _permissionService;
 
             public CrearProductoHandler(
                 IRepositoryAsync<Producto> repository,
@@ -48,7 +53,9 @@ namespace Application.Feautures.ProductoC.Commands
                 IRepositoryAsync<Negocio> negocioRepository,
                 IAzureStorageService azureStorageService,
                 IUnitOfWork unitOfWork,
-                IReadOnlyRepositoryAsync<Parametros> parametrosReadingRespoitory)
+                IReadOnlyRepositoryAsync<Parametros> parametrosReadingRespoitory,
+                IPermissionService permissionService
+                )
             {
                 _repository = repository;
                 _stockRepository = stockRepository;
@@ -57,61 +64,102 @@ namespace Application.Feautures.ProductoC.Commands
                 _azureStorageService = azureStorageService;
                 _unitOfWork = unitOfWork;
                 _parametrosReadingRespoitory = parametrosReadingRespoitory;
+                _permissionService = permissionService;
             }
 
             public async Task<Response<long>> Handle(CrearProducto request, CancellationToken cancellationToken)
             {
-                _ = await _categoriaRepository.GetByIdAsync(request.CategoriaId) ?? throw new ApiException($"Categoría con Id {request.CategoriaId} no encontrada");
-                _ = await _negocioRepository.GetByIdAsync(request.NegocioId) ?? throw new ApiException($"Negocio con Id {request.NegocioId} no encontrado");
-                
-                string? path = null;
+                await _unitOfWork.BeginTransactionAsync();
 
-                if (request.Imagen != null)
-                    path = await _azureStorageService.UploadAsync(request.Imagen, Enums.ContainerEnum.IMAGES);
+                try
+                {
+                    _permissionService.ValidateNegocioPermission(request.NegocioId, request.UserId).Wait(cancellationToken);
 
-                if(request.Iva != 0){
-                    var ivaFound = await _parametrosReadingRespoitory.FirstOrDefaultAsync(new ParametrosSpecification("Iva"));
-                    if(ivaFound.Valor != request.Iva)
-                        throw new ApiException($"El IVA ingresado no coincide con el IVA registrado en administracion, este debe ser del {Math.Round(ivaFound.Valor)}%");
+                    _ = await _categoriaRepository.GetByIdAsync(request.CategoriaId)
+                        ?? throw new ApiException($"Categoría con Id {request.CategoriaId} no encontrada");
+
+                    _ = await _negocioRepository.GetByIdAsync(request.NegocioId)
+                        ?? throw new ApiException($"Negocio con Id {request.NegocioId} no encontrado");
+
+                    string? path = null;
+
+                    if (request.Imagen != null)
+                        path = await _azureStorageService.UploadAsync(request.Imagen, Enums.ContainerEnum.IMAGES);
+
+                    if (request.Iva != 0)
+                    {
+                        var ivaFound = await _parametrosReadingRespoitory.FirstOrDefaultAsync(new ParametrosSpecification("Iva"));
+                        if (ivaFound.Valor != request.Iva)
+                            throw new ApiException($"El IVA ingresado no coincide con el registrado en administración. Debe ser del {Math.Round(ivaFound.Valor)}%");
+                    }
+
+                    var producto = new Producto
+                    {
+                        Codigo = request.Codigo,
+                        Nombre = request.Nombre,
+                        Descripcion = request.Descripcion,
+                        Estado = request.Estado,
+                        Iva = request.Iva,
+                        RutaImagen = path,
+                        CategoriaId = request.CategoriaId,
+                        NegocioId = request.NegocioId
+                    };
+
+                    await _repository.AddAsync(producto);
+                    await _repository.SaveChangesAsync();
+
+                    var stock = new Stock
+                    {
+                        PrecioCompra = request.PrecioCompra,
+                        PrecioVenta = request.PrecioVenta,
+                        Cantidad = request.Cantidad,
+                        FechaElaboracion = request.FechaElaboracion,
+                        FechaCaducidad = request.FechaCaducidad,
+                        FechaIngreso = request.FechaIngreso,
+                        ProductoId = producto.Id
+                    };
+
+                    await _stockRepository.AddAsync(stock);
+                    await _stockRepository.SaveChangesAsync();
+
+                    producto.Stocks.Add(stock);
+                    await _repository.UpdateAsync(producto);
+                    await _repository.SaveChangesAsync();
+
+                    await _unitOfWork.CommitAsync();
+                    return new Response<long>(producto.Id);
                 }
-
-                var producto = new Producto 
+                catch (Exception ex)
                 {
-                    Codigo = request.Codigo,
-                    Nombre = request.Nombre,
-                    Descripcion = request.Descripcion,
-                    Estado = request.Estado,
-                    Iva = request.Iva,
-                    RutaImagen = path,
-                    CategoriaId = request.CategoriaId,
-                    NegocioId = request.NegocioId
-                };
-
-
-                await _repository.AddAsync(producto);
-                await _repository.SaveChangesAsync(); 
-
-                var stock = new Stock
-                {
-                    PrecioCompra = request.PrecioCompra,
-                    PrecioVenta = request.PrecioVenta,
-                    Cantidad = request.Cantidad,
-                    FechaElaboracion = request.FechaElaboracion,
-                    FechaCaducidad = request.FechaCaducidad,
-                    FechaIngreso = request.FechaIngreso,
-                    ProductoId = producto.Id
-                };
-
-                await _stockRepository.AddAsync(stock);
-                await _stockRepository.SaveChangesAsync();
-
-                producto.Stocks.Add(stock);
-                await _repository.UpdateAsync(producto);
-                await _repository.SaveChangesAsync(); 
-
-                return new Response<long>(producto.Id);
+                    await _unitOfWork.RollbackAsync();
+                    throw new ApiException("Error al registrar el producto: " + ex.Message);
+                }
             }
 
         }
+
+        public class CrearProductoParameters
+        {
+        public string? Codigo { get; set; }
+        public required string Nombre { get; set; }
+        public string? Descripcion { get; set; }
+        public Estado Estado { get; set; }
+        public decimal Iva { get; set; }
+        public IFormFile? Imagen { get; set; }
+
+        //Relaciones
+        public int CategoriaId { get; set; }
+        public int NegocioId { get; set; }
+
+        //Data de Stock
+        public decimal PrecioCompra { get; set; }
+        public decimal PrecioVenta { get; set; }
+        public int Cantidad { get; set; }
+
+        public DateOnly FechaElaboracion { get; set; }
+        public DateOnly FechaCaducidad { get; set; }
+        public DateTime FechaIngreso { get; set; }
+        }
+
     }
 }

@@ -3,6 +3,7 @@ using Application.Feautures.CategoriaC.Commands;
 using Application.Feautures.CategoriaC.Queries;
 using Azure.Core;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -14,6 +15,7 @@ namespace WebAPI.Controllers
         {
         }
 
+        [Authorize(Roles = "Admin,Emprendedor")]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CrearCategoriaComando command)
         {
@@ -21,6 +23,7 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin,Emprendedor,Vendedor")]
         [HttpGet]
         public async Task<IActionResult> List([FromQuery] ListarCategoriasParameters filter)
         {
@@ -35,6 +38,7 @@ namespace WebAPI.Controllers
             return Ok(listaCategorias);
         }
 
+        [Authorize(Roles = "Admin,Emprendedor,Vendedor")]
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute] long id)
         {
@@ -43,6 +47,7 @@ namespace WebAPI.Controllers
             return Ok(categoria);
         }
 
+        [Authorize(Roles = "Admin,Emprendedor,Vendedor")]
         [HttpGet("select-categorias")]
         public async Task<IActionResult> SelectCategorias([FromQuery] SelectCategorias select)
         {

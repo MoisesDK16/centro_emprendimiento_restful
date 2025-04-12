@@ -1,6 +1,7 @@
 ﻿using Application.Enums;
 using Application.Exceptions;
 using Application.Interfaces;
+using Application.Services.PermissionS;
 using Application.Wrappers;
 using AutoMapper;
 using Domain.Entities;
@@ -28,6 +29,7 @@ namespace Application.Feautures.ProductoC.Commands
         public DateOnly FechaElaboracion { get; set; }
         public DateOnly FechaCaducidad { get; set; }
         public DateTime FechaIngreso { get; set; }
+        public required string UserId { get; set; }
 
 
         public class ActualizarProductoHandler: IRequestHandler<ActualizarProducto, Response<long>>
@@ -35,20 +37,25 @@ namespace Application.Feautures.ProductoC.Commands
             private readonly IRepositoryAsync<Producto> _repository;
             private readonly IRepositoryAsync<Domain.Entities.Categoria> _categoriaRepository;
             private readonly IAzureStorageService _azureStorageService;
+            private readonly IPermissionService _permissionService;
 
             public ActualizarProductoHandler(
                 IRepositoryAsync<Producto> repository,
                 IRepositoryAsync<Stock> stockRepository,
                 IRepositoryAsync<Domain.Entities.Categoria> categoriaRepository,
-                IAzureStorageService azureStorageService
+                IAzureStorageService azureStorageService,
+                IPermissionService permissionService
                 )
             {
                 _repository = repository;
                 _categoriaRepository = categoriaRepository;
                 _azureStorageService = azureStorageService;
+                _permissionService = permissionService;
             }
             public async Task<Response<long>> Handle(ActualizarProducto request, CancellationToken cancellationToken)
             {
+                _permissionService.ValidateNegocioPermission(request.StockId, request.UserId).Wait(cancellationToken);
+
                 var productFound = await _repository.GetByIdAsync(request.Id)
                     ?? throw new ApiException($"Producto con Id {request.Id} no encontrado");
 
@@ -75,4 +82,27 @@ namespace Application.Feautures.ProductoC.Commands
 
         }
     }
+
+
+    public class ActualizarProductoParameters
+    {
+        public long Id { get; set; }
+        public required string Codigo { get; set; }
+        public required string Nombre { get; set; }
+        public required string Descripcion { get; set; }
+        public decimal Iva { get; set; }
+        public IFormFile? Imagen { get; set; }
+        //Relaciones
+        public long CategoriaId { get; set; }
+
+        public long StockId { get; set; }
+        public decimal PrecioCompra { get; set; }
+        public decimal PrecioVenta { get; set; }
+        public int Cantidad { get; set; }
+        public DateOnly FechaElaboracion { get; set; }
+        public DateOnly FechaCaducidad { get; set; }
+        public DateTime FechaIngreso { get; set; }
+
+    }
+
 }

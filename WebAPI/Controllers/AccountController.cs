@@ -175,7 +175,7 @@ namespace WebAPI.Controllers
             return Ok(await Mediator.Send(new EmprendedorById { Id = emprendedorId }));
         }
 
-
+        [Authorize(Roles = "Admin,Emprendedor,Vendedor")]
         [HttpPost("actualizarUsuario")]
         public async Task<IActionResult> ActualizarUsuario([FromBody] ActualizarUsuario command)
         {
@@ -214,8 +214,8 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpPost("EnviarInformacionAEmprendedores")]
         [Authorize(Roles = "Admin")]
+        [HttpPost("EnviarInformacionAEmprendedores")]
         public async Task<IActionResult> EnviarInformacionAEmprendedores([FromBody] EnvioInformacionDTO request)
         {
             if (request.EnvioInformacion == null || string.IsNullOrWhiteSpace(request.EnvioInformacion.Asunto) || string.IsNullOrWhiteSpace(request.EnvioInformacion.Contenido))
