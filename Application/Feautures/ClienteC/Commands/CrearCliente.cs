@@ -19,6 +19,7 @@ namespace Application.Feautures.ClienteC.Commands
         public required string Ciudad { get; set; }
         public string? Direccion { get; set; }
         public long NegocioId { get; set; }
+        public required string UserId { get; set; }
 
 
         public class CrearClienteCommandHandler : IRequestHandler<CrearCliente, Response<long>>
@@ -86,5 +87,18 @@ namespace Application.Feautures.ClienteC.Commands
 
         }
 
+    }
+
+    public class CrearClienteParameters
+    {
+        public required string Identificacion { get; set; }
+        public required string Nombres { get; set; }
+        public required string PrimerApellido { get; set; }
+        public string? SegundoApellido { get; set; }
+        public string? Email { get; set; }
+        public string? Telefono { get; set; }
+        public required string Ciudad { get; set; }
+        public string? Direccion { get; set; }
+        public long NegocioId { get; set; }
     }
 }

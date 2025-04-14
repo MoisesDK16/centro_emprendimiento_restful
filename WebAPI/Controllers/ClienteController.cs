@@ -17,16 +17,39 @@ namespace WebAPI.Controllers
 
         [Authorize(Roles = "Emprendedor,Vendedor")]
         [HttpPost("crear")]
-        public async Task<IActionResult> CrearCliente([FromBody] CrearCliente commando)
+        public async Task<IActionResult> CrearCliente([FromBody] CrearClienteParameters commando)
         {
-            return Ok(await Mediator.Send(commando));
+            return Ok(await Mediator.Send(new CrearCliente
+            {
+                Identificacion = commando.Identificacion,
+                Nombres = commando.Nombres,
+                PrimerApellido = commando.PrimerApellido,
+                SegundoApellido = commando.SegundoApellido,
+                Email = commando.Email,
+                Telefono = commando.Telefono,
+                Ciudad = commando.Ciudad,
+                Direccion = commando.Direccion,
+                NegocioId = commando.NegocioId,
+                UserId = User.FindFirst("uid")?.Value
+            }));
         }
 
         [Authorize(Roles = "Emprendedor,Vendedor")]
         [HttpPut("actualizar")]
-        public async Task<IActionResult> ActualizarCliente([FromBody] ActualizarCliente commando)
+        public async Task<IActionResult> ActualizarCliente([FromBody] ActualizarClienteParameters commando)
         {
-            return Ok(await Mediator.Send(commando));
+            return Ok(await Mediator.Send(new ActualizarCliente
+            {
+                Id = commando.Id,
+                Identificacion = commando.Identificacion,
+                Nombres = commando.Nombres,
+                PrimerApellido = commando.PrimerApellido,
+                SegundoApellido = commando.SegundoApellido,
+                Email = commando.Email,
+                Telefono = commando.Telefono,
+                Ciudad = commando.Ciudad,
+                Direccion = commando.Direccion
+            }));
         }
 
         [Authorize(Roles = "Admin,Emprendedor,Vendedor")]
@@ -41,7 +64,8 @@ namespace WebAPI.Controllers
                     Identificacion = filter.Identificacion,
                     Nombres = filter.Nombres,
                     PrimerApellido = filter.PrimerApellido,
-                    Ciudad = filter.Ciudad 
+                    Ciudad = filter.Ciudad,
+                    UserId = User.FindFirst("uid")?.Value
                 }));
         }
 
@@ -56,7 +80,10 @@ namespace WebAPI.Controllers
         [HttpGet("clienteByIdentificacion")]
         public async Task<IActionResult> ClienteByIdentificacion([FromQuery] string identificacion)
         {
-            return Ok(await Mediator.Send(new ClienteByIdentificacion { Identificacion = identificacion }));
+            return Ok(await Mediator.Send(new ClienteByIdentificacion { 
+                Identificacion = identificacion,
+                UserId = User.FindFirst("uid")?.Value
+            }));
         }
     }
 }

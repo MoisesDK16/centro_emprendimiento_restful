@@ -17,7 +17,7 @@ namespace WebAPI.Controllers
 
         [Authorize(Roles = "Emprendedor, Vendedor")]
         [HttpPost("crear")]
-        public async Task<ActionResult<Response<long>>> CrearVenta(CrearVenta command)
+        public async Task<ActionResult<Response<long>>> CrearVenta(CrearVenta    command)
         {
             return await Mediator.Send(command);
         }

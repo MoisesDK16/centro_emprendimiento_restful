@@ -107,3 +107,40 @@ C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\D
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\refint\Shared.dll
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\Shared.pdb
 C:\Users\User\Pictures\6TO\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\ref\Shared.dll
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-Black.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-BlackItalic.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-Bold.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-BoldItalic.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-ExtraBold.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-ExtraBoldItalic.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-ExtraLight.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-ExtraLightItalic.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-Italic.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-Light.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-LightItalic.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-Medium.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-MediumItalic.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-Regular.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-SemiBold.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-SemiBoldItalic.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-Thin.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\Lato-ThinItalic.ttf
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\LatoFont\OFL.txt
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\Shared.deps.json
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\Shared.dll
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\Shared.pdb
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\Application.dll
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\Domain.dll
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\Application.pdb
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\bin\Debug\net8.0\Domain.pdb
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\Shared.csproj.AssemblyReference.cache
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\Shared.AssemblyInfoInputs.cache
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\Shared.AssemblyInfo.cs
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\Shared.csproj.CoreCompileInputs.cache
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\Shared.sourcelink.json
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\Shared.csproj.Up2Date
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\Shared.dll
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\refint\Shared.dll
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\Shared.pdb
+C:\Users\PC\Pictures\6TO\Aplicaciones Web\PI\BACKEND\centro_emprendimiento_restful\Shared\obj\Debug\net8.0\ref\Shared.dll

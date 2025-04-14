@@ -66,4 +66,17 @@ namespace Application.Feautures.ClienteC.Commands
         }
     }
 
+    public class ActualizarClienteParameters
+    {
+        public long Id { get; set; }
+        public string? Identificacion { get; set; }
+        public required string Nombres { get; set; }
+        public required string PrimerApellido { get; set; }
+        public string? SegundoApellido { get; set; }
+        public string? Email { get; set; }
+        public string? Telefono { get; set; }
+        public required string Ciudad { get; set; }
+        public string? Direccion { get; set; }
+
+    }
 }

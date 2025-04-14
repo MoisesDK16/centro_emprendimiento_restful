@@ -1,5 +1,6 @@
 ﻿using Application.Exceptions;
 using Application.Interfaces;
+using Application.Services.PermissionS;
 using Application.Specifications;
 using Application.Wrappers;
 using Domain.Entities;
@@ -26,18 +27,22 @@ namespace Application.Feautures.NegocioC.Commands
             private readonly IReadOnlyRepositoryAsync<Negocio> _repositoryNegocio;
             private readonly IUnitOfWork _unitOfWork;
             private readonly IUserService _userService;
+            private readonly IPermissionService _permissionService;
             public ActualizarNegocioHandler(
                 IRepositoryAsync<Negocio> repository,
                 IRepositoryAsync<Domain.Entities.Categoria> categoryRepository,
                 IReadOnlyRepositoryAsync<Negocio> repositoryNegocio,
                 IUnitOfWork unitOfWork,
-                IUserService userService)
+                IUserService userService,
+                IPermissionService permissionService
+                )
             {
                 _repository = repository;
                 _categoryRepository = categoryRepository;
                 _repositoryNegocio = repositoryNegocio;
                 _unitOfWork = unitOfWork;
                 _userService = userService;
+                _permissionService = permissionService;
             }
 
             public async Task<Response<long>> Handle(ActualizarNegocio request, CancellationToken cancellationToken)
@@ -48,7 +53,12 @@ namespace Application.Feautures.NegocioC.Commands
                 {
                     var negocio = await _repository.GetByIdAsync(request.Id) ?? throw new ApiException($"Negocio con ID {request.Id} no encontrado.");
                     var negocioExists = await _repositoryNegocio.FirstOrDefaultAsync(new NegocioSpecification(request.Nombre));
-                    
+
+                    var isEmprendedor = await _userService.IsEmprendedor(request.UserId);
+                    if (isEmprendedor)
+                        _permissionService.ValidateNegocioPermission(negocio.Id, request.UserId).Wait(cancellationToken);
+
+
                     if (negocioExists != null && negocioExists.Id != request.Id)
                         throw new ApiException($"Negocio con nombre {request.Nombre} ya existe");
 

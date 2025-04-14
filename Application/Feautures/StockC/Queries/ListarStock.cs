@@ -20,6 +20,7 @@ namespace Application.Feautures.StockC.Queries
         public required long NegocioId { get; set; }
         public int? Cantidad { get; set; } 
         public DateOnly? FechaCaducidad { get; set; }
+        public required string UserId { get; set; } 
 
         public class ListarStockHandler : IRequestHandler<ListarStock, PagedResponse<IEnumerable<Stock>>>
         {

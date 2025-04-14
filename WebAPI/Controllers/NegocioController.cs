@@ -32,7 +32,7 @@ namespace WebAPI.Controllers
                     Descripcion = commando.Descripcion,
                     CategoriaId = commando.CategoriaId,
                     EmprendedorId = commando.EmprendedorId,
-                    UserId = User.FindFirst("Id")?.Value
+                    UserId = User.FindFirst("uid")?.Value
                 }));
         }
 
@@ -50,7 +50,7 @@ namespace WebAPI.Controllers
                     Descripcion = commando.Descripcion,
                     Estado = commando.Estado,
                     CategoriaId = commando.CategoriaId,
-                    UserId = User.FindFirst("Id")?.Value
+                    UserId = User.FindFirst("uid")?.Value
                 }));
         }
 

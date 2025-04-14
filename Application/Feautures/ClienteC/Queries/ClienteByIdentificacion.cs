@@ -15,6 +15,7 @@ namespace Application.Feautures.ClienteC.Queries
     public class ClienteByIdentificacion : IRequest<Response<Cliente>>
     {
         public required string Identificacion { get; set; }
+        public required string UserId { get; set; }
 
         public class ClienteByIdHandler : IRequestHandler<ClienteByIdentificacion, Response<Cliente>>
         {

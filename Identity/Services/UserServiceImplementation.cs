@@ -1,16 +1,11 @@
 ﻿using Application.DTOs.Negocios;
 using Application.DTOs.Users;
+using Application.Exceptions;
 using Application.Interfaces;
 using Application.Specifications;
 using Domain.Entities;
 using Identity.Models;
 using Microsoft.AspNetCore.Identity;
-using NuGet.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Identity.Services
 {
@@ -29,7 +24,8 @@ namespace Identity.Services
         public async Task<bool> UserExistsAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
-            return user != null;
+            if (user == null) return false;
+            else return true;
         }
 
         public async Task<UserEmprendedor> GetEmprendedorInfoAsync(string userId)
@@ -71,7 +67,7 @@ namespace Identity.Services
         public async Task<bool> Confirmar(string userId, string token)
         {
             var user = await _userManager.FindByIdAsync(userId);
-            if (user == null) throw new Exception("Usuario no encontrado");
+            if (user == null) throw new ApiException("Usuario no encontrado");
 
             var result = await _userManager.ConfirmEmailAsync(user, token);
             Console.WriteLine("RESULT: " + result.Succeeded);
@@ -81,7 +77,7 @@ namespace Identity.Services
         public async Task<bool> ActualizarUsuario(UserInfo userInfo)
         {
             var user = await _userManager.FindByIdAsync(userInfo.Id);
-            if (user == null) throw new Exception("Usuario no encontrado");
+            if (user == null) throw new ApiException("Usuario no encontrado");
             user.Nombre = userInfo.Nombre;
             user.Apellido = userInfo.Apellido;
             user.CiudadOrigen = userInfo.CiudadOrigen;
@@ -166,7 +162,7 @@ namespace Identity.Services
         public async Task<bool> IsAdmin(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
-            if (user == null) throw new Exception("Usuario no encontrado");
+            if (user == null) throw new ApiException("Usuario no encontrado");
 
             var roles = await _userManager.GetRolesAsync(user);
             return roles.Contains("Admin");

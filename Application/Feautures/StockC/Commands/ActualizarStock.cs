@@ -15,6 +15,7 @@ namespace Application.Feautures.StockC.Commands
         public required DateOnly FechaElaboracion { get; set; }
         public required DateOnly FechaCaducidad { get; set; }
         public required DateTime FechaIngreso { get; set; }
+        public required string UserId { get; set; }
 
         public class ActualizarStockHandler : IRequestHandler<ActualizarStock, Response<long>>
         {
@@ -41,6 +42,16 @@ namespace Application.Feautures.StockC.Commands
                 return new Response<long>(stockFound.Id);
             }
         }
+    }
 
+    public class ActualizarStockParameters
+    {
+        public required long Id { get; set; }
+        public required decimal PrecioCompra { get; set; }
+        public required decimal PrecioVenta { get; set; }
+        public required int Cantidad { get; set; }
+        public required DateOnly FechaElaboracion { get; set; }
+        public required DateOnly FechaCaducidad { get; set; }
+        public required DateTime FechaIngreso { get; set; }
     }
 }

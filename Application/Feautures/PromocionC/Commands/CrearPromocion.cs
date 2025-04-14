@@ -27,7 +27,6 @@ namespace Application.Feautures.PromocionC.Commands
             private readonly IRepositoryAsync<Promocion> _repository;
             private readonly IRepositoryAsync<Producto> _productoRepository;
             private readonly IReadOnlyRepositoryAsync<Producto> _productoyReading;
-            private readonly IRepositoryAsync<Negocio> _negocioRepository;
             private readonly IReadOnlyRepositoryAsync<Negocio> _negocioRepositoryReading;
             private readonly IPermissionService _permissionService;
 

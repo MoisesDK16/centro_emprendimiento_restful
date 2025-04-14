@@ -15,18 +15,36 @@ namespace WebAPI.Controllers
 
         [Authorize(Roles = "Emprendedor, Vendedor")]
         [HttpPost("crear")]
-        public async Task<IActionResult> Create([FromBody] CrearStock command)
+        public async Task<IActionResult> Create([FromBody] CrearStockParameters command)
         {
-            var result = await Mediator.Send(command);
-            return Ok(result);
+            return Ok(await Mediator.Send(new CrearStock
+            {
+                ProductoId = command.ProductoId,
+                PrecioCompra = command.PrecioCompra,
+                PrecioVenta = command.PrecioVenta,
+                Cantidad = command.Cantidad,
+                FechaElaboracion = command.FechaElaboracion,
+                FechaCaducidad = command.FechaCaducidad,
+                FechaIngreso = DateTime.Now,
+                UserId = User.FindFirst("uid")?.Value
+            }));
         }
 
         [Authorize(Roles = "Emprendedor, Vendedor")]
         [HttpPut("actualizar")]
-        public async Task<IActionResult> Update([FromBody] ActualizarStock command)
+        public async Task<IActionResult> Update([FromBody] ActualizarStockParameters command)
         {
-            var result = await Mediator.Send(command);
-            return Ok(result);
+            return Ok(await Mediator.Send(new ActualizarStock
+            {
+                Id = command.Id,
+                PrecioCompra = command.PrecioCompra,
+                PrecioVenta = command.PrecioVenta,
+                Cantidad = command.Cantidad,
+                FechaElaboracion = command.FechaElaboracion,
+                FechaCaducidad = command.FechaCaducidad,
+                FechaIngreso = DateTime.Now,
+                UserId = User.FindFirst("UserId")?.Value
+            }));
         }
 
         [Authorize(Roles = "Emprendedor, Vendedor")]
@@ -40,7 +58,8 @@ namespace WebAPI.Controllers
                 NegocioId = filter.NegocioId,
                 ProductoId = filter.ProductoId,
                 Cantidad = filter.Cantidad,
-                FechaCaducidad = filter.FechaCaducidad
+                FechaCaducidad = filter.FechaCaducidad,
+                UserId = User.FindFirst("uid")?.Value
             });
             return Ok(result);
         }

@@ -27,7 +27,7 @@ namespace Application.Feautures.NegocioC.Commands
             private readonly IUserService _userService;
             private readonly IReadOnlyRepositoryAsync<Negocio> _repositoryNegocio;
             private readonly IAccountService _accountService;
-            private readonly IUnitOfWork unitOfWork;
+            private readonly IUnitOfWork _unitOfWork;
 
             public CrearNegocioCommandHandler(
                 IRepositoryAsync<Negocio> repository,
@@ -42,13 +42,13 @@ namespace Application.Feautures.NegocioC.Commands
                 _userService = userService;
                 _repositoryNegocio = repositoryNegocio;
                 _accountService = accountService;
-                this.unitOfWork = unitOfWork;
+                _unitOfWork = unitOfWork;
 
             }
 
             public async Task<Response<long>> Handle(CrearNegocio request, CancellationToken cancellationToken)
             {
-                await unitOfWork.BeginTransactionAsync();
+                await _unitOfWork.BeginTransactionAsync();
 
                 try
                 {
@@ -57,9 +57,6 @@ namespace Application.Feautures.NegocioC.Commands
                     if (!string.IsNullOrEmpty(request.EmprendedorId))
                     {
                         var userExists = await _userService.UserExistsAsync(request.EmprendedorId);
-                        if (!userExists)
-                            throw new ApiException($"Emprendedor con id {request.EmprendedorId} no encontrado");
-
                         isAdmin = await _userService.IsAdmin(request.UserId);
                     }
 
@@ -92,7 +89,7 @@ namespace Application.Feautures.NegocioC.Commands
                     };
 
                     var negocioGuardado = await _repository.AddAsync(negocio);
-                    await unitOfWork.SaveChangesAsync();
+                    await _unitOfWork.SaveChangesAsync();
 
                     if (!isAdmin && !string.IsNullOrEmpty(request.EmprendedorId))
                     {
@@ -100,7 +97,7 @@ namespace Application.Feautures.NegocioC.Commands
                         await _accountService.EnviarSolicitudAprobacionNegocioAsync(request.EmprendedorId, negocio);
                     }
 
-                    await unitOfWork.CommitAsync();
+                    await _unitOfWork.CommitAsync();
 
                     return new Response<long>(
                         negocioGuardado.Id,
@@ -109,7 +106,7 @@ namespace Application.Feautures.NegocioC.Commands
                 }
                 catch (Exception ex)
                 {
-                    await unitOfWork.RollbackAsync();
+                    await _unitOfWork.RollbackAsync();
                     throw new ApiException($"Error al registrar el negocio: {ex.InnerException?.Message ?? ex.Message}");
                 }
             }

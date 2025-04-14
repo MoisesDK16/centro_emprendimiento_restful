@@ -21,6 +21,7 @@ namespace Application.Feautures.ClienteC.Queries
         public string? Nombres { get; set; }
         public string? PrimerApellido { get; set; }
         public string? Ciudad { get; set; }
+        public required string UserId { get; set; } 
     }
 
     public class ListarClientesHandler : IRequestHandler<ListarClientes, PagedResponse<IEnumerable<Cliente>>>
