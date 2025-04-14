@@ -28,6 +28,6 @@ namespace Application.Interfaces
 
         Task<Response<string>> ResetPassword(ResetPassword request);
 
-        Task<bool> ForgotPassword(string email);
+        Task<Response<string>> ForgotPassword(string email);
     }
 }

@@ -665,7 +665,7 @@ namespace Identity.Services
             return new Response<string>($"Contraseña actualizada correctamente para el usuario: {user.UserName}");
         }
 
-        public async Task<bool> ForgotPassword(string email)
+        public async Task<Response<string>> ForgotPassword(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
@@ -699,7 +699,7 @@ namespace Identity.Services
             if (!enviado)
                 throw new ApiException("No se pudo enviar el correo de restablecimiento de contraseña.");
 
-            return true;
+            return new Response<string>("Se ha enviado un enlace para restablecer la contraseña a tu correo electrónico.");
         }
 
     }
